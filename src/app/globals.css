@@ -1,26 +1,152 @@
 @import "tailwindcss";
 
+/* ── Theme tokens (dark default, .light overrides) ─────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0a100d;
+  --bg-elevated: #0f1713;
+  --surface: #121c17;
+  --surface-hover: #17241e;
+  --border: #1f2e27;
+  --border-strong: #2c4237;
+
+  --text: #f2f5f3;
+  --text-muted: #9db3a8;
+  --text-faint: #5f7266;
+
+  --felt: #0b3d2e;
+  --felt-light: #14543f;
+  --emerald: #10b981;
+  --emerald-bright: #34d399;
+  --gold: #d4af37;
+  --gold-soft: #e8cd6e;
+  --live: #ef4444;
+  --cue: #f8f6f0;
+
+  --shadow-glow: 0 0 40px rgba(16, 185, 129, 0.08);
+}
+
+.light {
+  --bg: #f5f7f5;
+  --bg-elevated: #ffffff;
+  --surface: #ffffff;
+  --surface-hover: #eef3f0;
+  --border: #dce5e0;
+  --border-strong: #b8c9c0;
+
+  --text: #101815;
+  --text-muted: #4b5f55;
+  --text-faint: #8ba295;
+
+  --felt: #0b3d2e;
+  --felt-light: #14543f;
+  --emerald: #059669;
+  --emerald-bright: #10b981;
+  --gold: #a8842a;
+  --gold-soft: #c3a344;
+  --live: #dc2626;
+  --cue: #101815;
+
+  --shadow-glow: 0 0 40px rgba(5, 150, 105, 0.06);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-background: var(--bg);
+  --color-elevated: var(--bg-elevated);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-foreground: var(--text);
+  --color-muted: var(--text-muted);
+  --color-faint: var(--text-faint);
+  --color-felt: var(--felt);
+  --color-felt-light: var(--felt-light);
+  --color-emerald-accent: var(--emerald);
+  --color-emerald-bright: var(--emerald-bright);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-live: var(--live);
+  --color-cue: var(--cue);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --font-display: var(--font-bebas), sans-serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+
+  --animate-shimmer: shimmer 1.8s infinite linear;
+  --animate-pulse-live: pulse-live 1.6s infinite ease-in-out;
+  --animate-rise: rise 0.5s ease-out both;
+
+  @keyframes shimmer {
+    0% { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
+  }
+  @keyframes pulse-live {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+    50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
 
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+html.light {
+  color-scheme: light;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Felt texture backdrop for hero sections */
+.felt-texture {
+  background-color: var(--felt);
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(52, 211, 153, 0.14), transparent 55%),
+    radial-gradient(ellipse at 90% 100%, rgba(212, 175, 55, 0.08), transparent 50%),
+    url("data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* Glassmorphism card */
+.glass {
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+}
+
+/* Gold shine for rank highlights */
+.gold-text {
+  background: linear-gradient(120deg, var(--gold) 20%, var(--gold-soft) 50%, var(--gold) 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Skeleton shimmer */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface) 25%,
+    var(--surface-hover) 50%,
+    var(--surface) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.8s infinite linear;
+}
+
+/* Hide scrollbar for horizontal swipe rows */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--emerald);
+  outline-offset: 2px;
 }

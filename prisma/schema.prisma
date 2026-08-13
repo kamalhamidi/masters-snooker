@@ -1,0 +1,380 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────── Enums ───────────────────────────
+
+enum Role {
+  PLAYER
+  EMPLOYEE
+  CHEF
+}
+
+enum MatchType {
+  FRIENDLY
+  RANKED
+  TOURNAMENT
+  CHAMPIONSHIP
+}
+
+enum MatchStatus {
+  SCHEDULED
+  LIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum TournamentStatus {
+  DRAFT
+  REGISTRATION
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum TournamentFormat {
+  KNOCKOUT
+  ROUND_ROBIN
+  GROUPS_KNOCKOUT
+}
+
+enum EntryStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  WITHDRAWN
+}
+
+enum PaymentStatus {
+  UNPAID
+  PAID
+  REFUNDED
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum LoyaltyTier {
+  BRONZE
+  SILVER
+  GOLD
+  ELITE
+}
+
+enum LoyaltyTxType {
+  EARN
+  REDEEM
+}
+
+enum NotificationType {
+  MATCH_ASSIGNED
+  MATCH_RESULT
+  TOURNAMENT_UPDATE
+  TOURNAMENT_ACCEPTED
+  TOURNAMENT_REJECTED
+  BADGE_EARNED
+  RESERVATION_CONFIRMED
+  RESERVATION_REMINDER
+  RATING_REQUEST
+  LOYALTY_REWARD
+  GENERAL
+}
+
+// ─────────────────────────── Core users ───────────────────────────
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  phone         String?        @unique
+  passwordHash  String
+  name          String
+  avatarUrl     String?
+  role          Role           @default(PLAYER)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  player        Player?
+  employee      Employee?
+  notifications Notification[]
+}
+
+model Player {
+  id            String      @id @default(cuid())
+  userId        String      @unique
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bio           String?
+  points        Int         @default(1000) // Elo-style rating
+  xp            Int         @default(0)
+  level         Int         @default(1)
+  trustBadge    Boolean     @default(false)
+  qrToken       String      @unique @default(cuid())
+  loyaltyPoints Int         @default(0)
+  loyaltyTier   LoyaltyTier @default(BRONZE)
+  checkedInAt   DateTime?
+  createdAt     DateTime    @default(now())
+
+  matchesAsP1  Match[]              @relation("PlayerOne")
+  matchesAsP2  Match[]              @relation("PlayerTwo")
+  matchesWon   Match[]              @relation("MatchWinner")
+  entries      TournamentEntry[]
+  reservations Reservation[]
+  badges       PlayerBadge[]
+  ratingsGiven Rating[]
+  loyaltyTxs   LoyaltyTransaction[]
+  pointsLog    PointsHistory[]
+  checkIns     CheckIn[]
+  redemptions  RewardRedemption[]
+  tournamentsWon Tournament[]       @relation("TournamentWinner")
+}
+
+model Employee {
+  id             String        @id @default(cuid())
+  userId         String        @unique
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  position       String        @default("Floor Staff")
+  hiredAt        DateTime      @default(now())
+  matchesManaged Match[]
+  ratings        Rating[]
+  reservations   Reservation[]
+  checkInsDone   CheckIn[]
+}
+
+// ─────────────────────────── Club assets ───────────────────────────
+
+model Table {
+  id           String        @id @default(cuid())
+  number       Int           @unique
+  name         String
+  isActive     Boolean       @default(true)
+  hourlyRate   Int           @default(1500) // in cents
+  matches      Match[]
+  reservations Reservation[]
+}
+
+// ─────────────────────────── Matches & scoring ───────────────────────────
+
+model Match {
+  id          String      @id @default(cuid())
+  type        MatchType   @default(FRIENDLY)
+  status      MatchStatus @default(SCHEDULED)
+  player1Id   String
+  player1     Player      @relation("PlayerOne", fields: [player1Id], references: [id])
+  player2Id   String
+  player2     Player      @relation("PlayerTwo", fields: [player2Id], references: [id])
+  winnerId    String?
+  winner      Player?     @relation("MatchWinner", fields: [winnerId], references: [id])
+  score1      Int         @default(0)
+  score2      Int         @default(0)
+  frames      Int         @default(3) // best of N frames
+  tableId     String?
+  table       Table?      @relation(fields: [tableId], references: [id])
+  managedById String?
+  managedBy   Employee?   @relation(fields: [managedById], references: [id])
+  tournamentId String?
+  tournament  Tournament? @relation(fields: [tournamentId], references: [id])
+  round       String?     // e.g. "Quarter-final"
+  scheduledAt DateTime    @default(now())
+  completedAt DateTime?
+  createdAt   DateTime    @default(now())
+  pointsLog   PointsHistory[]
+  ratings     Rating[]
+
+  @@index([player1Id])
+  @@index([player2Id])
+  @@index([status])
+  @@index([type])
+}
+
+model PointsHistory {
+  id        String   @id @default(cuid())
+  playerId  String
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  matchId   String?
+  match     Match?   @relation(fields: [matchId], references: [id])
+  delta     Int
+  newTotal  Int
+  xpDelta   Int      @default(0)
+  reason    String
+  createdAt DateTime @default(now())
+
+  @@index([playerId, createdAt])
+}
+
+// ─────────────────────────── Tournaments ───────────────────────────
+
+model Tournament {
+  id          String           @id @default(cuid())
+  name        String
+  slug        String           @unique
+  description String
+  format      TournamentFormat @default(KNOCKOUT)
+  status      TournamentStatus @default(REGISTRATION)
+  isChampionship Boolean       @default(false)
+  maxPlayers  Int              @default(16)
+  entryFee    Int              @default(0) // cents
+  prizePool   Int              @default(0) // cents
+  rules       String?
+  bannerUrl   String?
+  startDate   DateTime
+  endDate     DateTime?
+  winnerId    String?
+  winner      Player?          @relation("TournamentWinner", fields: [winnerId], references: [id])
+  createdAt   DateTime         @default(now())
+  entries     TournamentEntry[]
+  matches     Match[]
+}
+
+model TournamentEntry {
+  id            String        @id @default(cuid())
+  tournamentId  String
+  tournament    Tournament    @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  playerId      String
+  player        Player        @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  status        EntryStatus   @default(PENDING)
+  paymentStatus PaymentStatus @default(UNPAID)
+  createdAt     DateTime      @default(now())
+
+  @@unique([tournamentId, playerId])
+}
+
+// ─────────────────────────── Reservations ───────────────────────────
+
+model Reservation {
+  id          String            @id @default(cuid())
+  playerId    String
+  player      Player            @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  tableId     String
+  table       Table             @relation(fields: [tableId], references: [id])
+  startTime   DateTime
+  endTime     DateTime
+  status      ReservationStatus @default(PENDING)
+  managedById String?
+  managedBy   Employee?         @relation(fields: [managedById], references: [id])
+  createdAt   DateTime          @default(now())
+
+  @@index([tableId, startTime])
+  @@index([playerId])
+}
+
+// ─────────────────────────── Gamification ───────────────────────────
+
+model Badge {
+  id          String        @id @default(cuid())
+  code        String        @unique
+  name        String
+  description String
+  icon        String        // lucide icon name or emoji
+  category    String        @default("milestone")
+  xpReward    Int           @default(50)
+  players     PlayerBadge[]
+}
+
+model PlayerBadge {
+  playerId   String
+  player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  badgeId    String
+  badge      Badge    @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+  unlockedAt DateTime @default(now())
+
+  @@id([playerId, badgeId])
+}
+
+// ─────────────────────────── Ratings ───────────────────────────
+
+model Rating {
+  id           String    @id @default(cuid())
+  matchId      String
+  match        Match     @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  playerId     String
+  player       Player    @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  employeeId   String?
+  employee     Employee? @relation(fields: [employeeId], references: [id])
+  serviceStars Int
+  tableStars   Int
+  overallStars Int
+  comment      String?
+  createdAt    DateTime  @default(now())
+
+  @@unique([matchId, playerId])
+}
+
+// ─────────────────────────── Notifications ───────────────────────────
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      NotificationType @default(GENERAL)
+  title     String
+  body      String
+  link      String?
+  read      Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  @@index([userId, read])
+}
+
+// ─────────────────────────── Loyalty ───────────────────────────
+
+model LoyaltyTransaction {
+  id        String        @id @default(cuid())
+  playerId  String
+  player    Player        @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  type      LoyaltyTxType
+  delta     Int
+  reason    String
+  createdAt DateTime      @default(now())
+
+  @@index([playerId, createdAt])
+}
+
+model Reward {
+  id          String             @id @default(cuid())
+  name        String
+  description String
+  cost        Int // loyalty points
+  icon        String             @default("gift")
+  isActive    Boolean            @default(true)
+  redemptions RewardRedemption[]
+}
+
+model RewardRedemption {
+  id        String   @id @default(cuid())
+  playerId  String
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  rewardId  String
+  reward    Reward   @relation(fields: [rewardId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+// ─────────────────────────── Check-ins & club state ───────────────────────────
+
+model CheckIn {
+  id           String    @id @default(cuid())
+  playerId     String
+  player       Player    @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  byEmployeeId String?
+  byEmployee   Employee? @relation(fields: [byEmployeeId], references: [id])
+  createdAt    DateTime  @default(now())
+
+  @@index([playerId, createdAt])
+}
+
+model ClubSettings {
+  id             Int     @id @default(1)
+  isLive         Boolean @default(false)
+  streamUrl      String?
+  streamPlatform String  @default("youtube")
+  streamTitle    String?
+  loyaltyPerMatch Int    @default(10)
+  loyaltyPerVisit Int    @default(5)
+  loyaltyPerReservation Int @default(15)
+}
