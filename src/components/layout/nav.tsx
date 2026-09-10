@@ -1,8 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import { Dialog } from "@/components/ui/dialog";
+import { SignOutButton } from "./sign-out-button";
 import { usePathname } from "next/navigation";
 import {
+  Menu,
   Home,
   Swords,
   Trophy,
@@ -50,15 +54,20 @@ const BOTTOM_NAV: NavItem[] = [
   { href: "/dashboard", label: "Home", icon: Home },
   { href: "/matches", label: "Play", icon: Swords },
   { href: "/leaderboard", label: "Ranks", icon: Trophy },
-  { href: "/live", label: "Live", icon: Radio },
-  { href: "/profile", label: "Profile", icon: User },
+  { href: "/reservations", label: "Book", icon: CalendarClock },
 ];
 
 function isActive(pathname: string, href: string) {
   return pathname === href || (href !== "/" && pathname.startsWith(href + "/"));
 }
 
-export function SidebarNav({ role }: { role: Role }) {
+export function SidebarNav({
+  role,
+  onNavigate,
+}: {
+  role: Role;
+  onNavigate?: () => void;
+}) {
   const pathname = usePathname();
   const items = [
     ...PLAYER_NAV,
@@ -74,15 +83,19 @@ export function SidebarNav({ role }: { role: Role }) {
           <Link
             key={item.href}
             href={item.href}
+            onClick={onNavigate}
             className={cn(
               "flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition-all",
               active
                 ? "bg-emerald-accent/12 text-emerald-bright"
-                : "text-muted hover:bg-surface-hover hover:text-foreground"
+                : "text-muted hover:bg-surface-hover hover:text-foreground",
             )}
             aria-current={active ? "page" : undefined}
           >
-            <item.icon size={19} className={active ? "text-emerald-bright" : ""} />
+            <item.icon
+              size={19}
+              className={active ? "text-emerald-bright" : ""}
+            />
             {item.label}
             {active && (
               <span className="ml-auto h-1.5 w-1.5 rounded-full bg-emerald-bright" />
@@ -94,40 +107,69 @@ export function SidebarNav({ role }: { role: Role }) {
   );
 }
 
-export function BottomNav({ live }: { live?: boolean }) {
+export function BottomNav({ live, role }: { live?: boolean; role: Role }) {
+  const [open, setOpen] = useState(false);
   const pathname = usePathname();
   return (
-    <nav
-      aria-label="Mobile"
-      className="glass fixed inset-x-0 bottom-0 z-40 border-t border-border pb-[env(safe-area-inset-bottom)] lg:hidden"
-    >
-      <div className="mx-auto flex max-w-lg items-stretch justify-around">
-        {BOTTOM_NAV.map((item) => {
-          const active = isActive(pathname, item.href);
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={active ? "page" : undefined}
-              className={cn(
-                "relative flex min-h-[56px] min-w-[64px] flex-col items-center justify-center gap-0.5 text-[11px] font-medium transition-colors",
-                active ? "text-emerald-bright" : "text-muted"
-              )}
-            >
-              <span className="relative">
-                <item.icon size={22} />
-                {item.href === "/live" && live && (
-                  <span className="absolute -right-1.5 -top-1 h-2 w-2 rounded-full bg-live animate-pulse-live" />
+    <>
+      <nav
+        aria-label="Mobile"
+        className="glass fixed inset-x-0 bottom-0 z-40 border-t border-border pb-[env(safe-area-inset-bottom)] lg:hidden"
+      >
+        <div className="mx-auto flex max-w-lg items-stretch justify-around">
+          {BOTTOM_NAV.map((item) => {
+            const active = isActive(pathname, item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "relative flex min-h-[56px] min-w-[64px] flex-col items-center justify-center gap-0.5 text-[11px] font-medium transition-colors",
+                  active ? "text-emerald-bright" : "text-muted",
                 )}
-              </span>
-              {item.label}
-              {active && (
-                <span className="absolute top-0 h-0.5 w-8 rounded-full bg-emerald-bright" />
-              )}
-            </Link>
-          );
-        })}
-      </div>
-    </nav>
+              >
+                <span className="relative">
+                  <item.icon size={22} />
+                  {item.href === "/live" && live && (
+                    <span className="absolute -right-1.5 -top-1 h-2 w-2 rounded-full bg-live animate-pulse-live" />
+                  )}
+                </span>
+                {item.label}
+                {active && (
+                  <span className="absolute top-0 h-0.5 w-8 rounded-full bg-emerald-bright" />
+                )}
+              </Link>
+            );
+          })}
+          <button
+            type="button"
+            aria-label="Open all navigation"
+            aria-haspopup="dialog"
+            aria-expanded={open}
+            onClick={() => setOpen(true)}
+            className="relative flex min-h-[64px] min-w-[64px] flex-col items-center justify-center gap-1 text-[11px] font-medium text-muted hover:text-foreground"
+          >
+            <Menu size={22} />
+            More
+            {live && (
+              <span className="absolute right-4 top-2 h-1.5 w-1.5 rounded-full bg-live" />
+            )}
+          </button>
+        </div>
+      </nav>
+      <Dialog open={open} onClose={() => setOpen(false)} title="Your club">
+        <SidebarNav role={role} onNavigate={() => setOpen(false)} />
+        <Link
+          href="/profile"
+          onClick={() => setOpen(false)}
+          className="mt-3 flex min-h-11 items-center gap-3 rounded-xl border-t border-border px-3.5 py-3 text-sm text-muted"
+        >
+          <User size={19} />
+          My profile
+        </Link>
+        <SignOutButton />
+      </Dialog>
+    </>
   );
 }

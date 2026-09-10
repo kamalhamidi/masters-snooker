@@ -24,7 +24,8 @@ export const metadata: Metadata = {
   keywords: ["snooker", "billiards", "club", "tournaments", "leaderboard"],
   openGraph: {
     title: "Master's Snooker",
-    description: "Championship tables, ranked matches, tournaments and live streams.",
+    description:
+      "Championship tables, ranked matches, tournaments and live streams.",
     type: "website",
   },
 };
@@ -45,6 +46,9 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
       <body className={`${bebas.variable} ${manrope.variable} antialiased`}>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         {children}
         <Toaster
           position="top-center"

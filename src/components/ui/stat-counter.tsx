@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
+import { useInView, useReducedMotion } from "framer-motion";
 
 export function StatCounter({
   value,
@@ -16,12 +16,13 @@ export function StatCounter({
   className?: string;
   duration?: number;
 }) {
+  const reducedMotion = useReducedMotion();
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
-    if (!inView) return;
+    if (!inView || reducedMotion) return;
     const start = performance.now();
     let raf: number;
     const tick = (now: number) => {
@@ -32,13 +33,19 @@ export function StatCounter({
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [inView, value, duration]);
+  }, [inView, value, duration, reducedMotion]);
 
   return (
-    <span ref={ref} className={className}>
-      {prefix}
-      {display.toLocaleString()}
-      {suffix}
+    <span
+      ref={ref}
+      className={className}
+      aria-label={`${prefix}${value.toLocaleString()}${suffix}`}
+    >
+      <span aria-hidden="true">
+        {prefix}
+        {(reducedMotion ? value : display).toLocaleString()}
+        {suffix}
+      </span>
     </span>
   );
 }

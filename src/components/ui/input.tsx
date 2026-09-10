@@ -8,8 +8,8 @@ export const Input = forwardRef<
   <input
     ref={ref}
     className={cn(
-      "h-11 w-full rounded-xl border border-border bg-elevated px-4 text-sm text-foreground placeholder:text-faint transition-colors focus:border-emerald-accent/60 focus:outline-none",
-      className
+      "h-11 w-full rounded-xl border border-border bg-elevated px-4 text-sm text-foreground placeholder:text-faint transition-colors focus:border-emerald-accent focus:ring-2 focus:ring-emerald-accent/20 disabled:cursor-not-allowed disabled:opacity-50",
+      className,
     )}
     {...props}
   />
@@ -23,8 +23,8 @@ export const Textarea = forwardRef<
   <textarea
     ref={ref}
     className={cn(
-      "w-full rounded-xl border border-border bg-elevated px-4 py-3 text-sm text-foreground placeholder:text-faint transition-colors focus:border-emerald-accent/60 focus:outline-none",
-      className
+      "w-full rounded-xl border border-border bg-elevated px-4 py-3 text-sm text-foreground placeholder:text-faint transition-colors focus:border-emerald-accent focus:ring-2 focus:ring-emerald-accent/20 disabled:cursor-not-allowed disabled:opacity-50",
+      className,
     )}
     {...props}
   />
@@ -38,8 +38,8 @@ export const Select = forwardRef<
   <select
     ref={ref}
     className={cn(
-      "h-11 w-full appearance-none rounded-xl border border-border bg-elevated px-4 text-sm text-foreground transition-colors focus:border-emerald-accent/60 focus:outline-none",
-      className
+      "h-11 w-full rounded-xl border border-border bg-elevated px-4 text-sm text-foreground transition-colors focus:border-emerald-accent focus:ring-2 focus:ring-emerald-accent/20 disabled:cursor-not-allowed disabled:opacity-50",
+      className,
     )}
     {...props}
   />

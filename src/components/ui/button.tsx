@@ -8,9 +8,8 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-emerald-accent text-white hover:bg-emerald-bright shadow-lg shadow-emerald-accent/20",
-        gold:
-          "bg-gold text-black hover:bg-gold-soft shadow-lg shadow-gold/20",
+          "bg-emerald-accent text-[#031b13] hover:bg-emerald-bright shadow-sm shadow-emerald-accent/15",
+        gold: "bg-gold text-black hover:bg-gold-soft shadow-lg shadow-gold/20",
         secondary:
           "bg-surface border border-border-strong text-foreground hover:bg-surface-hover",
         ghost: "text-muted hover:text-foreground hover:bg-surface-hover",
@@ -19,18 +18,19 @@ const buttonVariants = cva(
           "border border-emerald-accent/50 text-emerald-bright hover:bg-emerald-accent/10",
       },
       size: {
-        sm: "h-9 px-3.5 text-sm",
+        sm: "h-11 px-3.5 text-sm",
         md: "h-11 px-5 text-sm",
         lg: "h-12 px-7 text-base",
         icon: "h-11 w-11",
       },
     },
     defaultVariants: { variant: "primary", size: "md" },
-  }
+  },
 );
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {}
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -40,7 +40,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className={cn(buttonVariants({ variant, size }), className)}
       {...props}
     />
-  )
+  ),
 );
 Button.displayName = "Button";
 

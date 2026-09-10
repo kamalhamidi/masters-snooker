@@ -1,27 +1,36 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+function subscribe(callback: () => void) {
+  const observer = new MutationObserver(callback);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+  return () => observer.disconnect();
+}
 
 export function ThemeToggle() {
-  const [light, setLight] = useState(false);
-
-  useEffect(() => {
-    setLight(document.documentElement.classList.contains("light"));
-  }, []);
-
+  const light = useSyncExternalStore(
+    subscribe,
+    () => document.documentElement.classList.contains("light"),
+    () => false,
+  );
   const toggle = () => {
     const next = !light;
-    setLight(next);
     document.documentElement.classList.toggle("light", next);
-    localStorage.setItem("theme", next ? "light" : "dark");
+    try {
+      localStorage.setItem("theme", next ? "light" : "dark");
+    } catch {}
   };
-
   return (
     <button
+      type="button"
       onClick={toggle}
       aria-label={light ? "Switch to dark mode" : "Switch to light mode"}
-      className="flex h-10 w-10 items-center justify-center rounded-full text-muted transition-colors hover:bg-surface-hover hover:text-foreground"
+      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:bg-surface-hover hover:text-foreground"
     >
       {light ? <Moon size={18} /> : <Sun size={18} />}
     </button>

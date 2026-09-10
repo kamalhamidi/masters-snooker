@@ -12,7 +12,7 @@ import { MyReservations } from "./my-reservations";
 export const metadata: Metadata = { title: "Reservations" };
 
 function dateKey(d: Date) {
-  return d.toISOString().slice(0, 10);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
 export default async function ReservationsPage({
@@ -44,10 +44,13 @@ export default async function ReservationsPage({
   const dayStart = new Date(selected);
   dayStart.setHours(0, 0, 0, 0);
   const dayEnd = new Date(selected);
-  dayEnd.setHours(23, 59, 59, 999);
+  dayEnd.setHours(26, 0, 0, 0);
 
   const [tables, dayReservations, mine, allPlayers] = await Promise.all([
-    prisma.table.findMany({ where: { isActive: true }, orderBy: { number: "asc" } }),
+    prisma.table.findMany({
+      where: { isActive: true },
+      orderBy: { number: "asc" },
+    }),
     prisma.reservation.findMany({
       where: {
         status: { in: ["PENDING", "CONFIRMED"] },
@@ -90,11 +93,17 @@ export default async function ReservationsPage({
             <Link
               key={key}
               href={`/reservations?date=${key}`}
+              aria-current={isSelected ? "date" : undefined}
+              aria-label={d.toLocaleDateString("en-US", {
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+              })}
               className={cn(
                 "flex min-w-[72px] shrink-0 flex-col items-center rounded-2xl border px-4 py-2.5 transition-colors",
                 isSelected
                   ? "border-emerald-accent bg-emerald-accent/15 text-emerald-bright"
-                  : "border-border text-muted hover:border-border-strong"
+                  : "border-border text-muted hover:border-border-strong",
               )}
             >
               <span className="text-xs font-medium uppercase">
@@ -107,6 +116,7 @@ export default async function ReservationsPage({
       </div>
 
       <AvailabilityGrid
+        key={dateKey(selected)}
         date={dateKey(selected)}
         isStaff={isStaff}
         selfPlayerId={selfPlayer.id}
