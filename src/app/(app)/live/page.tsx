@@ -1,3 +1,4 @@
+import { getI18n } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { Radio, Film } from "lucide-react";
 import { prisma } from "@/lib/prisma";
@@ -9,10 +10,15 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { MatchRow } from "@/components/features/match-row";
 import { formatDate } from "@/lib/utils";
 
-export const metadata: Metadata = { title: "Live" };
+export async function generateMetadata(): Promise<Metadata> {
+  const { tr } = await getI18n();
+  return { title: tr("Live") };
+}
 export const revalidate = 20;
 
 export default async function LivePage() {
+  const { tr, locale } = await getI18n();
+
   const [settings, liveMatches, pastFinals] = await Promise.all([
     getClubSettings(),
     prisma.match.findMany({
@@ -35,7 +41,9 @@ export default async function LivePage() {
   return (
     <div className="space-y-8">
       <div className="flex flex-wrap items-center gap-3">
-        <h1 className="font-display text-4xl tracking-wide">Live at the club</h1>
+        <h1 className="font-display text-4xl tracking-wide">
+          {tr("Live at the club")}
+        </h1>
         {settings.isLive && <LiveBadge />}
       </div>
 
@@ -45,7 +53,7 @@ export default async function LivePage() {
           <div className="aspect-video w-full">
             <iframe
               src={settings.streamUrl}
-              title={settings.streamTitle ?? "Live stream"}
+              title={settings.streamTitle ?? tr("Live stream")}
               className="h-full w-full"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -61,7 +69,7 @@ export default async function LivePage() {
       ) : (
         <EmptyState
           icon={Radio}
-          title="No live broadcast right now"
+          title={tr("No live broadcast right now")}
           description="Championship nights and finals are streamed here. Follow the notification center to know when we go live."
         />
       )}
@@ -69,7 +77,9 @@ export default async function LivePage() {
       {/* Live scores */}
       {liveMatches.length > 0 && (
         <section className="space-y-3">
-          <h2 className="font-display text-2xl tracking-wide">Happening now</h2>
+          <h2 className="font-display text-2xl tracking-wide">
+            {tr("Happening now")}
+          </h2>
           {liveMatches.map((m) => (
             <MatchRow key={m.id} match={m} />
           ))}
@@ -80,17 +90,24 @@ export default async function LivePage() {
       <section>
         <div className="mb-4 flex items-center gap-2">
           <Film size={20} className="text-emerald-bright" />
-          <h2 className="font-display text-2xl tracking-wide">Best of the archive</h2>
+          <h2 className="font-display text-2xl tracking-wide">
+            {tr("Best of the archive")}
+          </h2>
         </div>
         {pastFinals.length === 0 ? (
-          <p className="text-sm text-muted">Highlights will appear after the next streamed event.</p>
+          <p className="text-sm text-muted">
+            {tr("Highlights will appear after the next streamed event.")}
+          </p>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2">
             {pastFinals.map((m) => (
-              <Card key={m.id} className="group transition-all hover:-translate-y-0.5 hover:border-emerald-accent/40">
+              <Card
+                key={m.id}
+                className="group transition-all hover:-translate-y-0.5 hover:border-emerald-accent/40"
+              >
                 <CardHeader className="mb-2">
                   <CardTitle className="text-lg">
-                    {m.player1.user.name} vs {m.player2.user.name}
+                    {m.player1.user.name} {tr("vs")} {m.player2.user.name}
                   </CardTitle>
                   <MatchTypeBadge type={m.type} />
                 </CardHeader>
@@ -98,10 +115,11 @@ export default async function LivePage() {
                   <p className="font-display text-3xl tracking-widest text-emerald-bright">
                     {m.score1} – {m.score2}
                   </p>
-                  <div className="text-right text-xs text-muted">
+                  <div className="text-end text-xs text-muted">
                     {m.round && <Badge variant="purple">{m.round}</Badge>}
                     <p className="mt-1">
-                      {m.tournament?.name} · {m.completedAt && formatDate(m.completedAt)}
+                      {m.tournament?.name} ·{" "}
+                      {m.completedAt && formatDate(m.completedAt, locale)}
                     </p>
                   </div>
                 </div>

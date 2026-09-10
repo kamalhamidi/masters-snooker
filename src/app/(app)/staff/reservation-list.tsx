@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Check, X } from "lucide-react";
@@ -17,7 +19,13 @@ type Item = {
   end: string;
 };
 
-export function StaffReservationList({ reservations }: { reservations: Item[] }) {
+export function StaffReservationList({
+  reservations,
+}: {
+  reservations: Item[];
+}) {
+  const { tr, locale } = useI18n();
+
   const router = useRouter();
 
   async function act(id: string, action: "confirm" | "cancel") {
@@ -27,15 +35,23 @@ export function StaffReservationList({ reservations }: { reservations: Item[] })
       body: JSON.stringify({ id, action }),
     });
     if (!res.ok) {
-      toast.error("Action failed");
+      toast.error(tr("Action failed"));
       return;
     }
-    toast.success(action === "confirm" ? "Reservation confirmed" : "Reservation cancelled");
+    toast.success(
+      action === "confirm"
+        ? tr("Reservation confirmed")
+        : tr("Reservation cancelled"),
+    );
     router.refresh();
   }
 
   if (reservations.length === 0) {
-    return <p className="text-sm text-muted">No pending reservations — all caught up.</p>;
+    return (
+      <p className="text-sm text-muted">
+        {tr("No pending reservations — all caught up.")}
+      </p>
+    );
   }
 
   return (
@@ -46,15 +62,22 @@ export function StaffReservationList({ reservations }: { reservations: Item[] })
           <div className="min-w-0 flex-1">
             <p className="truncate font-semibold">{r.playerName}</p>
             <p className="text-sm text-muted">
-              {r.tableName} · {formatDateTime(r.start)} →{" "}
-              {new Date(r.end).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}
+              {r.tableName} · {formatDateTime(r.start, locale)} →{" "}
+              {new Date(r.end).toLocaleTimeString(locale, {
+                hour: "numeric",
+                minute: "2-digit",
+              })}
             </p>
           </div>
           <div className="flex gap-2">
             <Button size="sm" onClick={() => act(r.id, "confirm")}>
-              <Check size={14} /> Confirm
+              <Check size={14} /> {tr("Confirm")}
             </Button>
-            <Button size="sm" variant="danger" onClick={() => act(r.id, "cancel")}>
+            <Button
+              size="sm"
+              variant="danger"
+              onClick={() => act(r.id, "cancel")}
+            >
               <X size={14} />
             </Button>
           </div>

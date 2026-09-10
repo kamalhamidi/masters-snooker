@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import { X } from "lucide-react";
 import { useEffect, useId, useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -17,6 +19,8 @@ export function Dialog({
   children: React.ReactNode;
   className?: string;
 }) {
+  const { tr } = useI18n();
+
   const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   useEffect(() => {
@@ -37,7 +41,7 @@ export function Dialog({
     <dialog
       ref={ref}
       aria-labelledby={title ? titleId : undefined}
-      aria-label={title ? undefined : "Dialog"}
+      aria-label={title ? undefined : tr("Dialog")}
       onCancel={(event) => {
         event.preventDefault();
         onClose();
@@ -57,14 +61,14 @@ export function Dialog({
           <div className="mb-5 flex items-center justify-between gap-4">
             {title && (
               <h2 id={titleId} className="font-display text-3xl tracking-wide">
-                {title}
+                {tr(title)}
               </h2>
             )}
             <button
               type="button"
               onClick={onClose}
-              aria-label="Close dialog"
-              className="ml-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:bg-surface-hover hover:text-foreground"
+              aria-label={tr("Close dialog")}
+              className="ms-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:bg-surface-hover hover:text-foreground"
             >
               <X size={20} />
             </button>

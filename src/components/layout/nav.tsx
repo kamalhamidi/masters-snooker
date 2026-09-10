@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import Link from "next/link";
 import { useState } from "react";
 import { Dialog } from "@/components/ui/dialog";
@@ -68,6 +70,8 @@ export function SidebarNav({
   role: Role;
   onNavigate?: () => void;
 }) {
+  const { tr } = useI18n();
+
   const pathname = usePathname();
   const items = [
     ...PLAYER_NAV,
@@ -76,7 +80,7 @@ export function SidebarNav({
   ];
 
   return (
-    <nav aria-label="Main" className="flex flex-col gap-1">
+    <nav aria-label={tr("Main")} className="flex flex-col gap-1">
       {items.map((item) => {
         const active = isActive(pathname, item.href);
         return (
@@ -96,9 +100,9 @@ export function SidebarNav({
               size={19}
               className={active ? "text-emerald-bright" : ""}
             />
-            {item.label}
+            {tr(item.label)}
             {active && (
-              <span className="ml-auto h-1.5 w-1.5 rounded-full bg-emerald-bright" />
+              <span className="ms-auto h-1.5 w-1.5 rounded-full bg-emerald-bright" />
             )}
           </Link>
         );
@@ -108,12 +112,14 @@ export function SidebarNav({
 }
 
 export function BottomNav({ live, role }: { live?: boolean; role: Role }) {
+  const { tr } = useI18n();
+
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   return (
     <>
       <nav
-        aria-label="Mobile"
+        aria-label={tr("Mobile")}
         className="glass fixed inset-x-0 bottom-0 z-40 border-t border-border pb-[env(safe-area-inset-bottom)] lg:hidden"
       >
         <div className="mx-auto flex max-w-lg items-stretch justify-around">
@@ -132,10 +138,10 @@ export function BottomNav({ live, role }: { live?: boolean; role: Role }) {
                 <span className="relative">
                   <item.icon size={22} />
                   {item.href === "/live" && live && (
-                    <span className="absolute -right-1.5 -top-1 h-2 w-2 rounded-full bg-live animate-pulse-live" />
+                    <span className="absolute -end-1.5 -top-1 h-2 w-2 rounded-full bg-live animate-pulse-live" />
                   )}
                 </span>
-                {item.label}
+                {tr(item.label)}
                 {active && (
                   <span className="absolute top-0 h-0.5 w-8 rounded-full bg-emerald-bright" />
                 )}
@@ -144,21 +150,25 @@ export function BottomNav({ live, role }: { live?: boolean; role: Role }) {
           })}
           <button
             type="button"
-            aria-label="Open all navigation"
+            aria-label={tr("Open all navigation")}
             aria-haspopup="dialog"
             aria-expanded={open}
             onClick={() => setOpen(true)}
             className="relative flex min-h-[64px] min-w-[64px] flex-col items-center justify-center gap-1 text-[11px] font-medium text-muted hover:text-foreground"
           >
             <Menu size={22} />
-            More
+            {tr("More")}
             {live && (
-              <span className="absolute right-4 top-2 h-1.5 w-1.5 rounded-full bg-live" />
+              <span className="absolute end-4 top-2 h-1.5 w-1.5 rounded-full bg-live" />
             )}
           </button>
         </div>
       </nav>
-      <Dialog open={open} onClose={() => setOpen(false)} title="Your club">
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        title={tr("Your club")}
+      >
         <SidebarNav role={role} onNavigate={() => setOpen(false)} />
         <Link
           href="/profile"
@@ -166,7 +176,7 @@ export function BottomNav({ live, role }: { live?: boolean; role: Role }) {
           className="mt-3 flex min-h-11 items-center gap-3 rounded-xl border-t border-border px-3.5 py-3 text-sm text-muted"
         >
           <User size={19} />
-          My profile
+          {tr("My profile")}
         </Link>
         <SignOutButton />
       </Dialog>

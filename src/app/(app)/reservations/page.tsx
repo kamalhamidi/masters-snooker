@@ -1,3 +1,4 @@
+import { getI18n } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -9,7 +10,10 @@ import { cn } from "@/lib/utils";
 import { AvailabilityGrid } from "./availability-grid";
 import { MyReservations } from "./my-reservations";
 
-export const metadata: Metadata = { title: "Reservations" };
+export async function generateMetadata(): Promise<Metadata> {
+  const { tr } = await getI18n();
+  return { title: tr("Reservations") };
+}
 
 function dateKey(d: Date) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
@@ -20,6 +24,8 @@ export default async function ReservationsPage({
 }: {
   searchParams: Promise<{ date?: string }>;
 }) {
+  const { tr, locale } = await getI18n();
+
   const session = await auth();
   if (!session) redirect("/login");
 
@@ -76,12 +82,16 @@ export default async function ReservationsPage({
     <div className="space-y-8">
       <div>
         <h1 className="font-display flex items-center gap-3 text-4xl tracking-wide">
-          <CalendarClock className="text-emerald-bright" /> Book a table
+          <CalendarClock className="text-emerald-bright" /> {tr("Book a table")}
         </h1>
         <p className="text-sm text-muted">
           {isStaff
-            ? "Book for yourself or any member — staff bookings are confirmed instantly."
-            : "Live availability, per table per hour. Bookings are confirmed by staff."}
+            ? tr(
+                "Book for yourself or any member — staff bookings are confirmed instantly.",
+              )
+            : tr(
+                "Live availability, per table per hour. Bookings are confirmed by staff.",
+              )}
         </p>
       </div>
 
@@ -94,7 +104,7 @@ export default async function ReservationsPage({
               key={key}
               href={`/reservations?date=${key}`}
               aria-current={isSelected ? "date" : undefined}
-              aria-label={d.toLocaleDateString("en-US", {
+              aria-label={d.toLocaleDateString(locale, {
                 weekday: "long",
                 month: "long",
                 day: "numeric",
@@ -107,7 +117,7 @@ export default async function ReservationsPage({
               )}
             >
               <span className="text-xs font-medium uppercase">
-                {d.toLocaleDateString("en-US", { weekday: "short" })}
+                {d.toLocaleDateString(locale, { weekday: "short" })}
               </span>
               <span className="font-display text-2xl">{d.getDate()}</span>
             </Link>

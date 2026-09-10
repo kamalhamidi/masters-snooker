@@ -5,8 +5,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatCents(cents: number): string {
-  return new Intl.NumberFormat("en-US", {
+export function formatCents(cents: number, locale = "en-US"): string {
+  return new Intl.NumberFormat(locale, {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: cents % 100 === 0 ? 0 : 2,
@@ -22,16 +22,16 @@ export function initials(name: string): string {
     .toUpperCase();
 }
 
-export function formatDate(d: Date | string): string {
-  return new Date(d).toLocaleDateString("en-US", {
+export function formatDate(d: Date | string, locale = "en-US"): string {
+  return new Date(d).toLocaleDateString(locale, {
     month: "short",
     day: "numeric",
     year: "numeric",
   });
 }
 
-export function formatDateTime(d: Date | string): string {
-  return new Date(d).toLocaleString("en-US", {
+export function formatDateTime(d: Date | string, locale = "en-US"): string {
+  return new Date(d).toLocaleString(locale, {
     month: "short",
     day: "numeric",
     hour: "numeric",
@@ -39,15 +39,18 @@ export function formatDateTime(d: Date | string): string {
   });
 }
 
-export function timeAgo(d: Date | string): string {
-  const seconds = Math.floor((Date.now() - new Date(d).getTime()) / 1000);
-  if (seconds < 60) return "just now";
-  const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m ago`;
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
-  const days = Math.floor(hours / 24);
-  if (days < 30) return `${days}d ago`;
-  const months = Math.floor(days / 30);
-  return `${months}mo ago`;
+export function timeAgo(d: Date | string, locale = "en-US"): string {
+  const seconds = Math.max(
+    0,
+    Math.floor((Date.now() - new Date(d).getTime()) / 1000),
+  );
+  const formatter = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
+  if (seconds < 60) return formatter.format(0, "second");
+  if (seconds < 3600)
+    return formatter.format(-Math.floor(seconds / 60), "minute");
+  if (seconds < 86400)
+    return formatter.format(-Math.floor(seconds / 3600), "hour");
+  if (seconds < 2592000)
+    return formatter.format(-Math.floor(seconds / 86400), "day");
+  return formatter.format(-Math.floor(seconds / 2592000), "month");
 }

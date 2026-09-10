@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -21,27 +23,32 @@ export function RegisterButton({
   trustBadge: boolean;
   entryFee: number;
 }) {
+  const { tr, locale } = useI18n();
+
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   if (entryStatus === "APPROVED") {
     return (
       <p className="flex items-center gap-2 font-semibold text-emerald-bright">
-        <CheckCircle2 size={18} /> You&apos;re confirmed — see you at the table.
+        <CheckCircle2 size={18} />{" "}
+        {tr("You're confirmed — see you at the table.")}
       </p>
     );
   }
   if (entryStatus === "PENDING") {
     return (
       <p className="flex items-center gap-2 font-semibold text-gold-soft">
-        <Clock size={18} /> Application submitted — awaiting staff approval.
+        <Clock size={18} />{" "}
+        {tr("Application submitted — awaiting staff approval.")}
       </p>
     );
   }
   if (entryStatus === "REJECTED") {
     return (
       <p className="flex items-center gap-2 font-semibold text-live">
-        <XCircle size={18} /> Your application wasn&apos;t accepted this time.
+        <XCircle size={18} />{" "}
+        {tr("Your application wasn't accepted this time.")}
       </p>
     );
   }
@@ -57,7 +64,7 @@ export function RegisterButton({
     setLoading(false);
 
     if (!res.ok) {
-      toast.error(data.error ?? "Registration failed");
+      toast.error(tr(data.error ?? tr("Registration failed")));
       return;
     }
     if (data.checkoutUrl) {
@@ -65,18 +72,37 @@ export function RegisterButton({
       return;
     }
     if (trustBadge) {
-      confetti({ particleCount: 90, spread: 70, origin: { y: 0.5 }, colors: ["#d4af37", "#10b981"] });
+      confetti({
+        particleCount: 90,
+        spread: 70,
+        origin: { y: 0.5 },
+        colors: ["#d4af37", "#10b981"],
+      });
       toast.success("You're in! Trust badge fast-tracked your entry.");
     } else {
-      toast.success("Application submitted — staff will review it shortly.");
+      toast.success(
+        tr("Application submitted — staff will review it shortly."),
+      );
     }
     router.refresh();
   }
 
   return (
-    <Button size="lg" variant="gold" onClick={register} disabled={loading} className="w-full sm:w-auto">
-      {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Ticket size={17} />}
-      Register {entryFee > 0 && `· pay ${formatCents(entryFee)}`}
+    <Button
+      size="lg"
+      variant="gold"
+      onClick={register}
+      disabled={loading}
+      className="w-full sm:w-auto"
+    >
+      {loading ? (
+        <Loader2 className="h-4 w-4 animate-spin" />
+      ) : (
+        <Ticket size={17} />
+      )}
+      {tr("Register")}{" "}
+      {entryFee > 0 &&
+        tr("· pay {amount}", { amount: formatCents(entryFee, locale) })}
     </Button>
   );
 }

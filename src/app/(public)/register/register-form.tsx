@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
@@ -12,6 +14,8 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { Card } from "@/components/ui/card";
 
 export function RegisterForm() {
+  const { tr } = useI18n();
+
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -38,7 +42,10 @@ export function RegisterForm() {
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         setError(
-          data.error ?? "We couldn’t create your account. Please try again.",
+          tr(
+            data.error ??
+              tr("We couldn’t create your account. Please try again."),
+          ),
         );
         return;
       }
@@ -50,16 +57,18 @@ export function RegisterForm() {
         redirect: false,
       });
       if (login?.error) {
-        toast.success("Your account is ready. Please log in to continue.");
+        toast.success(tr("Your account is ready. Please log in to continue."));
         router.push("/login");
         return;
       }
-      toast.success("Welcome to the club!");
+      toast.success(tr("Welcome to the club!"));
       router.push("/dashboard");
       router.refresh();
     } catch {
       setError(
-        "We couldn’t finish your request. If your account was created, try logging in.",
+        tr(
+          "We couldn’t finish your request. If your account was created, try logging in.",
+        ),
       );
     } finally {
       setLoading(false);
@@ -68,11 +77,14 @@ export function RegisterForm() {
 
   return (
     <Card className="w-full max-w-md p-6 sm:p-8">
-      <p className="eyebrow mb-3 text-gold">Your place in the club</p>
-      <h1 className="font-display text-4xl tracking-wide">Join the club</h1>
+      <p className="eyebrow mb-3 text-gold">{tr("Your place in the club")}</p>
+      <h1 className="font-display text-4xl tracking-wide">
+        {tr("Join the club")}
+      </h1>
       <p className="mt-1 text-sm text-muted">
-        Free player account — takes under a minute. You can complete your
-        profile later.
+        {tr(
+          "Free player account — takes under a minute. You can complete your profile later.",
+        )}
       </p>
 
       <form onSubmit={onSubmit} className="mt-7 space-y-4" aria-busy={loading}>
@@ -85,7 +97,7 @@ export function RegisterForm() {
           </p>
         )}
         <div>
-          <Label htmlFor="name">Full name</Label>
+          <Label htmlFor="name">{tr("Full name")}</Label>
           <Input
             id="name"
             name="name"
@@ -96,7 +108,7 @@ export function RegisterForm() {
           />
         </div>
         <div>
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">{tr("Email")}</Label>
           <Input
             id="email"
             name="email"
@@ -108,7 +120,7 @@ export function RegisterForm() {
         </div>
         <div>
           <Label htmlFor="phone">
-            Phone <span className="text-faint">(optional)</span>
+            {tr("Phone")} <span className="text-faint">{tr("(optional)")}</span>
           </Label>
           <Input
             id="phone"
@@ -119,29 +131,29 @@ export function RegisterForm() {
           />
         </div>
         <div>
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password">{tr("Password")}</Label>
           <PasswordInput
             id="password"
             name="password"
             required
             minLength={8}
-            placeholder="At least 8 characters"
+            placeholder={tr("At least 8 characters")}
             autoComplete="new-password"
           />
         </div>
         <Button className="w-full" size="lg" disabled={loading}>
           {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-          {loading ? "Creating your account…" : "Create account"}
+          {loading ? tr("Creating your account…") : tr("Create account")}
         </Button>
       </form>
 
       <p className="mt-6 text-center text-sm text-muted">
-        Already a member?{" "}
+        {tr("Already a member?")}{" "}
         <Link
           href="/login"
           className="font-semibold text-emerald-bright hover:underline"
         >
-          Log in
+          {tr("Log in")}
         </Link>
       </p>
     </Card>

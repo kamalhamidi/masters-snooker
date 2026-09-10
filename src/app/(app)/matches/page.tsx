@@ -1,3 +1,4 @@
+import { getI18n } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -11,15 +12,26 @@ import { RateMatchButton } from "@/components/features/rate-match-dialog";
 import { EmptyState } from "@/components/ui/empty-state";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = { title: "My matches" };
+export async function generateMetadata(): Promise<Metadata> {
+  const { tr } = await getI18n();
+  return { title: tr("My matches") };
+}
 
-const FILTERS = ["ALL", "FRIENDLY", "RANKED", "TOURNAMENT", "CHAMPIONSHIP"] as const;
+const FILTERS = [
+  "ALL",
+  "FRIENDLY",
+  "RANKED",
+  "TOURNAMENT",
+  "CHAMPIONSHIP",
+] as const;
 
 export default async function MatchesPage({
   searchParams,
 }: {
   searchParams: Promise<{ type?: string }>;
 }) {
+  const { tr } = await getI18n();
+
   const session = await auth();
   if (!session?.user.playerId) redirect("/login");
   const playerId = session.user.playerId;
@@ -48,15 +60,23 @@ export default async function MatchesPage({
   ]);
   const ratedMatchIds = new Set(myRatings.map((r) => r.matchId));
 
-  const upcoming = matches.filter((m) => m.status === "SCHEDULED" || m.status === "LIVE");
-  const past = matches.filter((m) => m.status === "COMPLETED" || m.status === "CANCELLED");
+  const upcoming = matches.filter(
+    (m) => m.status === "SCHEDULED" || m.status === "LIVE",
+  );
+  const past = matches.filter(
+    (m) => m.status === "COMPLETED" || m.status === "CANCELLED",
+  );
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-4xl tracking-wide">My matches</h1>
+        <h1 className="font-display text-4xl tracking-wide">
+          {tr("My matches")}
+        </h1>
         <p className="text-sm text-muted">
-          Your full match log — friendlies, ranked play, tournaments and championships.
+          {tr(
+            "Your full match log — friendlies, ranked play, tournaments and championships.",
+          )}
         </p>
       </div>
 
@@ -70,17 +90,21 @@ export default async function MatchesPage({
               "shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors",
               activeFilter === f
                 ? "border-emerald-accent bg-emerald-accent/15 text-emerald-bright"
-                : "border-border text-muted hover:border-border-strong hover:text-foreground"
+                : "border-border text-muted hover:border-border-strong hover:text-foreground",
             )}
           >
-            {f === "ALL" ? "All" : f.charAt(0) + f.slice(1).toLowerCase()}
+            {f === "ALL"
+              ? tr("All")
+              : tr(f.charAt(0) + f.slice(1).toLowerCase())}
           </Link>
         ))}
       </div>
 
       {upcoming.length > 0 && (
         <section className="space-y-3">
-          <h2 className="font-display text-2xl tracking-wide">Upcoming & live</h2>
+          <h2 className="font-display text-2xl tracking-wide">
+            {tr("Upcoming & live")}
+          </h2>
           {upcoming.map((m) => (
             <MatchRow key={m.id} match={m} perspectivePlayerId={playerId} />
           ))}
@@ -88,11 +112,11 @@ export default async function MatchesPage({
       )}
 
       <section className="space-y-3">
-        <h2 className="font-display text-2xl tracking-wide">History</h2>
+        <h2 className="font-display text-2xl tracking-wide">{tr("History")}</h2>
         {past.length === 0 ? (
           <EmptyState
             icon={Swords}
-            title="No matches yet"
+            title={tr("No matches yet")}
             description="Check in at the club and ask the staff to set up your first match."
           />
         ) : (

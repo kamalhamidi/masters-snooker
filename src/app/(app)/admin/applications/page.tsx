@@ -1,3 +1,4 @@
+import { getI18n } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Inbox } from "lucide-react";
@@ -6,9 +7,14 @@ import { prisma } from "@/lib/prisma";
 import { EmptyState } from "@/components/ui/empty-state";
 import { ApplicationList } from "./application-list";
 
-export const metadata: Metadata = { title: "Tournament applications" };
+export async function generateMetadata(): Promise<Metadata> {
+  const { tr } = await getI18n();
+  return { title: tr("Tournament applications") };
+}
 
 export default async function ApplicationsPage() {
+  const { tr } = await getI18n();
+
   const session = await auth();
   if (session?.user.role !== "CHEF") redirect("/dashboard");
 
@@ -28,17 +34,20 @@ export default async function ApplicationsPage() {
   return (
     <div className="mx-auto max-w-3xl space-y-6">
       <div>
-        <h1 className="font-display text-4xl tracking-wide">Applications</h1>
+        <h1 className="font-display text-4xl tracking-wide">
+          {tr("Applications")}
+        </h1>
         <p className="text-sm text-muted">
-          Players without a trust badge need your approval — check payment
-          status before accepting.
+          {tr(
+            "Players without a trust badge need your approval — check payment status before accepting.",
+          )}
         </p>
       </div>
 
       {entries.length === 0 ? (
         <EmptyState
           icon={Inbox}
-          title="Inbox zero"
+          title={tr("Inbox zero")}
           description="No pending tournament applications right now."
         />
       ) : (

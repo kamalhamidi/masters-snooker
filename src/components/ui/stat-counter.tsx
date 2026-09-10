@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import { useEffect, useRef, useState } from "react";
 import { useInView, useReducedMotion } from "framer-motion";
 
@@ -16,6 +18,8 @@ export function StatCounter({
   className?: string;
   duration?: number;
 }) {
+  const { locale } = useI18n();
+
   const reducedMotion = useReducedMotion();
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
@@ -39,11 +43,11 @@ export function StatCounter({
     <span
       ref={ref}
       className={className}
-      aria-label={`${prefix}${value.toLocaleString()}${suffix}`}
+      aria-label={`${prefix}${value.toLocaleString(locale)}${suffix}`}
     >
       <span aria-hidden="true">
         {prefix}
-        {(reducedMotion ? value : display).toLocaleString()}
+        {(reducedMotion ? value : display).toLocaleString(locale)}
         {suffix}
       </span>
     </span>

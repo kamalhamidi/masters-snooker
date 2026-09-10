@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Menu } from "lucide-react";
@@ -7,25 +9,27 @@ import { Dialog } from "@/components/ui/dialog";
 import { buttonVariants } from "@/components/ui/button";
 
 export function PublicMobileNav({ signedIn }: { signedIn: boolean }) {
+  const { tr } = useI18n();
+
   const [open, setOpen] = useState(false);
   return (
     <>
       <button
         type="button"
-        aria-label="Open navigation"
+        aria-label={tr("Open navigation")}
         aria-haspopup="dialog"
         aria-expanded={open}
         onClick={() => setOpen(true)}
-        className="flex h-11 w-11 items-center justify-center rounded-xl text-muted hover:bg-surface-hover lg:hidden"
+        className="flex h-11 w-11 items-center justify-center rounded-xl text-muted hover:bg-surface-hover xl:hidden"
       >
         <Menu size={22} />
       </button>
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
-        title="Explore the club"
+        title={tr("Explore the club")}
       >
-        <nav aria-label="Public mobile navigation" className="space-y-1">
+        <nav aria-label={tr("Public mobile navigation")} className="space-y-1">
           {[
             ["/#about", "The club"],
             ["/#tournaments", "Tournaments"],
@@ -39,7 +43,7 @@ export function PublicMobileNav({ signedIn }: { signedIn: boolean }) {
               onClick={() => setOpen(false)}
               className="flex items-center justify-between rounded-xl px-3 py-4 text-lg hover:bg-surface-hover"
             >
-              {label}
+              {tr(label)}
               <ArrowUpRight size={18} className="text-gold" />
             </Link>
           ))}
@@ -51,7 +55,7 @@ export function PublicMobileNav({ signedIn }: { signedIn: boolean }) {
               variant: "gold",
             })}
           >
-            {signedIn ? "My dashboard" : "Member login"}
+            {signedIn ? tr("My dashboard") : tr("Member login")}
           </Link>
         </nav>
       </Dialog>

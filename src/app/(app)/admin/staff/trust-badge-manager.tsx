@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -19,12 +21,14 @@ type PlayerRow = {
 };
 
 export function TrustBadgeManager({ players }: { players: PlayerRow[] }) {
+  const { tr } = useI18n();
+
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [busy, setBusy] = useState<string | null>(null);
 
   const filtered = players.filter((p) =>
-    p.name.toLowerCase().includes(query.toLowerCase())
+    p.name.toLowerCase().includes(query.toLowerCase()),
   );
 
   async function toggle(p: PlayerRow) {
@@ -36,11 +40,13 @@ export function TrustBadgeManager({ players }: { players: PlayerRow[] }) {
     });
     setBusy(null);
     if (!res.ok) {
-      toast.error("Could not update trust badge");
+      toast.error(tr("Could not update trust badge"));
       return;
     }
     toast.success(
-      !p.trustBadge ? `${p.name} is now trusted` : `Trust badge removed from ${p.name}`
+      !p.trustBadge
+        ? tr("{name} is now trusted", { name: p.name })
+        : tr("Trust badge removed from {name}", { name: p.name }),
     );
     router.refresh();
   }
@@ -48,20 +54,23 @@ export function TrustBadgeManager({ players }: { players: PlayerRow[] }) {
   return (
     <section>
       <CardHeader className="mb-4">
-        <CardTitle className="text-2xl">Trust badges</CardTitle>
+        <CardTitle className="text-2xl">{tr("Trust badges")}</CardTitle>
         <span className="text-sm text-muted">
-          {players.filter((p) => p.trustBadge).length} trusted players
+          {players.filter((p) => p.trustBadge).length} {tr("trusted players")}
         </span>
       </CardHeader>
 
       <div className="relative mb-4">
-        <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-faint" />
+        <Search
+          size={16}
+          className="absolute start-4 top-1/2 -translate-y-1/2 text-faint"
+        />
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search players…"
-          className="pl-10"
-          aria-label="Search players"
+          placeholder={tr("Search players…")}
+          className="ps-10"
+          aria-label={tr("Search players")}
         />
       </div>
 
@@ -71,27 +80,32 @@ export function TrustBadgeManager({ players }: { players: PlayerRow[] }) {
             <Avatar name={p.name} src={p.avatarUrl} size="sm" />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-semibold">{p.name}</p>
-              <p className="text-xs text-faint">Lv {p.level} · {p.points} pts</p>
+              <p className="text-xs text-faint">
+                {tr("Lv")} {p.level} · {p.points} {tr("pts")}
+              </p>
             </div>
             <button
               onClick={() => toggle(p)}
               disabled={busy === p.id}
               aria-pressed={p.trustBadge}
-              aria-label={`Trust badge for ${p.name}`}
+              aria-label={tr("Trust badge for {name}", { name: p.name })}
               className={cn(
                 "flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all",
                 p.trustBadge
                   ? "border-emerald-accent/50 bg-emerald-accent/15 text-emerald-bright"
-                  : "border-border text-faint hover:border-border-strong hover:text-muted"
+                  : "border-border text-faint hover:border-border-strong hover:text-muted",
               )}
             >
               <ShieldCheck size={14} />
-              {p.trustBadge ? "Trusted" : "Grant"}
+              {p.trustBadge ? tr("Trusted") : tr("Grant")}
             </button>
           </div>
         ))}
         {filtered.length === 0 && (
-          <p className="p-6 text-center text-sm text-faint">No players match “{query}”.</p>
+          <p className="p-6 text-center text-sm text-faint">
+            {tr("No players match “")}
+            {query}”.
+          </p>
         )}
       </Card>
     </section>

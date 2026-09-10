@@ -1,3 +1,4 @@
+import { getI18n } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Gift, Sparkles } from "lucide-react";
@@ -11,7 +12,10 @@ import { Progress } from "@/components/ui/progress";
 import { StatCounter } from "@/components/ui/stat-counter";
 import { RedeemButton } from "./redeem-button";
 
-export const metadata: Metadata = { title: "Loyalty & rewards" };
+export async function generateMetadata(): Promise<Metadata> {
+  const { tr } = await getI18n();
+  return { title: tr("Loyalty & rewards") };
+}
 
 const TIER_COLORS: Record<string, string> = {
   BRONZE: "text-amber-600",
@@ -21,12 +25,17 @@ const TIER_COLORS: Record<string, string> = {
 };
 
 export default async function LoyaltyPage() {
+  const { tr, locale } = await getI18n();
+
   const session = await auth();
   if (!session?.user.playerId) redirect("/login");
 
   const [player, rewards, transactions, lifetime] = await Promise.all([
     prisma.player.findUniqueOrThrow({ where: { id: session.user.playerId } }),
-    prisma.reward.findMany({ where: { isActive: true }, orderBy: { cost: "asc" } }),
+    prisma.reward.findMany({
+      where: { isActive: true },
+      orderBy: { cost: "asc" },
+    }),
     prisma.loyaltyTransaction.findMany({
       where: { playerId: session.user.playerId },
       orderBy: { createdAt: "desc" },
@@ -49,42 +58,55 @@ export default async function LoyaltyPage() {
     <div className="space-y-8">
       <div>
         <h1 className="font-display flex items-center gap-3 text-4xl tracking-wide">
-          <Gift className="text-gold" /> Loyalty & rewards
+          <Gift className="text-gold" /> {tr("Loyalty & rewards")}
         </h1>
         <p className="text-sm text-muted">
-          Earn points every visit, match and booking. Spend them on real perks.
+          {tr(
+            "Earn points every visit, match and booking. Spend them on real perks.",
+          )}
         </p>
       </div>
 
       {/* Balance + tier */}
       <div className="grid gap-5 md:grid-cols-2">
-        <Card glass className="flex flex-col items-center justify-center py-8 text-center">
-          <p className="text-sm text-muted">Available balance</p>
+        <Card
+          glass
+          className="flex flex-col items-center justify-center py-8 text-center"
+        >
+          <p className="text-sm text-muted">{tr("Available balance")}</p>
           <p className="font-display text-6xl tracking-wide text-gold">
             <StatCounter value={player.loyaltyPoints} />
           </p>
-          <p className="text-sm text-muted">points</p>
+          <p className="text-sm text-muted">{tr("points")}</p>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle className={cn("capitalize", TIER_COLORS[player.loyaltyTier])}>
-              {player.loyaltyTier.toLowerCase()} tier
+            <CardTitle
+              className={cn("capitalize", TIER_COLORS[player.loyaltyTier])}
+            >
+              {tr(player.loyaltyTier)} {tr("tier")}
             </CardTitle>
             <Sparkles size={18} className={TIER_COLORS[player.loyaltyTier]} />
           </CardHeader>
           <p className="mb-4 text-sm text-muted">
-            {LOYALTY_TIERS[tierIdx].perk}
+            {tr(LOYALTY_TIERS[tierIdx].perk)}
           </p>
           {nextTier ? (
             <>
-              <Progress value={tierPct} barClassName="bg-gradient-to-r from-gold to-gold-soft" />
+              <Progress
+                value={tierPct}
+                barClassName="bg-gradient-to-r from-gold to-gold-soft"
+              />
               <p className="mt-2 text-xs text-muted">
-                {lifetimeEarned.toLocaleString()} / {nextTier.min.toLocaleString()} lifetime
-                points to <span className="font-semibold capitalize">{nextTier.tier.toLowerCase()}</span>
+                {lifetimeEarned.toLocaleString(locale)} /{" "}
+                {nextTier.min.toLocaleString(locale)} {tr("lifetime points to")}{" "}
+                <span className="font-semibold capitalize">
+                  {tr(nextTier.tier)}
+                </span>
               </p>
             </>
           ) : (
-            <Badge variant="purple">Top tier — enjoy the perks</Badge>
+            <Badge variant="purple">{tr("Top tier — enjoy the perks")}</Badge>
           )}
           <div className="mt-4 grid grid-cols-4 gap-1.5">
             {LOYALTY_TIERS.map((t, i) => (
@@ -94,10 +116,10 @@ export default async function LoyaltyPage() {
                   "rounded-lg border px-1 py-1.5 text-center text-[10px] font-semibold uppercase tracking-wide",
                   i <= tierIdx
                     ? "border-gold/40 bg-gold/10 text-gold-soft"
-                    : "border-border text-faint"
+                    : "border-border text-faint",
                 )}
               >
-                {t.tier}
+                {tr(t.tier)}
               </div>
             ))}
           </div>
@@ -106,7 +128,9 @@ export default async function LoyaltyPage() {
 
       {/* Rewards catalog */}
       <section>
-        <h2 className="mb-4 font-display text-2xl tracking-wide">Rewards catalog</h2>
+        <h2 className="mb-4 font-display text-2xl tracking-wide">
+          {tr("Rewards catalog")}
+        </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {rewards.map((r) => {
             const affordable = player.loyaltyPoints >= r.cost;
@@ -115,17 +139,21 @@ export default async function LoyaltyPage() {
                 key={r.id}
                 className={cn(
                   "flex flex-col transition-all",
-                  affordable && "hover:-translate-y-1 hover:border-gold/40"
+                  affordable && "hover:-translate-y-1 hover:border-gold/40",
                 )}
               >
                 <div className="mb-3 flex items-center justify-between">
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold/10 text-xl">
                     🎁
                   </span>
-                  <Badge variant={affordable ? "gold" : "default"}>{r.cost} pts</Badge>
+                  <Badge variant={affordable ? "gold" : "default"}>
+                    {r.cost} {tr("pts")}
+                  </Badge>
                 </div>
-                <p className="font-semibold">{r.name}</p>
-                <p className="mb-4 mt-1 text-sm text-muted">{r.description}</p>
+                <p className="font-semibold">{tr(r.name)}</p>
+                <p className="mb-4 mt-1 text-sm text-muted">
+                  {tr(r.description)}
+                </p>
                 <div className="mt-auto">
                   <RedeemButton rewardId={r.id} affordable={affordable} />
                 </div>
@@ -137,18 +165,22 @@ export default async function LoyaltyPage() {
 
       {/* History */}
       <section>
-        <h2 className="mb-4 font-display text-2xl tracking-wide">Points history</h2>
+        <h2 className="mb-4 font-display text-2xl tracking-wide">
+          {tr("Points history")}
+        </h2>
         <Card className="divide-y divide-border p-0">
           {transactions.map((t) => (
             <div key={t.id} className="flex items-center gap-3 px-5 py-3.5">
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium">{t.reason}</p>
-                <p className="text-xs text-faint">{timeAgo(t.createdAt)}</p>
+                <p className="truncate text-sm font-medium">{tr(t.reason)}</p>
+                <p className="text-xs text-faint">
+                  {timeAgo(t.createdAt, locale)}
+                </p>
               </div>
               <span
                 className={cn(
                   "font-display text-xl",
-                  t.delta > 0 ? "text-emerald-bright" : "text-live"
+                  t.delta > 0 ? "text-emerald-bright" : "text-live",
                 )}
               >
                 {t.delta > 0 ? "+" : ""}

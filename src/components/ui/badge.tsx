@@ -1,3 +1,6 @@
+"use client";
+
+import { useI18n } from "@/lib/i18n/provider";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
@@ -7,7 +10,8 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default: "bg-surface-hover text-muted border border-border",
-        emerald: "bg-emerald-accent/15 text-emerald-bright border border-emerald-accent/30",
+        emerald:
+          "bg-emerald-accent/15 text-emerald-bright border border-emerald-accent/30",
         gold: "bg-gold/15 text-gold-soft border border-gold/30",
         live: "bg-live/15 text-live border border-live/30",
         blue: "bg-sky-500/15 text-sky-400 border border-sky-500/30",
@@ -15,7 +19,7 @@ const badgeVariants = cva(
       },
     },
     defaultVariants: { variant: "default" },
-  }
+  },
 );
 
 export function Badge({
@@ -23,7 +27,12 @@ export function Badge({
   variant,
   ...props
 }: React.HTMLAttributes<HTMLSpanElement> & VariantProps<typeof badgeVariants>) {
-  return <span className={cn(badgeVariants({ variant }), className)} {...props} />;
+  const { tr } = useI18n();
+  return (
+    <span className={cn(badgeVariants({ variant }), className)} {...props}>
+      {typeof props.children === "string" ? tr(props.children) : props.children}
+    </span>
+  );
 }
 
 const MATCH_TYPE_VARIANT = {
@@ -33,7 +42,11 @@ const MATCH_TYPE_VARIANT = {
   CHAMPIONSHIP: "gold",
 } as const;
 
-export function MatchTypeBadge({ type }: { type: keyof typeof MATCH_TYPE_VARIANT }) {
+export function MatchTypeBadge({
+  type,
+}: {
+  type: keyof typeof MATCH_TYPE_VARIANT;
+}) {
   return (
     <Badge variant={MATCH_TYPE_VARIANT[type]}>
       {type.charAt(0) + type.slice(1).toLowerCase()}
@@ -42,15 +55,17 @@ export function MatchTypeBadge({ type }: { type: keyof typeof MATCH_TYPE_VARIANT
 }
 
 export function LiveBadge({ className }: { className?: string }) {
+  const { tr } = useI18n();
+
   return (
     <span
       className={cn(
         "inline-flex items-center gap-1.5 rounded-full bg-live px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider text-white animate-pulse-live",
-        className
+        className,
       )}
     >
       <span className="h-1.5 w-1.5 rounded-full bg-white" />
-      Live
+      {tr("Live")}
     </span>
   );
 }

@@ -1,14 +1,23 @@
+import { getI18n } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NewMatchForm } from "./new-match-form";
 
-export const metadata: Metadata = { title: "Create match" };
+export async function generateMetadata(): Promise<Metadata> {
+  const { tr } = await getI18n();
+  return { title: tr("Create match") };
+}
 
 export default async function NewMatchPage() {
+  const { tr } = await getI18n();
+
   const session = await auth();
-  if (!session || (session.user.role !== "EMPLOYEE" && session.user.role !== "CHEF")) {
+  if (
+    !session ||
+    (session.user.role !== "EMPLOYEE" && session.user.role !== "CHEF")
+  ) {
     redirect("/dashboard");
   }
 
@@ -17,7 +26,10 @@ export default async function NewMatchPage() {
       include: { user: { select: { name: true } } },
       orderBy: { points: "desc" },
     }),
-    prisma.table.findMany({ where: { isActive: true }, orderBy: { number: "asc" } }),
+    prisma.table.findMany({
+      where: { isActive: true },
+      orderBy: { number: "asc" },
+    }),
     prisma.tournament.findMany({
       where: { status: { in: ["REGISTRATION", "IN_PROGRESS"] } },
       select: { id: true, name: true },
@@ -27,10 +39,13 @@ export default async function NewMatchPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div>
-        <h1 className="font-display text-4xl tracking-wide">Create a match</h1>
+        <h1 className="font-display text-4xl tracking-wide">
+          {tr("Create a match")}
+        </h1>
         <p className="text-sm text-muted">
-          Pair two registered players, pick a table and match type. Ranked and
-          competition matches move the leaderboard.
+          {tr(
+            "Pair two registered players, pick a table and match type. Ranked and competition matches move the leaderboard.",
+          )}
         </p>
       </div>
       <NewMatchForm
@@ -41,7 +56,8 @@ export default async function NewMatchPage() {
           points: p.points,
           checkedIn:
             !!p.checkedInAt &&
-            new Date(p.checkedInAt).toDateString() === new Date().toDateString(),
+            new Date(p.checkedInAt).toDateString() ===
+              new Date().toDateString(),
         }))}
         tables={tables.map((t) => ({ id: t.id, name: t.name }))}
         tournaments={tournaments}

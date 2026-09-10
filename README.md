@@ -134,3 +134,70 @@ src/
 npx tsx scripts/smoke-test.ts   # Elo/XP formulas, match side-effects, seed integrity
 npm run build                   # production build
 ```
+
+## Languages
+
+Use the language selector in the header to switch between **English**, **Français**,
+and **العربية**. English is the default. The `cuehub-locale` cookie remembers the
+selection for one year; no account is required. URLs and form/API values stay the
+same across languages. Arabic pages use `lang="ar"`, right-to-left layout, and
+Arabic-compatible typography. Dates, currency, and relative times use the selected
+locale (the currency remains USD).
+
+Translations live in `src/lib/i18n/messages.json`. The English source text is the
+message key; French and Arabic must preserve all `{placeholder}` names. Server
+components use `await getI18n()` and client components use `useI18n()`. Translate
+labels at render time; never translate database enums, route names, form values,
+or API payloads. Member names and custom club content are kept as entered. Known
+built-in rewards, badges, and legacy notification templates are translated.
+
+Run the localization and reservation checks with:
+
+```bash
+node --import tsx --test scripts/i18n.test.ts scripts/reservation-slots.test.ts
+```
+
+## Deploying to Vercel
+
+The repository includes an initial Prisma migration and a Vercel build command.
+Each deployment generates Prisma Client, applies pending migrations with
+`prisma migrate deploy`, and builds Next.js.
+
+1. Push the repository to GitHub, then import it from **Vercel → New Project**.
+   Keep the detected **Next.js** framework preset and repository root.
+2. In the Vercel project, open **Storage → Create Database** and provision a
+   PostgreSQL database (for example Neon, Prisma Postgres, or Supabase). Connect
+   it to this project and ensure its connection string is available as
+   `DATABASE_URL` in Production. Use a separate database or database branch for
+   Preview deployments; do not point untrusted preview branches at production.
+3. Add these variables under **Settings → Environment Variables**:
+
+   | Variable | Value |
+   |---|---|
+   | `DATABASE_URL` | Production PostgreSQL connection string from the storage integration |
+   | `AUTH_SECRET` | A private random value generated with `openssl rand -base64 32` |
+   | `AUTH_TRUST_HOST` | `true` |
+   | `NEXT_PUBLIC_APP_URL` | `https://your-project.vercel.app` (replace with the custom domain later) |
+   | `STRIPE_SECRET_KEY` | Optional; omit to keep demo tournament payments |
+   | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Optional; Stripe publishable key |
+   | `CLOUDINARY_URL` | Optional; required only for Cloudinary uploads |
+
+4. Deploy. The build applies `prisma/migrations` to the empty database. An
+   initial deployment made before connecting the database may fail; after adding
+   the variables, open **Deployments** and select **Redeploy**.
+
+5. For a demo or staging deployment, seed the club's sample data once:
+
+   ```bash
+   npx vercel link
+   npx vercel env run -e production -- npx prisma db seed
+   ```
+
+   The seed contains publicly documented demo credentials, including
+   `chef@masters.club` / `password123`. Do not seed a real member database
+   until those demo accounts are replaced with a secure owner-onboarding flow.
+
+Environment variable changes only affect new deployments, so redeploy after
+changing `NEXT_PUBLIC_APP_URL`, Stripe keys, or the database connection. Do not
+copy the local `.env` to Vercel: its `localhost` database address cannot be
+reached from Vercel and `.env*` is intentionally excluded from Git.

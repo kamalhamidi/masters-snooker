@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -21,6 +23,8 @@ type Settings = {
 };
 
 export function SettingsForm({ settings }: { settings: Settings }) {
+  const { tr } = useI18n();
+
   const router = useRouter();
   const [form, setForm] = useState(settings);
   const [loading, setLoading] = useState(false);
@@ -45,10 +49,10 @@ export function SettingsForm({ settings }: { settings: Settings }) {
     });
     setLoading(false);
     if (!res.ok) {
-      toast.error("Could not save settings");
+      toast.error(tr("Could not save settings"));
       return;
     }
-    toast.success("Settings saved");
+    toast.success(tr("Settings saved"));
     router.refresh();
   }
 
@@ -58,7 +62,7 @@ export function SettingsForm({ settings }: { settings: Settings }) {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Radio size={18} className="text-live" /> Live broadcast
+            <Radio size={18} className="text-live" /> {tr("Live broadcast")}
           </CardTitle>
           {form.isLive && <LiveBadge />}
         </CardHeader>
@@ -70,29 +74,31 @@ export function SettingsForm({ settings }: { settings: Settings }) {
             aria-checked={form.isLive}
             className={cn(
               "flex w-full items-center justify-between rounded-xl border p-4 transition-colors",
-              form.isLive ? "border-live/50 bg-live/5" : "border-border"
+              form.isLive ? "border-live/50 bg-live/5" : "border-border",
             )}
           >
             <span className="text-sm font-semibold">
-              {form.isLive ? "Streaming is ON — LIVE badge shows across the site" : "Streaming is OFF"}
+              {form.isLive
+                ? tr("Streaming is ON — LIVE badge shows across the site")
+                : tr("Streaming is OFF")}
             </span>
             <span
               className={cn(
                 "relative h-6 w-11 rounded-full transition-colors",
-                form.isLive ? "bg-live" : "bg-surface-hover"
+                form.isLive ? "bg-live" : "bg-surface-hover",
               )}
             >
               <span
                 className={cn(
                   "absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all",
-                  form.isLive ? "left-[22px]" : "left-0.5"
+                  form.isLive ? "start-[22px]" : "start-0.5",
                 )}
               />
             </span>
           </button>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <Label htmlFor="platform">Platform</Label>
+              <Label htmlFor="platform">{tr("Platform")}</Label>
               <Select
                 id="platform"
                 value={form.streamPlatform}
@@ -103,17 +109,17 @@ export function SettingsForm({ settings }: { settings: Settings }) {
               </Select>
             </div>
             <div>
-              <Label htmlFor="streamTitle">Stream title</Label>
+              <Label htmlFor="streamTitle">{tr("Stream title")}</Label>
               <Input
                 id="streamTitle"
                 value={form.streamTitle}
                 onChange={(e) => set("streamTitle", e.target.value)}
-                placeholder="Championship Final Night"
+                placeholder={tr("Championship Final Night")}
               />
             </div>
           </div>
           <div>
-            <Label htmlFor="streamUrl">Embed URL</Label>
+            <Label htmlFor="streamUrl">{tr("Embed URL")}</Label>
             <Input
               id="streamUrl"
               type="url"
@@ -122,7 +128,9 @@ export function SettingsForm({ settings }: { settings: Settings }) {
               placeholder="https://www.youtube.com/embed/…"
             />
             <p className="mt-1.5 text-xs text-faint">
-              YouTube: use the /embed/VIDEO_ID URL. Twitch: https://player.twitch.tv/?channel=NAME&parent=yourdomain.com
+              {tr(
+                "YouTube: use the /embed/VIDEO_ID URL. Twitch: https://player.twitch.tv/?channel=NAME&parent=yourdomain.com",
+              )}
             </p>
           </div>
         </div>
@@ -131,11 +139,11 @@ export function SettingsForm({ settings }: { settings: Settings }) {
       {/* Loyalty rules */}
       <Card>
         <CardHeader>
-          <CardTitle>Loyalty program rules</CardTitle>
+          <CardTitle>{tr("Loyalty program rules")}</CardTitle>
         </CardHeader>
         <div className="grid gap-4 sm:grid-cols-3">
           <div>
-            <Label htmlFor="perMatch">Points per match</Label>
+            <Label htmlFor="perMatch">{tr("Points per match")}</Label>
             <Input
               id="perMatch"
               type="number"
@@ -145,7 +153,7 @@ export function SettingsForm({ settings }: { settings: Settings }) {
             />
           </div>
           <div>
-            <Label htmlFor="perVisit">Points per visit</Label>
+            <Label htmlFor="perVisit">{tr("Points per visit")}</Label>
             <Input
               id="perVisit"
               type="number"
@@ -155,13 +163,17 @@ export function SettingsForm({ settings }: { settings: Settings }) {
             />
           </div>
           <div>
-            <Label htmlFor="perReservation">Points per reservation</Label>
+            <Label htmlFor="perReservation">
+              {tr("Points per reservation")}
+            </Label>
             <Input
               id="perReservation"
               type="number"
               min={0}
               value={form.loyaltyPerReservation}
-              onChange={(e) => set("loyaltyPerReservation", Number(e.target.value))}
+              onChange={(e) =>
+                set("loyaltyPerReservation", Number(e.target.value))
+              }
             />
           </div>
         </div>
@@ -169,7 +181,7 @@ export function SettingsForm({ settings }: { settings: Settings }) {
 
       <Button size="lg" onClick={save} disabled={loading}>
         {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-        Save settings
+        {tr("Save settings")}
       </Button>
     </div>
   );

@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -13,6 +15,8 @@ import { cn } from "@/lib/utils";
 const STEPS = ["Basics", "Format & money", "Schedule & rules"];
 
 export function TournamentWizard() {
+  const { tr } = useI18n();
+
   const router = useRouter();
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -36,8 +40,10 @@ export function TournamentWizard() {
 
   function validateStep(): string | null {
     if (step === 0) {
-      if (form.name.trim().length < 3) return "Give the tournament a name (3+ chars)";
-      if (form.description.trim().length < 10) return "Add a short description (10+ chars)";
+      if (form.name.trim().length < 3)
+        return "Give the tournament a name (3+ chars)";
+      if (form.description.trim().length < 10)
+        return "Add a short description (10+ chars)";
     }
     if (step === 2 && !form.startDate) return "Pick a start date";
     return null;
@@ -46,7 +52,7 @@ export function TournamentWizard() {
   function next() {
     const err = validateStep();
     if (err) {
-      toast.error(err);
+      toast.error(tr(err));
       return;
     }
     setStep((s) => Math.min(s + 1, STEPS.length - 1));
@@ -55,7 +61,7 @@ export function TournamentWizard() {
   async function submit() {
     const err = validateStep();
     if (err) {
-      toast.error(err);
+      toast.error(tr(err));
       return;
     }
     setLoading(true);
@@ -71,7 +77,9 @@ export function TournamentWizard() {
         entryFee: Math.round(Number(form.entryFee) * 100),
         prizePool: Math.round(Number(form.prizePool) * 100),
         startDate: new Date(form.startDate).toISOString(),
-        endDate: form.endDate ? new Date(form.endDate).toISOString() : undefined,
+        endDate: form.endDate
+          ? new Date(form.endDate).toISOString()
+          : undefined,
         rules: form.rules.trim() || undefined,
         bannerUrl: form.bannerUrl.trim(),
         openRegistration: form.openRegistration,
@@ -80,10 +88,10 @@ export function TournamentWizard() {
     const data = await res.json().catch(() => ({}));
     setLoading(false);
     if (!res.ok) {
-      toast.error(data.error ?? "Could not create tournament");
+      toast.error(tr(data.error ?? tr("Could not create tournament")));
       return;
     }
-    toast.success("Tournament created — players notified!");
+    toast.success(tr("Tournament created — players notified!"));
     router.push(`/tournaments/${data.slug}`);
     router.refresh();
   }
@@ -102,7 +110,7 @@ export function TournamentWizard() {
                   ? "bg-emerald-accent text-white"
                   : i < step
                     ? "bg-emerald-accent/20 text-emerald-bright cursor-pointer"
-                    : "bg-surface-hover text-faint"
+                    : "bg-surface-hover text-faint",
               )}
             >
               {i + 1}
@@ -110,10 +118,10 @@ export function TournamentWizard() {
             <span
               className={cn(
                 "hidden text-xs font-medium sm:block",
-                i === step ? "text-foreground" : "text-faint"
+                i === step ? "text-foreground" : "text-faint",
               )}
             >
-              {label}
+              {tr(label)}
             </span>
             {i < STEPS.length - 1 && <div className="h-px flex-1 bg-border" />}
           </div>
@@ -132,16 +140,36 @@ export function TournamentWizard() {
           {step === 0 && (
             <>
               <div>
-                <Label htmlFor="name">Tournament name</Label>
-                <Input id="name" value={form.name} onChange={(e) => set("name", e.target.value)} placeholder="Autumn Masters Cup" />
+                <Label htmlFor="name">{tr("Tournament name")}</Label>
+                <Input
+                  id="name"
+                  value={form.name}
+                  onChange={(e) => set("name", e.target.value)}
+                  placeholder={tr("Autumn Masters Cup")}
+                />
               </div>
               <div>
-                <Label htmlFor="description">Description</Label>
-                <Textarea id="description" rows={3} value={form.description} onChange={(e) => set("description", e.target.value)} placeholder="What makes this event special?" />
+                <Label htmlFor="description">{tr("Description")}</Label>
+                <Textarea
+                  id="description"
+                  rows={3}
+                  value={form.description}
+                  onChange={(e) => set("description", e.target.value)}
+                  placeholder={tr("What makes this event special?")}
+                />
               </div>
               <div>
-                <Label htmlFor="bannerUrl">Banner image URL <span className="text-faint">(optional)</span></Label>
-                <Input id="bannerUrl" type="url" value={form.bannerUrl} onChange={(e) => set("bannerUrl", e.target.value)} placeholder="https://…" />
+                <Label htmlFor="bannerUrl">
+                  {tr("Banner image URL")}{" "}
+                  <span className="text-faint">{tr("(optional)")}</span>
+                </Label>
+                <Input
+                  id="bannerUrl"
+                  type="url"
+                  value={form.bannerUrl}
+                  onChange={(e) => set("bannerUrl", e.target.value)}
+                  placeholder="https://…"
+                />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <button
@@ -149,24 +177,36 @@ export function TournamentWizard() {
                   onClick={() => set("isChampionship", false)}
                   className={cn(
                     "flex flex-col items-center gap-1.5 rounded-xl border p-4 transition-colors",
-                    !form.isChampionship ? "border-emerald-accent bg-emerald-accent/10" : "border-border"
+                    !form.isChampionship
+                      ? "border-emerald-accent bg-emerald-accent/10"
+                      : "border-border",
                   )}
                 >
                   <Trophy size={20} className="text-emerald-bright" />
-                  <span className="text-sm font-semibold">Tournament</span>
-                  <span className="text-xs text-muted">Standard weight</span>
+                  <span className="text-sm font-semibold">
+                    {tr("Tournament")}
+                  </span>
+                  <span className="text-xs text-muted">
+                    {tr("Standard weight")}
+                  </span>
                 </button>
                 <button
                   type="button"
                   onClick={() => set("isChampionship", true)}
                   className={cn(
                     "flex flex-col items-center gap-1.5 rounded-xl border p-4 transition-colors",
-                    form.isChampionship ? "border-gold bg-gold/10" : "border-border"
+                    form.isChampionship
+                      ? "border-gold bg-gold/10"
+                      : "border-border",
                   )}
                 >
                   <Crown size={20} className="text-gold" />
-                  <span className="text-sm font-semibold">Championship</span>
-                  <span className="text-xs text-muted">Highest ranking weight</span>
+                  <span className="text-sm font-semibold">
+                    {tr("Championship")}
+                  </span>
+                  <span className="text-xs text-muted">
+                    {tr("Highest ranking weight")}
+                  </span>
                 </button>
               </div>
             </>
@@ -176,30 +216,54 @@ export function TournamentWizard() {
             <>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
-                  <Label htmlFor="format">Format</Label>
-                  <Select id="format" value={form.format} onChange={(e) => set("format", e.target.value)}>
-                    <option value="KNOCKOUT">Knockout</option>
-                    <option value="ROUND_ROBIN">Round robin</option>
-                    <option value="GROUPS_KNOCKOUT">Groups + knockout</option>
+                  <Label htmlFor="format">{tr("Format")}</Label>
+                  <Select
+                    id="format"
+                    value={form.format}
+                    onChange={(e) => set("format", e.target.value)}
+                  >
+                    <option value="KNOCKOUT">{tr("Knockout")}</option>
+                    <option value="ROUND_ROBIN">{tr("Round robin")}</option>
+                    <option value="GROUPS_KNOCKOUT">
+                      {tr("Groups + knockout")}
+                    </option>
                   </Select>
                 </div>
                 <div>
-                  <Label htmlFor="maxPlayers">Number of players</Label>
-                  <Select id="maxPlayers" value={form.maxPlayers} onChange={(e) => set("maxPlayers", Number(e.target.value))}>
+                  <Label htmlFor="maxPlayers">{tr("Number of players")}</Label>
+                  <Select
+                    id="maxPlayers"
+                    value={form.maxPlayers}
+                    onChange={(e) => set("maxPlayers", Number(e.target.value))}
+                  >
                     {[8, 16, 32, 64].map((n) => (
-                      <option key={n} value={n}>{n} players</option>
+                      <option key={n} value={n}>
+                        {n} {tr("players")}
+                      </option>
                     ))}
                   </Select>
                 </div>
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
-                  <Label htmlFor="entryFee">Entry fee ($)</Label>
-                  <Input id="entryFee" type="number" min={0} value={form.entryFee} onChange={(e) => set("entryFee", Number(e.target.value))} />
+                  <Label htmlFor="entryFee">{tr("Entry fee ($)")}</Label>
+                  <Input
+                    id="entryFee"
+                    type="number"
+                    min={0}
+                    value={form.entryFee}
+                    onChange={(e) => set("entryFee", Number(e.target.value))}
+                  />
                 </div>
                 <div>
-                  <Label htmlFor="prizePool">Prize pool ($)</Label>
-                  <Input id="prizePool" type="number" min={0} value={form.prizePool} onChange={(e) => set("prizePool", Number(e.target.value))} />
+                  <Label htmlFor="prizePool">{tr("Prize pool ($)")}</Label>
+                  <Input
+                    id="prizePool"
+                    type="number"
+                    min={0}
+                    value={form.prizePool}
+                    onChange={(e) => set("prizePool", Number(e.target.value))}
+                  />
                 </div>
               </div>
               <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-border p-4">
@@ -210,8 +274,14 @@ export function TournamentWizard() {
                   className="h-5 w-5 accent-emerald-500"
                 />
                 <span>
-                  <span className="block text-sm font-semibold">Open registration immediately</span>
-                  <span className="block text-xs text-muted">All players get a notification. Untick to save as draft.</span>
+                  <span className="block text-sm font-semibold">
+                    {tr("Open registration immediately")}
+                  </span>
+                  <span className="block text-xs text-muted">
+                    {tr(
+                      "All players get a notification. Untick to save as draft.",
+                    )}
+                  </span>
                 </span>
               </label>
             </>
@@ -221,17 +291,38 @@ export function TournamentWizard() {
             <>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
-                  <Label htmlFor="startDate">Start date</Label>
-                  <Input id="startDate" type="datetime-local" value={form.startDate} onChange={(e) => set("startDate", e.target.value)} />
+                  <Label htmlFor="startDate">{tr("Start date")}</Label>
+                  <Input
+                    id="startDate"
+                    type="datetime-local"
+                    value={form.startDate}
+                    onChange={(e) => set("startDate", e.target.value)}
+                  />
                 </div>
                 <div>
-                  <Label htmlFor="endDate">End date <span className="text-faint">(optional)</span></Label>
-                  <Input id="endDate" type="datetime-local" value={form.endDate} onChange={(e) => set("endDate", e.target.value)} />
+                  <Label htmlFor="endDate">
+                    {tr("End date")}{" "}
+                    <span className="text-faint">{tr("(optional)")}</span>
+                  </Label>
+                  <Input
+                    id="endDate"
+                    type="datetime-local"
+                    value={form.endDate}
+                    onChange={(e) => set("endDate", e.target.value)}
+                  />
                 </div>
               </div>
               <div>
-                <Label htmlFor="rules">Rules</Label>
-                <Textarea id="rules" rows={5} value={form.rules} onChange={(e) => set("rules", e.target.value)} placeholder={"Best of 5 frames until semi-finals.\nWPBSA rules. Dress code: smart casual."} />
+                <Label htmlFor="rules">{tr("Rules")}</Label>
+                <Textarea
+                  id="rules"
+                  rows={5}
+                  value={form.rules}
+                  onChange={(e) => set("rules", e.target.value)}
+                  placeholder={
+                    "Best of 5 frames until semi-finals.\nWPBSA rules. Dress code: smart casual."
+                  }
+                />
               </div>
             </>
           )}
@@ -239,17 +330,21 @@ export function TournamentWizard() {
       </AnimatePresence>
 
       <div className="mt-6 flex justify-between">
-        <Button variant="ghost" onClick={() => setStep((s) => Math.max(0, s - 1))} disabled={step === 0}>
-          <ArrowLeft size={16} /> Back
+        <Button
+          variant="ghost"
+          onClick={() => setStep((s) => Math.max(0, s - 1))}
+          disabled={step === 0}
+        >
+          <ArrowLeft size={16} /> {tr("Back")}
         </Button>
         {step < STEPS.length - 1 ? (
           <Button onClick={next}>
-            Next <ArrowRight size={16} />
+            {tr("Next")} <ArrowRight size={16} />
           </Button>
         ) : (
           <Button variant="gold" onClick={submit} disabled={loading}>
             {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-            Create tournament
+            {tr("Create tournament")}
           </Button>
         )}
       </div>

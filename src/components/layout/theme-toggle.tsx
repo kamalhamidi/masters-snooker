@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import { Moon, Sun } from "lucide-react";
 import { useSyncExternalStore } from "react";
 
@@ -13,6 +15,8 @@ function subscribe(callback: () => void) {
 }
 
 export function ThemeToggle() {
+  const { tr } = useI18n();
+
   const light = useSyncExternalStore(
     subscribe,
     () => document.documentElement.classList.contains("light"),
@@ -29,7 +33,9 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      aria-label={light ? "Switch to dark mode" : "Switch to light mode"}
+      aria-label={
+        light ? tr("Switch to dark mode") : tr("Switch to light mode")
+      }
       className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:bg-surface-hover hover:text-foreground"
     >
       {light ? <Moon size={18} /> : <Sun size={18} />}

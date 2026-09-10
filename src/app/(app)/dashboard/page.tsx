@@ -1,3 +1,4 @@
+import { getI18n } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -31,9 +32,14 @@ import { PointsChart } from "@/components/charts/points-chart";
 import { MatchRow } from "@/components/features/match-row";
 import { buttonVariants } from "@/components/ui/button";
 
-export const metadata: Metadata = { title: "Dashboard" };
+export async function generateMetadata(): Promise<Metadata> {
+  const { tr } = await getI18n();
+  return { title: tr("Dashboard") };
+}
 
 export default async function DashboardPage() {
+  const { tr, locale } = await getI18n();
+
   const session = await auth();
   if (!session) redirect("/login");
 
@@ -81,22 +87,26 @@ export default async function DashboardPage() {
       {/* Greeting + trust badge */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <p className="eyebrow mb-2 text-muted">Your game, at a glance</p>
+          <p className="eyebrow mb-2 text-muted">
+            {tr("Your game, at a glance")}
+          </p>
           <h1 className="font-display text-4xl tracking-wide sm:text-5xl">
-            Hey, {player.user.name.split(" ")[0]}
+            {tr("Hey,")} {player.user.name.split(" ")[0]}
           </h1>
           <p className="text-sm text-muted">
-            Rank <span className="font-semibold text-gold">#{rank}</span> in the
-            club · {player.points.toLocaleString()} pts
+            {tr("Rank")}{" "}
+            <span className="font-semibold text-gold">#{rank}</span>{" "}
+            {tr("in the club ·")} {player.points.toLocaleString(locale)}{" "}
+            {tr("pts")}
           </p>
         </div>
         {player.trustBadge ? (
           <Badge variant="emerald" className="px-3 py-1.5 text-sm">
-            <ShieldCheck size={15} /> Trusted member
+            <ShieldCheck size={15} /> {tr("Trusted member")}
           </Badge>
         ) : (
           <Badge className="px-3 py-1.5 text-sm">
-            <ShieldAlert size={15} /> Standard member
+            <ShieldAlert size={15} /> {tr("Standard member")}
           </Badge>
         )}
       </div>
@@ -104,13 +114,16 @@ export default async function DashboardPage() {
       <section className="felt-texture overflow-hidden rounded-2xl border border-white/10 p-6 text-white sm:p-8">
         <div className="flex flex-wrap items-center justify-between gap-5">
           <div>
-            <p className="eyebrow mb-2 text-[#e8cd6e]">Make your next move</p>
+            <p className="eyebrow mb-2 text-[#e8cd6e]">
+              {tr("Make your next move")}
+            </p>
             <h2 className="font-display text-3xl tracking-wide sm:text-4xl">
-              There’s a great frame ahead of you.
+              {tr("There’s a great frame ahead of you.")}
             </h2>
             <p className="mt-2 max-w-lg text-sm text-white/65">
-              Book your next session or check in when you arrive. We’ll keep
-              track of the progress.
+              {tr(
+                "Book your next session or check in when you arrive. We’ll keep track of the progress.",
+              )}
             </p>
           </div>
           <Link
@@ -118,7 +131,7 @@ export default async function DashboardPage() {
             className={buttonVariants({ variant: "gold", size: "lg" })}
           >
             <CalendarClock size={18} />
-            Book a table
+            {tr("Book a table")}
             <ArrowRight size={17} />
           </Link>
         </div>
@@ -127,19 +140,21 @@ export default async function DashboardPage() {
             {
               href: "/checkin",
               label: "Club check-in",
-              detail: "Open your personal QR",
+              detail: tr("Open your personal QR"),
               icon: QrCode,
             },
             {
               href: "/tournaments",
-              label: "Find your competition",
-              detail: "Explore club tournaments",
+              label: tr("Find your competition"),
+              detail: tr("Explore club tournaments"),
               icon: Trophy,
             },
             {
               href: "/loyalty",
-              label: `${player.loyaltyPoints.toLocaleString()} reward points`,
-              detail: "See what you can redeem",
+              label: tr("{points} reward points", {
+                points: player.loyaltyPoints.toLocaleString(locale),
+              }),
+              detail: tr("See what you can redeem"),
               icon: Gift,
             },
           ].map((action) => (
@@ -151,15 +166,15 @@ export default async function DashboardPage() {
               <action.icon size={21} className="shrink-0 text-[#e8cd6e]" />
               <span className="min-w-0">
                 <span className="block text-sm font-semibold">
-                  {action.label}
+                  {tr(action.label)}
                 </span>
                 <span className="mt-1 block text-xs text-white/60">
-                  {action.detail}
+                  {tr(action.detail)}
                 </span>
               </span>
               <ArrowRight
                 size={15}
-                className="ml-auto shrink-0 text-white/50"
+                className="ms-auto shrink-0 text-white/50"
               />
             </Link>
           ))}
@@ -170,26 +185,26 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         {[
           {
-            label: "Matches played",
+            label: tr("Matches played"),
             value: stats.played,
             icon: Swords,
             color: "text-emerald-bright",
           },
           {
-            label: "Win rate",
+            label: tr("Win rate"),
             value: stats.winRate,
             suffix: "%",
             icon: TrendingUp,
             color: "text-gold",
           },
           {
-            label: "Ranking points",
+            label: tr("Ranking points"),
             value: player.points,
             icon: Trophy,
             color: "text-emerald-bright",
           },
           {
-            label: "Badges earned",
+            label: tr("Badges earned"),
             value: player._count.badges,
             icon: Medal,
             color: "text-gold",
@@ -200,7 +215,7 @@ export default async function DashboardPage() {
             <p className="font-display text-4xl tracking-wide">
               <StatCounter value={s.value} suffix={s.suffix ?? ""} />
             </p>
-            <p className="mt-1 text-xs text-muted">{s.label}</p>
+            <p className="mt-1 text-xs text-muted">{tr(s.label)}</p>
           </Card>
         ))}
       </div>
@@ -209,8 +224,8 @@ export default async function DashboardPage() {
         {/* Points graph */}
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle>Points history</CardTitle>
-            <Badge variant="emerald">last 90 days</Badge>
+            <CardTitle>{tr("Points history")}</CardTitle>
+            <Badge variant="emerald">{tr("last 90 days")}</Badge>
           </CardHeader>
           <PointsChart data={series} />
         </Card>
@@ -218,8 +233,12 @@ export default async function DashboardPage() {
         {/* Level card */}
         <Card className="flex flex-col">
           <CardHeader>
-            <CardTitle>Level {lvl.level}</CardTitle>
-            <Badge variant="gold">{player.xp.toLocaleString()} XP</Badge>
+            <CardTitle>
+              {tr("Level")} {lvl.level}
+            </CardTitle>
+            <Badge variant="gold">
+              {player.xp.toLocaleString(locale)} {tr("XP")}
+            </Badge>
           </CardHeader>
           <div className="flex flex-1 flex-col justify-center gap-3">
             <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full border-4 border-gold/40 bg-felt">
@@ -230,10 +249,13 @@ export default async function DashboardPage() {
             <Progress value={lvl.pct} />
             <p className="text-center text-xs text-muted">
               {player.xp - lvl.currentLevelXp} /{" "}
-              {lvl.nextLevelXp - lvl.currentLevelXp} XP to level {lvl.level + 1}
+              {lvl.nextLevelXp - lvl.currentLevelXp} {tr("XP to level")}{" "}
+              {lvl.level + 1}
             </p>
             <p className="text-center text-xs text-faint">
-              Beat higher-level players for bonus XP and bigger point swings.
+              {tr(
+                "Beat higher-level players for bonus XP and bigger point swings.",
+              )}
             </p>
           </div>
         </Card>
@@ -244,7 +266,7 @@ export default async function DashboardPage() {
         <section>
           <div className="mb-3 flex items-center justify-between">
             <h2 className="font-display text-2xl tracking-wide">
-              Your upcoming matches
+              {tr("Your upcoming matches")}
             </h2>
           </div>
           <div className="space-y-3">
@@ -259,13 +281,13 @@ export default async function DashboardPage() {
       <section>
         <div className="mb-3 flex items-center justify-between">
           <h2 className="font-display text-2xl tracking-wide">
-            Recent matches
+            {tr("Recent matches")}
           </h2>
           <Link
             href="/matches"
             className={buttonVariants({ variant: "ghost", size: "sm" })}
           >
-            All matches <ArrowRight size={15} />
+            {tr("All matches")} <ArrowRight size={15} />
           </Link>
         </div>
         <div className="space-y-3">
@@ -273,11 +295,12 @@ export default async function DashboardPage() {
             <Card className="border-dashed py-10 text-center">
               <Swords size={28} className="mx-auto mb-3 text-emerald-bright" />
               <h3 className="font-display text-2xl">
-                Your story starts with a frame.
+                {tr("Your story starts with a frame.")}
               </h3>
               <p className="mx-auto mt-2 max-w-md text-sm text-muted">
-                Your results will appear here after your first match. Book a
-                table and ask the staff to set up a match.
+                {tr(
+                  "Your results will appear here after your first match. Book a table and ask the staff to set up a match.",
+                )}
               </p>
               <Link
                 href="/reservations"
@@ -286,7 +309,7 @@ export default async function DashboardPage() {
                   className: "mt-5",
                 })}
               >
-                Plan your first session
+                {tr("Plan your first session")}
               </Link>
             </Card>
           )}

@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { useEffect } from "react";
@@ -24,6 +26,8 @@ export function BadgeWall({
   badges: WallBadge[];
   celebrate?: boolean;
 }) {
+  const { tr, locale } = useI18n();
+
   useEffect(() => {
     if (!celebrate) return;
     const t = setTimeout(() => {
@@ -47,26 +51,41 @@ export function BadgeWall({
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.04, type: "spring", stiffness: 260, damping: 22 }}
+            transition={{
+              delay: i * 0.04,
+              type: "spring",
+              stiffness: 260,
+              damping: 22,
+            }}
             className={cn(
               "relative flex flex-col items-center gap-2 rounded-2xl border p-5 text-center transition-all",
               unlocked
                 ? "border-gold/40 bg-gold/5 hover:-translate-y-1 hover:shadow-lg hover:shadow-gold/10"
-                : "border-border bg-surface opacity-60"
+                : "border-border bg-surface opacity-60",
             )}
           >
             <div
               className={cn(
                 "flex h-16 w-16 items-center justify-center rounded-full text-3xl",
-                unlocked ? "bg-gold/15 ring-2 ring-gold/50" : "bg-surface-hover grayscale"
+                unlocked
+                  ? "bg-gold/15 ring-2 ring-gold/50"
+                  : "bg-surface-hover grayscale",
               )}
             >
               {unlocked ? b.icon : <Lock size={22} className="text-faint" />}
             </div>
-            <p className={cn("font-semibold", unlocked && "text-gold-soft")}>{b.name}</p>
-            <p className="text-xs text-muted">{b.description}</p>
+            <p className={cn("font-semibold", unlocked && "text-gold-soft")}>
+              {tr(b.name)}
+            </p>
+            <p className="text-xs text-muted">{tr(b.description)}</p>
             <p className="mt-auto text-[11px] text-faint">
-              {unlocked ? `Unlocked ${formatDate(b.unlockedAt!)}` : `+${b.xpReward} XP`}
+              {unlocked
+                ? tr("Unlocked {date}", {
+                    date: formatDate(b.unlockedAt!, locale),
+                  })
+                : tr("+{points} XP", {
+                    points: b.xpReward.toLocaleString(locale),
+                  })}
             </p>
           </motion.div>
         );

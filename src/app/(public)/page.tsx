@@ -1,3 +1,4 @@
+import { getI18n } from "@/lib/i18n/server";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -25,6 +26,8 @@ import { Reveal } from "@/components/motion";
 export const revalidate = 60;
 
 export default async function LandingPage() {
+  const { tr, locale } = await getI18n();
+
   const [settings, tournaments, topPlayers, stats] = await Promise.all([
     getClubSettings(),
     prisma.tournament.findMany({
@@ -56,7 +59,7 @@ export default async function LandingPage() {
       <section className="relative isolate overflow-hidden bg-[#0b110e] text-white">
         <Image
           src="/masters_background.png"
-          alt="Snooker tables beneath warm pendant lights at the club"
+          alt={tr("Snooker tables beneath warm pendant lights at the club")}
           fill
           priority
           sizes="100vw"
@@ -74,25 +77,26 @@ export default async function LandingPage() {
           <div>
             <p className="eyebrow mb-6 flex items-center gap-3 text-[#e8cd6e]">
               <span className="h-px w-8 bg-[#d4af37]" />
-              The game. The people. The club.
+              {tr("The game. The people. The club.")}
             </p>
             <h1 className="font-display text-[clamp(4rem,8.5vw,7.5rem)] leading-[.9] tracking-wide">
-              YOUR NEXT
+              {tr("YOUR NEXT")}
               <br />
-              GREAT FRAME
+              {tr("GREAT FRAME")}
               <br />
-              <span className="text-[#e8cd6e]">STARTS HERE.</span>
+              <span className="text-[#e8cd6e]">{tr("STARTS HERE.")}</span>
             </h1>
             <p className="mt-7 max-w-md text-base leading-relaxed text-white/75 sm:text-lg">
-              Find your table. Meet your competition. Make your mark. Welcome to
-              Master&apos;s Snooker.
+              {tr(
+                "Find your table. Meet your competition. Make your mark. Welcome to Master's Snooker.",
+              )}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/reservations"
                 className={buttonVariants({ variant: "gold", size: "lg" })}
               >
-                Book a table <ArrowUpRight size={18} />
+                {tr("Book a table")} <ArrowUpRight size={18} />
               </Link>
               <Link
                 href="/#about"
@@ -103,21 +107,23 @@ export default async function LandingPage() {
                     "border-white/25 bg-white/5 text-white hover:bg-white/15",
                 })}
               >
-                Explore the club <ArrowDown size={16} />
+                {tr("Explore the club")} <ArrowDown size={16} />
               </Link>
             </div>
             <div className="mt-9 flex items-center gap-3 text-sm text-white/65">
               <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20">
                 <Check size={14} className="text-[#e8cd6e]" />
               </span>
-              Friendly frames to championship nights. All levels welcome.
+              {tr(
+                "Friendly frames to championship nights. All levels welcome.",
+              )}
             </div>
           </div>
           <div className="lg:mt-28">
             <div className="hero-panel overflow-hidden rounded-2xl border border-white/15">
               <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
                 <span className="eyebrow text-white/60">
-                  On the club calendar
+                  {tr("On the club calendar")}
                 </span>
                 <Trophy size={17} className="text-[#e8cd6e]" />
               </div>
@@ -129,37 +135,41 @@ export default async function LandingPage() {
                   >
                     <LiveBadge />
                     <span className="truncate">
-                      {settings.streamTitle ?? "Watch the action"}
+                      {settings.streamTitle ?? tr("Watch the action")}
                     </span>
-                    <ArrowUpRight size={16} className="ml-auto shrink-0" />
+                    <ArrowUpRight size={16} className="ms-auto shrink-0" />
                   </Link>
                 )}
                 <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-[#e8cd6e]">
                   {featured
                     ? featured.status === "IN_PROGRESS"
-                      ? "Competition in progress"
-                      : "Your next challenge"
-                    : "Make time for the game"}
+                      ? tr("Competition in progress")
+                      : tr("Your next challenge")
+                    : tr("Make time for the game")}
                 </p>
                 <h2 className="font-display text-4xl leading-none tracking-wide">
-                  {featured?.name ?? "A table. A cue. Your moment."}
+                  {featured?.name ?? tr("A table. A cue. Your moment.")}
                 </h2>
                 <p className="mt-4 text-sm leading-relaxed text-white/60">
                   {featured
-                    ? formatDate(featured.startDate)
-                    : "Plan your next visit with hourly table availability and simple online reservations."}
+                    ? formatDate(featured.startDate, locale)
+                    : tr(
+                        "Plan your next visit with hourly table availability and simple online reservations.",
+                      )}
                 </p>
                 {featured && (
                   <div className="mt-6 grid grid-cols-2 gap-4 border-y border-white/10 py-5">
                     <div>
-                      <p className="text-xs text-white/50">Prize pool</p>
+                      <p className="text-xs text-white/50">
+                        {tr("Prize pool")}
+                      </p>
                       <p className="mt-1 font-display text-3xl text-[#e8cd6e]">
-                        {formatCents(featured.prizePool)}
+                        {formatCents(featured.prizePool, locale)}
                       </p>
                     </div>
                     <div>
                       <p className="text-xs text-white/50">
-                        Players registered
+                        {tr("Players registered")}
                       </p>
                       <p className="mt-1 font-display text-3xl">
                         {featured._count.entries}
@@ -177,28 +187,36 @@ export default async function LandingPage() {
                   }
                   className="mt-6 flex min-h-11 items-center justify-between text-sm font-bold text-[#e8cd6e]"
                 >
-                  {featured ? "View tournament" : "Find your table"}
+                  {featured ? tr("View tournament") : tr("Find your table")}
                   <ArrowRight size={18} />
                 </Link>
               </div>
             </div>
             <p className="mt-4 text-center text-[11px] uppercase tracking-[.2em] text-white/50">
-              A little focus. A lot of possibility.
+              {tr("A little focus. A lot of possibility.")}
             </p>
           </div>
         </div>
       </section>
 
       <section
-        aria-label="The club in numbers"
+        aria-label={tr("The club in numbers")}
         className="border-y border-border bg-elevated"
       >
         <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-border px-4 py-8 sm:px-6 md:grid-cols-4">
           {[
-            { label: "Club players", value: playerCount, icon: Users },
-            { label: "Frames of competition", value: matchCount, icon: Swords },
-            { label: "Tournaments", value: tournamentCount, icon: Trophy },
-            { label: "Tables to play", value: tableCount, icon: CalendarClock },
+            { label: tr("Club players"), value: playerCount, icon: Users },
+            {
+              label: tr("Frames of competition"),
+              value: matchCount,
+              icon: Swords,
+            },
+            { label: tr("Tournaments"), value: tournamentCount, icon: Trophy },
+            {
+              label: tr("Tables to play"),
+              value: tableCount,
+              icon: CalendarClock,
+            },
           ].map((stat) => (
             <div
               key={stat.label}
@@ -209,7 +227,7 @@ export default async function LandingPage() {
                 <p className="font-display text-4xl leading-none">
                   <StatCounter value={stat.value} />
                 </p>
-                <p className="mt-2 text-xs text-muted">{stat.label}</p>
+                <p className="mt-2 text-xs text-muted">{tr(stat.label)}</p>
               </div>
             </div>
           ))}
@@ -222,42 +240,48 @@ export default async function LandingPage() {
       >
         <div className="mb-10 flex flex-wrap items-end justify-between gap-5">
           <div>
-            <p className="eyebrow mb-3 text-gold">More than a place to play</p>
+            <p className="eyebrow mb-3 text-gold">
+              {tr("More than a place to play")}
+            </p>
             <h2 className="font-display text-4xl tracking-wide sm:text-5xl">
-              YOUR CLUB. YOUR NEXT LEVEL.
+              {tr("YOUR CLUB. YOUR NEXT LEVEL.")}
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-relaxed text-muted">
-            From your first friendly frame to the final black. Everything you
-            need to enjoy the game, in one place.
+            {tr(
+              "From your first friendly frame to the final black. Everything you need to enjoy the game, in one place.",
+            )}
           </p>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
           {[
             {
               n: "01",
-              title: "Make it a table for you.",
-              description:
+              title: tr("Make it a table for you."),
+              description: tr(
                 "Choose your table, find a time that fits, and get your next session on the calendar.",
-              action: "Find a table",
+              ),
+              action: tr("Find a table"),
               href: "/reservations",
               icon: CalendarClock,
             },
             {
               n: "02",
-              title: "A little friendly rivalry.",
-              description:
+              title: tr("A little friendly rivalry."),
+              description: tr(
                 "Play ranked matches, track your progress, and see how you measure up against the club.",
-              action: "Explore the rankings",
+              ),
+              action: tr("Explore the rankings"),
               href: "/leaderboard",
               icon: Swords,
             },
             {
               n: "03",
-              title: "Every visit counts.",
-              description:
+              title: tr("Every visit counts."),
+              description: tr(
                 "Check in, play your frames, and turn your time at the club into achievements and rewards.",
-              action: "Discover rewards",
+              ),
+              action: tr("Discover rewards"),
               href: "/loyalty",
               icon: Gift,
             },
@@ -274,13 +298,13 @@ export default async function LandingPage() {
                 </span>
               </div>
               <h3 className="font-display text-3xl tracking-wide">
-                {item.title}
+                {tr(item.title)}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted">
-                {item.description}
+                {tr(item.description)}
               </p>
               <span className="mt-7 flex items-center justify-between text-sm font-semibold text-emerald-bright">
-                {item.action}
+                {tr(item.action)}
                 <ArrowUpRight
                   size={19}
                   className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
@@ -296,17 +320,17 @@ export default async function LandingPage() {
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="eyebrow mb-3 text-gold">
-                Step into the competition
+                {tr("Step into the competition")}
               </p>
               <h2 className="font-display text-4xl tracking-wide sm:text-5xl">
-                BIG NIGHTS. GREAT MATCHES.
+                {tr("BIG NIGHTS. GREAT MATCHES.")}
               </h2>
             </div>
             <Link
               href="/tournaments"
               className="flex min-h-11 items-center gap-2 text-sm font-semibold text-emerald-bright"
             >
-              All tournaments <ArrowRight size={16} />
+              {tr("All tournaments")} <ArrowRight size={16} />
             </Link>
           </div>
           <div className="grid gap-5 md:grid-cols-3">
@@ -319,7 +343,7 @@ export default async function LandingPage() {
                   <div className="relative flex h-36 items-center justify-center overflow-hidden border-b border-border bg-felt">
                     <span
                       aria-hidden
-                      className="absolute -right-2 -top-8 font-display text-[160px] leading-none text-white/5"
+                      className="absolute -end-2 -top-8 font-display text-[160px] leading-none text-white/5"
                     >
                       0{i + 1}
                     </span>
@@ -328,20 +352,22 @@ export default async function LandingPage() {
                       strokeWidth={1}
                       className="text-[#e8cd6e]"
                     />
-                    <div className="absolute left-4 top-4">
+                    <div className="absolute start-4 top-4">
                       <Badge variant={t.isChampionship ? "gold" : "emerald"}>
-                        {t.isChampionship ? "Championship" : "Club tournament"}
+                        {t.isChampionship
+                          ? tr("Championship")
+                          : tr("Club tournament")}
                       </Badge>
                     </div>
-                    <span className="absolute bottom-4 right-4 rounded-full bg-black/50 px-3 py-1 text-xs text-white">
+                    <span className="absolute bottom-4 end-4 rounded-full bg-black/50 px-3 py-1 text-xs text-white">
                       {t.status === "IN_PROGRESS"
-                        ? "In progress"
-                        : "Registration open"}
+                        ? tr("In progress")
+                        : tr("Registration open")}
                     </span>
                   </div>
                   <div className="p-6">
                     <p className="mb-2 text-xs text-muted">
-                      {formatDate(t.startDate)}
+                      {formatDate(t.startDate, locale)}
                     </p>
                     <h3 className="font-display text-3xl tracking-wide group-hover:text-gold">
                       {t.name}
@@ -351,16 +377,18 @@ export default async function LandingPage() {
                     </p>
                     <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
                       <div>
-                        <p className="text-[11px] text-muted">Prize pool</p>
+                        <p className="text-[11px] text-muted">
+                          {tr("Prize pool")}
+                        </p>
                         <p className="font-display text-2xl text-gold">
-                          {formatCents(t.prizePool)}
+                          {formatCents(t.prizePool, locale)}
                         </p>
                       </div>
                       <ArrowUpRight size={20} className="text-emerald-bright" />
                     </div>
                     <p className="mt-3 text-xs text-muted">
-                      {t._count.entries}/{t.maxPlayers} registered ·{" "}
-                      {formatCents(t.entryFee)} entry
+                      {t._count.entries}/{t.maxPlayers} {tr("registered ·")}{" "}
+                      {formatCents(t.entryFee, locale)} {tr("entry")}
                     </p>
                   </div>
                 </Link>
@@ -370,11 +398,12 @@ export default async function LandingPage() {
               <div className="rounded-2xl border border-dashed border-border-strong p-10 text-center md:col-span-3">
                 <Trophy className="mx-auto mb-4 text-gold" size={32} />
                 <h3 className="font-display text-3xl">
-                  The next challenge is on its way.
+                  {tr("The next challenge is on its way.")}
                 </h3>
                 <p className="mt-2 text-sm text-muted">
-                  Check back for upcoming tournaments. Your next frame
-                  doesn&apos;t have to wait.
+                  {tr(
+                    "Check back for upcoming tournaments. Your next frame doesn't have to wait.",
+                  )}
                 </p>
                 <Link
                   href="/reservations"
@@ -383,7 +412,7 @@ export default async function LandingPage() {
                     className: "mt-5",
                   })}
                 >
-                  Book a table
+                  {tr("Book a table")}
                 </Link>
               </div>
             )}
@@ -393,15 +422,17 @@ export default async function LandingPage() {
 
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
         <div>
-          <p className="eyebrow mb-3 text-gold">The club leaderboard</p>
+          <p className="eyebrow mb-3 text-gold">{tr("The club leaderboard")}</p>
           <h2 className="font-display text-5xl tracking-wide sm:text-6xl">
-            THE ONES
+            {tr("THE ONES")}
             <br />
-            TO <span className="text-emerald-bright">CATCH.</span>
+            {tr("TO")}{" "}
+            <span className="text-emerald-bright">{tr("CATCH.")}</span>
           </h2>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted">
-            Every ranked match tells a story. These are the players setting the
-            pace. Where will you make your mark?
+            {tr(
+              "Every ranked match tells a story. These are the players setting the pace. Where will you make your mark?",
+            )}
           </p>
           <Link
             href="/leaderboard"
@@ -410,13 +441,13 @@ export default async function LandingPage() {
               className: "mt-7",
             })}
           >
-            View full leaderboard <ArrowUpRight size={17} />
+            {tr("View full leaderboard")} <ArrowUpRight size={17} />
           </Link>
         </div>
         <Card className="overflow-hidden p-0">
           <div className="flex items-center justify-between border-b border-border px-5 py-4">
-            <span className="eyebrow text-muted">Club standings</span>
-            <span className="text-xs text-muted">Rating points</span>
+            <span className="eyebrow text-muted">{tr("Club standings")}</span>
+            <span className="text-xs text-muted">{tr("Rating points")}</span>
           </div>
           <ol>
             {topPlayers.slice(0, 5).map((p, i) => (
@@ -435,22 +466,23 @@ export default async function LandingPage() {
                     {p.user.name}
                   </p>
                   <p className="mt-1 text-xs text-muted">
-                    Level {p.level} · {p._count.matchesWon} wins
+                    {tr("Level")} {p.level} · {p._count.matchesWon} {tr("wins")}
                   </p>
                 </div>
                 {i === 0 && (
                   <Crown size={16} className="hidden text-gold sm:block" />
                 )}
                 <span className="font-display text-2xl text-emerald-bright">
-                  {p.points.toLocaleString()}
+                  {p.points.toLocaleString(locale)}
                 </span>
               </li>
             ))}
           </ol>
           {topPlayers.length === 0 && (
             <p className="p-8 text-center text-sm text-muted">
-              A fresh leaderboard. Join the club and play your first ranked
-              match.
+              {tr(
+                "A fresh leaderboard. Join the club and play your first ranked match.",
+              )}
             </p>
           )}
         </Card>
@@ -458,13 +490,16 @@ export default async function LandingPage() {
 
       <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6">
         <div className="felt-texture relative overflow-hidden rounded-3xl border border-white/10 px-6 py-14 text-center text-white sm:px-12">
-          <p className="eyebrow mb-4 text-[#e8cd6e]">Your place at the table</p>
+          <p className="eyebrow mb-4 text-[#e8cd6e]">
+            {tr("Your place at the table")}
+          </p>
           <h2 className="font-display text-5xl tracking-wide sm:text-7xl">
-            GOOD GAMES. GREAT COMPANY.
+            {tr("GOOD GAMES. GREAT COMPANY.")}
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-white/70">
-            Your next chapter starts with a player profile. Join the club to
-            book tables, enter tournaments, and make every frame count.
+            {tr(
+              "Your next chapter starts with a player profile. Join the club to book tables, enter tournaments, and make every frame count.",
+            )}
           </p>
           <Link
             href="/register"
@@ -474,15 +509,15 @@ export default async function LandingPage() {
               className: "mt-8",
             })}
           >
-            Become a member <ArrowUpRight size={18} />
+            {tr("Become a member")} <ArrowUpRight size={18} />
           </Link>
           <p className="mt-4 text-xs text-white/60">
-            Already part of the club?{" "}
+            {tr("Already part of the club?")}{" "}
             <Link
               href="/login"
               className="underline underline-offset-4 hover:text-white"
             >
-              Log in
+              {tr("Log in")}
             </Link>
           </p>
         </div>

@@ -1,3 +1,4 @@
+import { getI18n } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Bell } from "lucide-react";
@@ -6,9 +7,14 @@ import { prisma } from "@/lib/prisma";
 import { EmptyState } from "@/components/ui/empty-state";
 import { NotificationList } from "./notification-list";
 
-export const metadata: Metadata = { title: "Notifications" };
+export async function generateMetadata(): Promise<Metadata> {
+  const { tr } = await getI18n();
+  return { title: tr("Notifications") };
+}
 
 export default async function NotificationsPage() {
+  const { tr } = await getI18n();
+
   const session = await auth();
   if (!session) redirect("/login");
 
@@ -21,16 +27,20 @@ export default async function NotificationsPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div>
-        <h1 className="font-display text-4xl tracking-wide">Notifications</h1>
+        <h1 className="font-display text-4xl tracking-wide">
+          {tr("Notifications")}
+        </h1>
         <p className="text-sm text-muted">
-          Match invites, tournament updates, badges and reservation reminders.
+          {tr(
+            "Match invites, tournament updates, badges and reservation reminders.",
+          )}
         </p>
       </div>
 
       {notifications.length === 0 ? (
         <EmptyState
           icon={Bell}
-          title="All quiet"
+          title={tr("All quiet")}
           description="You'll see match invites, tournament news and badge unlocks here."
         />
       ) : (

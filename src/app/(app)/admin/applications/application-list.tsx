@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Check, X } from "lucide-react";
@@ -24,6 +26,8 @@ type Entry = {
 };
 
 export function ApplicationList({ entries }: { entries: Entry[] }) {
+  const { tr, locale } = useI18n();
+
   const router = useRouter();
 
   async function act(entryId: string, action: "approve" | "reject") {
@@ -33,10 +37,14 @@ export function ApplicationList({ entries }: { entries: Entry[] }) {
       body: JSON.stringify({ entryId, action }),
     });
     if (!res.ok) {
-      toast.error("Action failed");
+      toast.error(tr("Action failed"));
       return;
     }
-    toast.success(action === "approve" ? "Application approved" : "Application rejected");
+    toast.success(
+      action === "approve"
+        ? tr("Application approved")
+        : tr("Application rejected"),
+    );
     router.refresh();
   }
 
@@ -48,23 +56,30 @@ export function ApplicationList({ entries }: { entries: Entry[] }) {
           <div className="min-w-0 flex-1">
             <p className="font-semibold">{e.playerName}</p>
             <p className="text-xs text-muted">
-              Lv {e.level} · {e.points} pts · applied {timeAgo(e.createdAt)}
+              {tr("Lv")} {e.level} · {e.points} {tr("pts · applied")}{" "}
+              {timeAgo(e.createdAt, locale)}
             </p>
             <p className="mt-1 text-sm text-muted">{e.tournamentName}</p>
           </div>
           <div className="flex flex-col items-end gap-1.5">
             <Badge variant={e.paymentStatus === "PAID" ? "emerald" : "live"}>
               {e.paymentStatus === "PAID"
-                ? `paid ${formatCents(e.entryFee)}`
-                : "unpaid"}
+                ? tr("paid {amount}", {
+                    amount: formatCents(e.entryFee, locale),
+                  })
+                : tr("unpaid")}
             </Badge>
-            {e.trustBadge && <Badge variant="gold">trusted</Badge>}
+            {e.trustBadge && <Badge variant="gold">{tr("trusted")}</Badge>}
           </div>
           <div className="flex gap-2">
             <Button size="sm" onClick={() => act(e.id, "approve")}>
-              <Check size={14} /> Accept
+              <Check size={14} /> {tr("Accept")}
             </Button>
-            <Button size="sm" variant="danger" onClick={() => act(e.id, "reject")}>
+            <Button
+              size="sm"
+              variant="danger"
+              onClick={() => act(e.id, "reject")}
+            >
               <X size={14} />
             </Button>
           </div>

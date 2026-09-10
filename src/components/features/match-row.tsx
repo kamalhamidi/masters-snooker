@@ -1,3 +1,4 @@
+import { getI18n } from "@/lib/i18n/server";
 import { Avatar } from "@/components/ui/avatar";
 import { MatchTypeBadge, LiveBadge, Badge } from "@/components/ui/badge";
 import { formatDateTime } from "@/lib/utils";
@@ -8,7 +9,7 @@ export type MatchWithRelations = Prisma.MatchGetPayload<{
   include: typeof matchInclude;
 }>;
 
-export function MatchRow({
+export async function MatchRow({
   match,
   perspectivePlayerId,
   action,
@@ -18,6 +19,8 @@ export function MatchRow({
   perspectivePlayerId?: string;
   action?: React.ReactNode;
 }) {
+  const { tr, locale } = await getI18n();
+
   const isCompleted = match.status === "COMPLETED";
   const won = perspectivePlayerId && match.winnerId === perspectivePlayerId;
 
@@ -26,19 +29,33 @@ export function MatchRow({
       {/* players + score */}
       <div className="flex flex-1 items-center gap-3">
         <div className="flex min-w-0 flex-1 items-center gap-2.5">
-          <Avatar name={match.player1.user.name} src={match.player1.user.avatarUrl} size="sm" />
-          <span className={`truncate text-sm font-semibold ${match.winnerId === match.player1Id ? "text-emerald-bright" : ""}`}>
+          <Avatar
+            name={match.player1.user.name}
+            src={match.player1.user.avatarUrl}
+            size="sm"
+          />
+          <span
+            className={`truncate text-sm font-semibold ${match.winnerId === match.player1Id ? "text-emerald-bright" : ""}`}
+          >
             {match.player1.user.name}
           </span>
         </div>
         <div className="shrink-0 rounded-lg bg-elevated px-3 py-1 font-display text-xl tracking-widest">
-          {match.status === "SCHEDULED" ? "vs" : `${match.score1} – ${match.score2}`}
+          {match.status === "SCHEDULED"
+            ? tr("vs")
+            : `${match.score1} – ${match.score2}`}
         </div>
         <div className="flex min-w-0 flex-1 items-center justify-end gap-2.5">
-          <span className={`truncate text-right text-sm font-semibold ${match.winnerId === match.player2Id ? "text-emerald-bright" : ""}`}>
+          <span
+            className={`truncate text-end text-sm font-semibold ${match.winnerId === match.player2Id ? "text-emerald-bright" : ""}`}
+          >
             {match.player2.user.name}
           </span>
-          <Avatar name={match.player2.user.name} src={match.player2.user.avatarUrl} size="sm" />
+          <Avatar
+            name={match.player2.user.name}
+            src={match.player2.user.avatarUrl}
+            size="sm"
+          />
         </div>
       </div>
 
@@ -46,13 +63,17 @@ export function MatchRow({
       <div className="flex flex-wrap items-center gap-2 sm:justify-end">
         <MatchTypeBadge type={match.type} />
         {match.status === "LIVE" && <LiveBadge />}
-        {match.status === "SCHEDULED" && <Badge variant="blue">Upcoming</Badge>}
+        {match.status === "SCHEDULED" && (
+          <Badge variant="blue">{tr("Upcoming")}</Badge>
+        )}
         {isCompleted && perspectivePlayerId && (
-          <Badge variant={won ? "emerald" : "live"}>{won ? "Won" : "Lost"}</Badge>
+          <Badge variant={won ? "emerald" : "live"}>
+            {won ? tr("Won") : tr("Lost")}
+          </Badge>
         )}
         {match.round && <Badge variant="purple">{match.round}</Badge>}
         <span className="text-xs text-faint">
-          {match.table?.name} · {formatDateTime(match.scheduledAt)}
+          {match.table?.name} · {formatDateTime(match.scheduledAt, locale)}
         </span>
         {action}
       </div>

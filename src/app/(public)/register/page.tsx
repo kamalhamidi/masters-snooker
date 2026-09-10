@@ -1,7 +1,11 @@
+import { getI18n } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { RegisterForm } from "./register-form";
 
-export const metadata: Metadata = { title: "Join the club" };
+export async function generateMetadata(): Promise<Metadata> {
+  const { tr } = await getI18n();
+  return { title: tr("Join the club") };
+}
 
 export default function RegisterPage() {
   return (

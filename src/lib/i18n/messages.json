@@ -1,0 +1,2702 @@
+{
+  "(optional)": {
+    "fr": "(facultatif)",
+    "ar": "(اختياري)"
+  },
+  "/hr": {
+    "fr": "/h",
+    "ar": "/ساعة"
+  },
+  "A fresh leaderboard. Join the club and play your first ranked match.": {
+    "fr": "Un nouveau classement. Rejoignez le club et jouez votre premier match classé.",
+    "ar": "تصنيف جديد. انضم إلى النادي والعب أول مباراة مصنفة لك."
+  },
+  "A little focus. A lot of possibility.": {
+    "fr": "Un peu de concentration. De grandes possibilités.",
+    "ar": "قليل من التركيز. الكثير من الإمكانات."
+  },
+  "A little friendly rivalry.": {
+    "fr": "Une rivalité amicale.",
+    "ar": "منافسة ودية ممتعة."
+  },
+  "A table. A cue. Your moment.": {
+    "fr": "Une table. Une queue. Votre moment.",
+    "ar": "طاولة. عصا. لحظتك."
+  },
+  "Accept": {
+    "fr": "Accepter",
+    "ar": "قبول"
+  },
+  "Achievements": {
+    "fr": "Succès",
+    "ar": "الإنجازات"
+  },
+  "Action failed": {
+    "fr": "L’action a échoué",
+    "ar": "تعذر تنفيذ الإجراء"
+  },
+  "Add employee": {
+    "fr": "Ajouter un employé",
+    "ar": "إضافة موظف"
+  },
+  "Admin": {
+    "fr": "Administration",
+    "ar": "الإدارة"
+  },
+  "Admin dashboard": {
+    "fr": "Tableau de bord administrateur",
+    "ar": "لوحة تحكم الإدارة"
+  },
+  "All": {
+    "fr": "Tous",
+    "ar": "الكل"
+  },
+  "All-time": {
+    "fr": "Depuis toujours",
+    "ar": "كل الفترات"
+  },
+  "All matches": {
+    "fr": "Tous les matchs",
+    "ar": "جميع المباريات"
+  },
+  "All players get a notification. Untick to save as draft.": {
+    "fr": "Tous les joueurs seront notifiés. Décochez pour enregistrer un brouillon.",
+    "ar": "سيتلقى جميع اللاعبين إشعارًا. ألغِ التحديد للحفظ كمسودة."
+  },
+  "All quiet": {
+    "fr": "Tout est calme",
+    "ar": "لا جديد حاليًا"
+  },
+  "All tournaments": {
+    "fr": "Tous les tournois",
+    "ar": "جميع البطولات"
+  },
+  "Already a member?": {
+    "fr": "Déjà membre ?",
+    "ar": "هل أنت عضو بالفعل؟"
+  },
+  "Already part of the club?": {
+    "fr": "Déjà au club ?",
+    "ar": "هل انضممت إلى النادي بالفعل؟"
+  },
+  "Anything we should know? (optional)": {
+    "fr": "Quelque chose à nous signaler ? (facultatif)",
+    "ar": "هل هناك ما ينبغي أن نعرفه؟ (اختياري)"
+  },
+  "Application approved": {
+    "fr": "Inscription approuvée",
+    "ar": "تمت الموافقة على الطلب"
+  },
+  "Application pending": {
+    "fr": "Inscription en attente",
+    "ar": "الطلب قيد الانتظار"
+  },
+  "Application rejected": {
+    "fr": "Inscription refusée",
+    "ar": "تم رفض الطلب"
+  },
+  "Application submitted — awaiting staff approval.": {
+    "fr": "Inscription envoyée — en attente d’approbation.",
+    "ar": "تم إرسال الطلب — بانتظار موافقة الموظفين."
+  },
+  "Application submitted — staff will review it shortly.": {
+    "fr": "Inscription envoyée — l’équipe l’examinera prochainement.",
+    "ar": "تم إرسال الطلب — سيراجعه الموظفون قريبًا."
+  },
+  "Applications": {
+    "fr": "Inscriptions",
+    "ar": "طلبات المشاركة"
+  },
+  "At least 8 characters": {
+    "fr": "Au moins 8 caractères",
+    "ar": "8 أحرف على الأقل"
+  },
+  "Available": {
+    "fr": "Disponible",
+    "ar": "متاح"
+  },
+  "Available balance": {
+    "fr": "Solde disponible",
+    "ar": "الرصيد المتاح"
+  },
+  "Avatar URL": {
+    "fr": "URL de la photo de profil",
+    "ar": "رابط الصورة الشخصية"
+  },
+  "BIG NIGHTS. GREAT MATCHES.": {
+    "fr": "GRANDES SOIRÉES. BEAUX MATCHS.",
+    "ar": "أمسيات مميزة. مباريات رائعة."
+  },
+  "Back": {
+    "fr": "Retour",
+    "ar": "رجوع"
+  },
+  "Back at the table": {
+    "fr": "De retour à la table",
+    "ar": "عدنا إلى الطاولة"
+  },
+  "Badge wall →": {
+    "fr": "Voir les badges →",
+    "ar": "عرض الشارات ←"
+  },
+  "Badges earned": {
+    "fr": "Badges obtenus",
+    "ar": "الشارات المكتسبة"
+  },
+  "Banner image URL": {
+    "fr": "URL de l’image de couverture",
+    "ar": "رابط صورة الغلاف"
+  },
+  "Basics": {
+    "fr": "Informations générales",
+    "ar": "المعلومات الأساسية"
+  },
+  "Be the first to register.": {
+    "fr": "Soyez le premier à vous inscrire.",
+    "ar": "كن أول من يسجل."
+  },
+  "Beat higher-level players for bonus XP and bigger point swings.": {
+    "fr": "Battez des joueurs de niveau supérieur pour gagner plus d’XP et de points.",
+    "ar": "اهزم لاعبين بمستويات أعلى لتحصل على خبرة إضافية ونقاط أكثر."
+  },
+  "Become a member": {
+    "fr": "Devenir membre",
+    "ar": "انضم إلى النادي"
+  },
+  "Best of": {
+    "fr": "Au meilleur de",
+    "ar": "الأفضل من"
+  },
+  "Best of the archive": {
+    "fr": "Le meilleur des archives",
+    "ar": "أفضل اللقطات المؤرشفة"
+  },
+  "Bio": {
+    "fr": "Présentation",
+    "ar": "نبذة شخصية"
+  },
+  "Book": {
+    "fr": "Réserver",
+    "ar": "احجز"
+  },
+  "Book a table": {
+    "fr": "Réserver une table",
+    "ar": "احجز طاولة"
+  },
+  "Book for": {
+    "fr": "Réserver pour",
+    "ar": "الحجز لصالح"
+  },
+  "Book for member": {
+    "fr": "Réserver pour un membre",
+    "ar": "احجز لعضو"
+  },
+  "Book for yourself or any member — staff bookings are confirmed instantly.": {
+    "fr": "Réservez pour vous ou un membre — les réservations du personnel sont confirmées immédiatement.",
+    "ar": "احجز لنفسك أو لأي عضو — حجوزات الموظفين مؤكدة فورًا."
+  },
+  "Book your next session or check in when you arrive. We’ll keep track of the progress.": {
+    "fr": "Réservez votre prochaine session ou signalez votre arrivée. Nous suivrons vos progrès.",
+    "ar": "احجز جلستك القادمة أو سجّل حضورك عند الوصول. سنتابع تقدمك."
+  },
+  "Booked": {
+    "fr": "Réservé",
+    "ar": "محجوز"
+  },
+  "Booking failed": {
+    "fr": "La réservation a échoué",
+    "ar": "تعذر الحجز"
+  },
+  "CATCH.": {
+    "fr": "DÉPASSER.",
+    "ar": "تصدّرهم."
+  },
+  "Camera unavailable — check permissions, or use manual entry.": {
+    "fr": "Caméra indisponible — vérifiez les autorisations ou utilisez la saisie manuelle.",
+    "ar": "الكاميرا غير متاحة — تحقق من الأذونات أو استخدم الإدخال اليدوي."
+  },
+  "Cancel": {
+    "fr": "Annuler",
+    "ar": "إلغاء"
+  },
+  "Cancel this match": {
+    "fr": "Annuler ce match",
+    "ar": "إلغاء هذه المباراة"
+  },
+  "Cancelled": {
+    "fr": "Annulé",
+    "ar": "ملغى"
+  },
+  "Champion": {
+    "fr": "Champion",
+    "ar": "البطل"
+  },
+  "Championship": {
+    "fr": "Championnat",
+    "ar": "بطولة الأبطال"
+  },
+  "Championship tables, ranked matches, tournaments and live streams.": {
+    "fr": "Tables de compétition, matchs classés, tournois et diffusions en direct.",
+    "ar": "طاولات احترافية ومباريات مصنفة وبطولات وبث مباشر."
+  },
+  "Check back for upcoming tournaments. Your next frame doesn't have to wait.": {
+    "fr": "Revenez découvrir les prochains tournois. Votre prochaine partie n’attend pas.",
+    "ar": "تابع البطولات القادمة. لا داعي لتأجيل شوطك القادم."
+  },
+  "Check in, play your frames, and turn your time at the club into achievements and rewards.": {
+    "fr": "Signalez votre arrivée, jouez et transformez vos visites en succès et récompenses.",
+    "ar": "سجّل حضورك والعب وحوّل وقتك في النادي إلى إنجازات ومكافآت."
+  },
+  "Check-in scanner": {
+    "fr": "Scanner de présence",
+    "ar": "ماسح تسجيل الحضور"
+  },
+  "Check-ins": {
+    "fr": "Présences",
+    "ar": "تسجيلات الحضور"
+  },
+  "Check-ins today": {
+    "fr": "Présences aujourd’hui",
+    "ar": "تسجيلات الحضور اليوم"
+  },
+  "Checked in today": {
+    "fr": "Présence enregistrée aujourd’hui",
+    "ar": "تم تسجيل حضورك اليوم"
+  },
+  "Choose your table & time": {
+    "fr": "Choisissez votre table et votre horaire",
+    "ar": "اختر طاولتك وموعدك"
+  },
+  "Choose your table, find a time that fits, and get your next session on the calendar.": {
+    "fr": "Choisissez une table, trouvez le bon créneau et planifiez votre prochaine session.",
+    "ar": "اختر طاولة ووقتًا مناسبًا وحدد موعد جلستك القادمة."
+  },
+  "Close dialog": {
+    "fr": "Fermer la fenêtre",
+    "ar": "إغلاق النافذة"
+  },
+  "Club players": {
+    "fr": "Joueurs du club",
+    "ar": "لاعبو النادي"
+  },
+  "Club settings": {
+    "fr": "Paramètres du club",
+    "ar": "إعدادات النادي"
+  },
+  "Club standings": {
+    "fr": "Classement du club",
+    "ar": "ترتيب النادي"
+  },
+  "Club tournament": {
+    "fr": "Tournoi du club",
+    "ar": "بطولة النادي"
+  },
+  "Competition in progress": {
+    "fr": "Compétition en cours",
+    "ar": "المنافسة جارية"
+  },
+  "Complete match": {
+    "fr": "Terminer le match",
+    "ar": "إنهاء المباراة"
+  },
+  "Completed": {
+    "fr": "Terminé",
+    "ar": "مكتمل"
+  },
+  "Confirm": {
+    "fr": "Confirmer",
+    "ar": "تأكيد"
+  },
+  "Confirm booking": {
+    "fr": "Confirmer la réservation",
+    "ar": "تأكيد الحجز"
+  },
+  "Confirm my booking": {
+    "fr": "Confirmer ma réservation",
+    "ar": "تأكيد حجزي"
+  },
+  "Confirmed bookings": {
+    "fr": "Réservations confirmées",
+    "ar": "الحجوزات المؤكدة"
+  },
+  "Confirmed instantly — the player will be notified.": {
+    "fr": "Confirmation immédiate — le joueur sera notifié.",
+    "ar": "تأكيد فوري — سيتم إشعار اللاعب."
+  },
+  "Could not add employee": {
+    "fr": "Impossible d’ajouter l’employé",
+    "ar": "تعذرت إضافة الموظف"
+  },
+  "Could not cancel": {
+    "fr": "Impossible d’annuler",
+    "ar": "تعذر الإلغاء"
+  },
+  "Could not create match": {
+    "fr": "Impossible de créer le match",
+    "ar": "تعذر إنشاء المباراة"
+  },
+  "Could not create tournament": {
+    "fr": "Impossible de créer le tournoi",
+    "ar": "تعذر إنشاء البطولة"
+  },
+  "Could not remove employee": {
+    "fr": "Impossible de retirer l’employé",
+    "ar": "تعذرت إزالة الموظف"
+  },
+  "Could not save profile": {
+    "fr": "Impossible d’enregistrer le profil",
+    "ar": "تعذر حفظ الملف الشخصي"
+  },
+  "Could not save rating": {
+    "fr": "Impossible d’enregistrer l’évaluation",
+    "ar": "تعذر حفظ التقييم"
+  },
+  "Could not save result": {
+    "fr": "Impossible d’enregistrer le résultat",
+    "ar": "تعذر حفظ النتيجة"
+  },
+  "Could not save settings": {
+    "fr": "Impossible d’enregistrer les paramètres",
+    "ar": "تعذر حفظ الإعدادات"
+  },
+  "Could not update trust badge": {
+    "fr": "Impossible de modifier le badge de confiance",
+    "ar": "تعذر تحديث شارة الثقة"
+  },
+  "Create a match": {
+    "fr": "Créer un match",
+    "ar": "إنشاء مباراة"
+  },
+  "Create a tournament": {
+    "fr": "Créer un tournoi",
+    "ar": "إنشاء بطولة"
+  },
+  "Create account": {
+    "fr": "Créer un compte",
+    "ar": "إنشاء حساب"
+  },
+  "Create an account": {
+    "fr": "Créer un compte",
+    "ar": "إنشاء حساب"
+  },
+  "Create match": {
+    "fr": "Créer un match",
+    "ar": "إنشاء مباراة"
+  },
+  "Create tournament": {
+    "fr": "Créer un tournoi",
+    "ar": "إنشاء بطولة"
+  },
+  "Creating your account…": {
+    "fr": "Création de votre compte…",
+    "ar": "جارٍ إنشاء حسابك…"
+  },
+  "CueHub home": {
+    "fr": "Accueil CueHub",
+    "ar": "الرئيسية — CueHub"
+  },
+  "CueHub — Play, compete, connect": {
+    "fr": "CueHub — Jouez, rivalisez, partagez",
+    "ar": "CueHub — العب، نافس، تواصل"
+  },
+  "Daily 10:00 AM — 2:00 AM": {
+    "fr": "Tous les jours de 10 h à 2 h",
+    "ar": "يوميًا من 10 صباحًا إلى 2 صباحًا"
+  },
+  "Dashboard": {
+    "fr": "Tableau de bord",
+    "ar": "لوحة التحكم"
+  },
+  "Demo accounts (password: password123)": {
+    "fr": "Comptes de démonstration (mot de passe : password123)",
+    "ar": "حسابات تجريبية (كلمة المرور: password123)"
+  },
+  "Description": {
+    "fr": "Description",
+    "ar": "الوصف"
+  },
+  "Dialog": {
+    "fr": "Fenêtre de dialogue",
+    "ar": "نافذة حوار"
+  },
+  "Discover rewards": {
+    "fr": "Découvrir les récompenses",
+    "ar": "اكتشف المكافآت"
+  },
+  "Display name": {
+    "fr": "Nom affiché",
+    "ar": "الاسم المعروض"
+  },
+  "Download QR": {
+    "fr": "Télécharger le QR",
+    "ar": "تنزيل رمز QR"
+  },
+  "Draft": {
+    "fr": "Brouillon",
+    "ar": "مسودة"
+  },
+  "Duration": {
+    "fr": "Durée",
+    "ar": "المدة"
+  },
+  "EARN": {
+    "fr": "GAGNEZ",
+    "ar": "اكسب"
+  },
+  "Earn badges by playing, winning and showing up. Each unlock pays XP.": {
+    "fr": "Gagnez des badges en jouant, en gagnant et en venant au club. Chaque badge rapporte de l’XP.",
+    "ar": "اكسب الشارات باللعب والفوز والحضور. كل شارة تمنحك نقاط خبرة."
+  },
+  "Earn points every visit, match and booking. Spend them on real perks.": {
+    "fr": "Gagnez des points à chaque visite, match et réservation. Échangez-les contre des avantages.",
+    "ar": "اكسب نقاطًا مع كل زيارة ومباراة وحجز، واستبدلها بمزايا حقيقية."
+  },
+  "Edit profile": {
+    "fr": "Modifier le profil",
+    "ar": "تعديل الملف الشخصي"
+  },
+  "Elo-style ranking — every ranked frame counts. Beat above your weight to climb faster.": {
+    "fr": "Classement Elo — chaque partie classée compte. Battez des joueurs plus forts pour progresser plus vite.",
+    "ar": "تصنيف إيلو — كل شوط مصنف مهم. اهزم الأقوى لتتقدم أسرع."
+  },
+  "Email": {
+    "fr": "E-mail",
+    "ar": "البريد الإلكتروني"
+  },
+  "Embed URL": {
+    "fr": "URL d’intégration",
+    "ar": "رابط التضمين"
+  },
+  "Employee": {
+    "fr": "Employé",
+    "ar": "موظف"
+  },
+  "Employee account created": {
+    "fr": "Compte employé créé",
+    "ar": "تم إنشاء حساب الموظف"
+  },
+  "Employee performance": {
+    "fr": "Performance du personnel",
+    "ar": "أداء الموظفين"
+  },
+  "Employee removed": {
+    "fr": "Employé retiré",
+    "ar": "تمت إزالة الموظف"
+  },
+  "Employee — sara@masters.club": {
+    "fr": "Employé — sara@masters.club",
+    "ar": "موظف — sara@masters.club"
+  },
+  "End date": {
+    "fr": "Date de fin",
+    "ar": "تاريخ الانتهاء"
+  },
+  "Entry fee ($)": {
+    "fr": "Frais d’inscription ($)",
+    "ar": "رسوم المشاركة ($)"
+  },
+  "Every ranked match tells a story. These are the players setting the pace. Where will you make your mark?": {
+    "fr": "Chaque match classé raconte une histoire. Voici les joueurs qui donnent le rythme. À vous de marquer les esprits.",
+    "ar": "كل مباراة مصنفة تروي قصة. هؤلاء اللاعبون يصنعون المنافسة. أين ستترك بصمتك؟"
+  },
+  "Every visit counts.": {
+    "fr": "Chaque visite compte.",
+    "ar": "كل زيارة تصنع فرقًا."
+  },
+  "Explore club tournaments": {
+    "fr": "Explorer les tournois du club",
+    "ar": "استكشف بطولات النادي"
+  },
+  "Explore the club": {
+    "fr": "Découvrir le club",
+    "ar": "اكتشف النادي"
+  },
+  "Explore the rankings": {
+    "fr": "Explorer le classement",
+    "ar": "استكشف التصنيف"
+  },
+  "Final": {
+    "fr": "Finale",
+    "ar": "النهائي"
+  },
+  "Find a table": {
+    "fr": "Trouver une table",
+    "ar": "ابحث عن طاولة"
+  },
+  "Find your competition": {
+    "fr": "Trouvez votre compétition",
+    "ar": "اختر منافستك"
+  },
+  "Find your table": {
+    "fr": "Trouvez votre table",
+    "ar": "اعثر على طاولتك"
+  },
+  "Find your table. Meet your competition. Make your mark. Welcome to Master's Snooker.": {
+    "fr": "Trouvez votre table. Rencontrez vos adversaires. Laissez votre empreinte. Bienvenue chez Master's Snooker.",
+    "ar": "اعثر على طاولتك. تعرّف على منافسيك. اترك بصمتك. مرحبًا بك في Master's Snooker."
+  },
+  "Floor Manager": {
+    "fr": "Responsable de salle",
+    "ar": "مدير الصالة"
+  },
+  "Footer": {
+    "fr": "Pied de page",
+    "ar": "تذييل الصفحة"
+  },
+  "Format": {
+    "fr": "Format",
+    "ar": "النظام"
+  },
+  "Format & money": {
+    "fr": "Format et tarifs",
+    "ar": "النظام والرسوم"
+  },
+  "Frames of competition": {
+    "fr": "Matchs disputés",
+    "ar": "المباريات الملعوبة"
+  },
+  "Free player account — takes under a minute. You can complete your profile later.": {
+    "fr": "Un compte joueur gratuit en moins d’une minute. Complétez votre profil plus tard.",
+    "ar": "حساب لاعب مجاني في أقل من دقيقة. يمكنك إكمال ملفك لاحقًا."
+  },
+  "Friendly frames to championship nights. All levels welcome.": {
+    "fr": "Des parties amicales aux championnats. Tous les niveaux sont les bienvenus.",
+    "ar": "من الأشواط الودية إلى ليالي البطولات. جميع المستويات مرحب بها."
+  },
+  "Friendly — no ranking": {
+    "fr": "Amical — sans classement",
+    "ar": "ودية — دون تصنيف"
+  },
+  "From your first friendly frame to the final black. Everything you need to enjoy the game, in one place.": {
+    "fr": "De votre première partie amicale à la dernière noire. Tout pour profiter du jeu, au même endroit.",
+    "ar": "من أول شوط ودي إلى الكرة السوداء الأخيرة. كل ما تحتاجه للاستمتاع باللعبة في مكان واحد."
+  },
+  "Full name": {
+    "fr": "Nom complet",
+    "ar": "الاسم الكامل"
+  },
+  "GOOD GAMES. GREAT COMPANY.": {
+    "fr": "DU BEAU JEU. DE BELLES RENCONTRES.",
+    "ar": "لعب ممتع. رفقة رائعة."
+  },
+  "GREAT FRAME": {
+    "fr": "GRANDE PARTIE",
+    "ar": "الرائع القادم"
+  },
+  "Grant": {
+    "fr": "Accorder",
+    "ar": "منح"
+  },
+  "Group stage": {
+    "fr": "Phase de groupes",
+    "ar": "دور المجموعات"
+  },
+  "Groups + knockout": {
+    "fr": "Groupes + élimination directe",
+    "ar": "مجموعات + خروج المغلوب"
+  },
+  "Happening now": {
+    "fr": "En ce moment",
+    "ar": "يحدث الآن"
+  },
+  "Hey,": {
+    "fr": "Bonjour,",
+    "ar": "مرحبًا،"
+  },
+  "Hide password": {
+    "fr": "Masquer le mot de passe",
+    "ar": "إخفاء كلمة المرور"
+  },
+  "Highest break, favourite table, playing style…": {
+    "fr": "Meilleure série, table préférée, style de jeu…",
+    "ar": "أعلى بريك، الطاولة المفضلة، أسلوب اللعب…"
+  },
+  "Highest ranking weight": {
+    "fr": "Impact maximal sur le classement",
+    "ar": "أعلى تأثير على التصنيف"
+  },
+  "Highlights will appear after the next streamed event.": {
+    "fr": "Les temps forts apparaîtront après le prochain événement diffusé.",
+    "ar": "ستظهر أبرز اللقطات بعد الفعالية القادمة التي تُبث مباشرة."
+  },
+  "History": {
+    "fr": "Historique",
+    "ar": "السجل"
+  },
+  "Home": {
+    "fr": "Accueil",
+    "ar": "الرئيسية"
+  },
+  "Hourly table availability for": {
+    "fr": "Disponibilité horaire des tables pour le",
+    "ar": "توفر الطاولات بالساعة ليوم"
+  },
+  "In progress": {
+    "fr": "En cours",
+    "ar": "جارٍ"
+  },
+  "Inbox zero": {
+    "fr": "Aucune notification",
+    "ar": "لا توجد إشعارات"
+  },
+  "Join the club": {
+    "fr": "Rejoindre le club",
+    "ar": "انضم إلى النادي"
+  },
+  "Knockout": {
+    "fr": "Élimination directe",
+    "ar": "خروج المغلوب"
+  },
+  "Last visit:": {
+    "fr": "Dernière visite :",
+    "ar": "آخر زيارة:"
+  },
+  "Latest badges": {
+    "fr": "Derniers badges",
+    "ar": "أحدث الشارات"
+  },
+  "Leaderboard": {
+    "fr": "Classement",
+    "ar": "الترتيب"
+  },
+  "Level": {
+    "fr": "Niveau",
+    "ar": "المستوى"
+  },
+  "Live": {
+    "fr": "En direct",
+    "ar": "مباشر"
+  },
+  "Live at the club": {
+    "fr": "En direct du club",
+    "ar": "مباشر من النادي"
+  },
+  "Live availability, per table per hour. Bookings are confirmed by staff.": {
+    "fr": "Disponibilités par table et par heure. Les réservations sont confirmées par le personnel.",
+    "ar": "توفر مباشر لكل طاولة وساعة. يؤكد الموظفون الحجوزات."
+  },
+  "Live broadcast": {
+    "fr": "Diffusion en direct",
+    "ar": "البث المباشر"
+  },
+  "Live broadcast controls and loyalty program rules.": {
+    "fr": "Contrôles du direct et règles du programme de fidélité.",
+    "ar": "إعدادات البث المباشر وقواعد برنامج الولاء."
+  },
+  "Live matches": {
+    "fr": "Matchs en direct",
+    "ar": "المباريات المباشرة"
+  },
+  "Live stream": {
+    "fr": "Diffusion en direct",
+    "ar": "البث المباشر"
+  },
+  "Log in": {
+    "fr": "Se connecter",
+    "ar": "تسجيل الدخول"
+  },
+  "Log in to your club account.": {
+    "fr": "Connectez-vous à votre compte du club.",
+    "ar": "سجّل الدخول إلى حسابك في النادي."
+  },
+  "Logging in…": {
+    "fr": "Connexion…",
+    "ar": "جارٍ تسجيل الدخول…"
+  },
+  "Lost": {
+    "fr": "Perdu",
+    "ar": "خسارة"
+  },
+  "Loyalty & rewards": {
+    "fr": "Fidélité et récompenses",
+    "ar": "الولاء والمكافآت"
+  },
+  "Loyalty program rules": {
+    "fr": "Règles du programme de fidélité",
+    "ar": "قواعد برنامج الولاء"
+  },
+  "Lv": {
+    "fr": "Niv.",
+    "ar": "مستوى"
+  },
+  "Main": {
+    "fr": "Navigation principale",
+    "ar": "التنقل الرئيسي"
+  },
+  "Make it a table for you.": {
+    "fr": "Votre table vous attend.",
+    "ar": "طاولتك بانتظارك."
+  },
+  "Make time for a frame.": {
+    "fr": "Prenez le temps de jouer.",
+    "ar": "خصص وقتًا لشوط."
+  },
+  "Make time for the game": {
+    "fr": "Prenez le temps de jouer",
+    "ar": "خصص وقتًا للعب"
+  },
+  "Make your next move": {
+    "fr": "À vous de jouer",
+    "ar": "خطط لخطوتك القادمة"
+  },
+  "Manage": {
+    "fr": "Gérer",
+    "ar": "إدارة"
+  },
+  "Manage employee accounts and decide which players skip tournament approval.": {
+    "fr": "Gérez le personnel et les joueurs dispensés d’approbation aux tournois.",
+    "ar": "أدر حسابات الموظفين وحدد اللاعبين المعفيين من موافقة المشاركة في البطولات."
+  },
+  "Manual entry": {
+    "fr": "Saisie manuelle",
+    "ar": "إدخال يدوي"
+  },
+  "Mark all read": {
+    "fr": "Tout marquer comme lu",
+    "ar": "تحديد الكل كمقروء"
+  },
+  "Master's Snooker Club. All rights reserved.": {
+    "fr": "Master's Snooker Club. Tous droits réservés.",
+    "ar": "نادي Master's Snooker. جميع الحقوق محفوظة."
+  },
+  "Master’s Snooker / Member club": {
+    "fr": "Master’s Snooker / Espace membre",
+    "ar": "Master’s Snooker / مساحة الأعضاء"
+  },
+  "Match cancelled": {
+    "fr": "Match annulé",
+    "ar": "تم إلغاء المباراة"
+  },
+  "Match created — players notified": {
+    "fr": "Match créé — joueurs notifiés",
+    "ar": "تم إنشاء المباراة وإشعار اللاعبين"
+  },
+  "Match invites, tournament updates, badges and reservation reminders.": {
+    "fr": "Invitations, actualités des tournois, badges et rappels de réservation.",
+    "ar": "دعوات المباريات ومستجدات البطولات والشارات وتذكيرات الحجوزات."
+  },
+  "Match result": {
+    "fr": "Résultat du match",
+    "ar": "نتيجة المباراة"
+  },
+  "Match type": {
+    "fr": "Type de match",
+    "ar": "نوع المباراة"
+  },
+  "Matches": {
+    "fr": "Matchs",
+    "ar": "المباريات"
+  },
+  "Matches completed": {
+    "fr": "Matchs terminés",
+    "ar": "المباريات المكتملة"
+  },
+  "Matches managed": {
+    "fr": "Matchs gérés",
+    "ar": "المباريات المُدارة"
+  },
+  "Matches per week": {
+    "fr": "Matchs par semaine",
+    "ar": "المباريات أسبوعيًا"
+  },
+  "Matches played": {
+    "fr": "Matchs joués",
+    "ar": "المباريات الملعوبة"
+  },
+  "Member login": {
+    "fr": "Connexion membre",
+    "ar": "دخول الأعضاء"
+  },
+  "Mobile": {
+    "fr": "Navigation mobile",
+    "ar": "التنقل على الهاتف"
+  },
+  "More": {
+    "fr": "Plus",
+    "ar": "المزيد"
+  },
+  "More than a place to play": {
+    "fr": "Plus qu’un lieu pour jouer",
+    "ar": "أكثر من مجرد مكان للعب"
+  },
+  "My QR": {
+    "fr": "Mon QR",
+    "ar": "رمزي QR"
+  },
+  "My QR code": {
+    "fr": "Mon code QR",
+    "ar": "رمز QR الخاص بي"
+  },
+  "My check-in QR": {
+    "fr": "Mon QR de présence",
+    "ar": "رمز الحضور الخاص بي"
+  },
+  "My dashboard": {
+    "fr": "Mon tableau de bord",
+    "ar": "لوحة تحكمي"
+  },
+  "My matches": {
+    "fr": "Mes matchs",
+    "ar": "مبارياتي"
+  },
+  "My profile": {
+    "fr": "Mon profil",
+    "ar": "ملفي الشخصي"
+  },
+  "My upcoming bookings": {
+    "fr": "Mes prochaines réservations",
+    "ar": "حجوزاتي القادمة"
+  },
+  "New match": {
+    "fr": "Nouveau match",
+    "ar": "مباراة جديدة"
+  },
+  "New to the club?": {
+    "fr": "Nouveau au club ?",
+    "ar": "جديد في النادي؟"
+  },
+  "New tournament": {
+    "fr": "Nouveau tournoi",
+    "ar": "بطولة جديدة"
+  },
+  "Next": {
+    "fr": "Suivant",
+    "ar": "التالي"
+  },
+  "No badges yet — your first win unlocks one.": {
+    "fr": "Aucun badge — votre première victoire en débloquera un.",
+    "ar": "لا شارات بعد — ستحصل على أول شارة عند فوزك الأول."
+  },
+  "No bio yet — tell the club who you are.": {
+    "fr": "Pas encore de présentation — présentez-vous au club.",
+    "ar": "لا نبذة بعد — عرّف أعضاء النادي بنفسك."
+  },
+  "No live broadcast right now": {
+    "fr": "Aucune diffusion en direct actuellement",
+    "ar": "لا يوجد بث مباشر حاليًا"
+  },
+  "No matches yet": {
+    "fr": "Aucun match pour le moment",
+    "ar": "لا مباريات بعد"
+  },
+  "No pending reservations — all caught up.": {
+    "fr": "Aucune réservation en attente — tout est à jour.",
+    "ar": "لا حجوزات معلقة — كل شيء محدّث."
+  },
+  "No players match “": {
+    "fr": "Aucun joueur ne correspond à «",
+    "ar": "لا يوجد لاعب يطابق «"
+  },
+  "No scheduled or live matches. Create one to get the tables rolling.": {
+    "fr": "Aucun match prévu ou en direct. Créez-en un pour lancer le jeu.",
+    "ar": "لا مباريات مجدولة أو مباشرة. أنشئ مباراة لبدء اللعب."
+  },
+  "No tables available right now": {
+    "fr": "Aucune table disponible actuellement",
+    "ar": "لا توجد طاولات متاحة حاليًا"
+  },
+  "None": {
+    "fr": "Aucun",
+    "ar": "لا شيء"
+  },
+  "Not checked in today": {
+    "fr": "Présence non enregistrée aujourd’hui",
+    "ar": "لم تسجّل حضورك اليوم"
+  },
+  "Not enough points": {
+    "fr": "Points insuffisants",
+    "ar": "النقاط غير كافية"
+  },
+  "Nothing here yet": {
+    "fr": "Rien pour le moment",
+    "ar": "لا شيء هنا بعد"
+  },
+  "Notifications": {
+    "fr": "Notifications",
+    "ar": "الإشعارات"
+  },
+  "Number of players": {
+    "fr": "Nombre de joueurs",
+    "ar": "عدد اللاعبين"
+  },
+  "On the club calendar": {
+    "fr": "Au calendrier du club",
+    "ar": "على جدول النادي"
+  },
+  "Open": {
+    "fr": "Ouvrir",
+    "ar": "فتح"
+  },
+  "Open all navigation": {
+    "fr": "Ouvrir toute la navigation",
+    "ar": "فتح جميع خيارات التنقل"
+  },
+  "Open matches": {
+    "fr": "Matchs ouverts",
+    "ar": "المباريات المفتوحة"
+  },
+  "Open navigation": {
+    "fr": "Ouvrir la navigation",
+    "ar": "فتح قائمة التنقل"
+  },
+  "Open registration immediately": {
+    "fr": "Ouvrir les inscriptions immédiatement",
+    "ar": "فتح التسجيل فورًا"
+  },
+  "Open your personal QR": {
+    "fr": "Ouvrir votre QR personnel",
+    "ar": "افتح رمزك الشخصي"
+  },
+  "Overall experience": {
+    "fr": "Expérience globale",
+    "ar": "التجربة العامة"
+  },
+  "Owner — chef@masters.club": {
+    "fr": "Propriétaire — chef@masters.club",
+    "ar": "المالك — chef@masters.club"
+  },
+  "Pair two registered players, pick a table and match type. Ranked and competition matches move the leaderboard.": {
+    "fr": "Choisissez deux joueurs inscrits, une table et un type de match. Les matchs classés et de compétition modifient le classement.",
+    "ar": "اختر لاعبين مسجلين وطاولة ونوع المباراة. المباريات المصنفة والتنافسية تؤثر على الترتيب."
+  },
+  "Password": {
+    "fr": "Mot de passe",
+    "ar": "كلمة المرور"
+  },
+  "Past": {
+    "fr": "Passés",
+    "ar": "السابقة"
+  },
+  "Pending reservations": {
+    "fr": "Réservations en attente",
+    "ar": "الحجوزات المعلقة"
+  },
+  "Phone": {
+    "fr": "Téléphone",
+    "ar": "الهاتف"
+  },
+  "Pick a start date": {
+    "fr": "Choisissez une date de début",
+    "ar": "اختر تاريخ البدء"
+  },
+  "Pick two different players": {
+    "fr": "Choisissez deux joueurs différents",
+    "ar": "اختر لاعبين مختلفين"
+  },
+  "Plan your first session": {
+    "fr": "Planifier votre première session",
+    "ar": "خطط لجلستك الأولى"
+  },
+  "Plan your next visit with hourly table availability and simple online reservations.": {
+    "fr": "Planifiez votre prochaine visite grâce aux créneaux horaires et à la réservation en ligne.",
+    "ar": "خطط لزيارتك القادمة مع توفر الطاولات بالساعة وحجوزات سهلة عبر الإنترنت."
+  },
+  "Platform": {
+    "fr": "Plateforme",
+    "ar": "المنصة"
+  },
+  "Play": {
+    "fr": "Jouer",
+    "ar": "العب"
+  },
+  "Play ranked matches to build your points history.": {
+    "fr": "Jouez des matchs classés pour construire votre historique de points.",
+    "ar": "العب مباريات مصنفة لبناء سجل نقاطك."
+  },
+  "Play ranked matches, track your progress, and see how you measure up against the club.": {
+    "fr": "Jouez des matchs classés, suivez vos progrès et comparez-vous aux autres joueurs.",
+    "ar": "العب مباريات مصنفة وتابع تقدمك وقارن أداءك بلاعبي النادي."
+  },
+  "Played": {
+    "fr": "Joués",
+    "ar": "لعبت"
+  },
+  "Player 1": {
+    "fr": "Joueur 1",
+    "ar": "اللاعب 1"
+  },
+  "Player 2": {
+    "fr": "Joueur 2",
+    "ar": "اللاعب 2"
+  },
+  "Player — ronnie@demo.club": {
+    "fr": "Joueur — ronnie@demo.club",
+    "ar": "لاعب — ronnie@demo.club"
+  },
+  "Players": {
+    "fr": "Joueurs",
+    "ar": "اللاعبون"
+  },
+  "Players registered": {
+    "fr": "Joueurs inscrits",
+    "ar": "اللاعبون المسجلون"
+  },
+  "Players with a club trust badge are approved instantly. Your application will be reviewed by staff after payment.": {
+    "fr": "Les joueurs de confiance sont approuvés immédiatement. Votre inscription sera examinée après paiement.",
+    "ar": "تتم الموافقة فورًا على اللاعبين الحاصلين على شارة الثقة. سيراجع الموظفون طلبك بعد الدفع."
+  },
+  "Players without a trust badge need your approval — check payment status before accepting.": {
+    "fr": "Les joueurs sans badge de confiance nécessitent votre accord — vérifiez le paiement avant d’accepter.",
+    "ar": "اللاعبون دون شارة ثقة يحتاجون إلى موافقتك — تحقق من حالة الدفع قبل القبول."
+  },
+  "Please check back or ask the club staff for help.": {
+    "fr": "Revenez plus tard ou demandez de l’aide au personnel.",
+    "ar": "يرجى المحاولة لاحقًا أو طلب المساعدة من الموظفين."
+  },
+  "Please rate all three categories": {
+    "fr": "Évaluez les trois catégories",
+    "ar": "يرجى تقييم الفئات الثلاث"
+  },
+  "Point the camera at a player's QR code, or paste their code manually. Each check-in awards visit loyalty points.": {
+    "fr": "Visez le QR d’un joueur ou collez son code. Chaque présence rapporte des points de fidélité.",
+    "ar": "وجّه الكاميرا إلى رمز اللاعب أو أدخله يدويًا. كل تسجيل حضور يمنح نقاط ولاء."
+  },
+  "Points": {
+    "fr": "Points",
+    "ar": "النقاط"
+  },
+  "Points history": {
+    "fr": "Historique des points",
+    "ar": "سجل النقاط"
+  },
+  "Points per match": {
+    "fr": "Points par match",
+    "ar": "النقاط لكل مباراة"
+  },
+  "Points per reservation": {
+    "fr": "Points par réservation",
+    "ar": "النقاط لكل حجز"
+  },
+  "Points per visit": {
+    "fr": "Points par visite",
+    "ar": "النقاط لكل زيارة"
+  },
+  "Position": {
+    "fr": "Position",
+    "ar": "المركز"
+  },
+  "Prize pool": {
+    "fr": "Dotation",
+    "ar": "مجموع الجوائز"
+  },
+  "Prize pool ($)": {
+    "fr": "Dotation ($)",
+    "ar": "مجموع الجوائز ($)"
+  },
+  "Profile": {
+    "fr": "Profil",
+    "ar": "الملف الشخصي"
+  },
+  "Profile completion": {
+    "fr": "Profil complété",
+    "ar": "اكتمال الملف الشخصي"
+  },
+  "Profile updated": {
+    "fr": "Profil mis à jour",
+    "ar": "تم تحديث الملف الشخصي"
+  },
+  "Public": {
+    "fr": "Navigation publique",
+    "ar": "التنقل العام"
+  },
+  "Public mobile navigation": {
+    "fr": "Navigation publique mobile",
+    "ar": "التنقل العام للهاتف"
+  },
+  "QR code value": {
+    "fr": "Valeur du code QR",
+    "ar": "قيمة رمز QR"
+  },
+  "Quick links": {
+    "fr": "Liens rapides",
+    "ar": "روابط سريعة"
+  },
+  "Rank": {
+    "fr": "Rang",
+    "ar": "الترتيب"
+  },
+  "Rank #": {
+    "fr": "Rang n°",
+    "ar": "الترتيب #"
+  },
+  "Ranked — rating updates": {
+    "fr": "Classé — points mis à jour",
+    "ar": "مصنفة — تحديث التصنيف"
+  },
+  "Ranking points": {
+    "fr": "Points de classement",
+    "ar": "نقاط التصنيف"
+  },
+  "Rankings": {
+    "fr": "Classement",
+    "ar": "التصنيفات"
+  },
+  "Ranks": {
+    "fr": "Classement",
+    "ar": "الترتيب"
+  },
+  "Rate": {
+    "fr": "Évaluer",
+    "ar": "قيّم"
+  },
+  "Rate your experience": {
+    "fr": "Évaluez votre expérience",
+    "ar": "قيّم تجربتك"
+  },
+  "Rating": {
+    "fr": "Évaluation",
+    "ar": "التقييم"
+  },
+  "Rating points": {
+    "fr": "Points de classement",
+    "ar": "نقاط التصنيف"
+  },
+  "Recent matches": {
+    "fr": "Matchs récents",
+    "ar": "أحدث المباريات"
+  },
+  "Redeem": {
+    "fr": "Échanger",
+    "ar": "استبدال"
+  },
+  "Redeemed! Show the front desk your notification to claim.": {
+    "fr": "Récompense échangée ! Présentez la notification à l’accueil.",
+    "ar": "تم الاستبدال! أظهر الإشعار للاستقبال لاستلام مكافأتك."
+  },
+  "Redemption failed": {
+    "fr": "L’échange a échoué",
+    "ar": "تعذر الاستبدال"
+  },
+  "Register": {
+    "fr": "S’inscrire",
+    "ar": "سجّل"
+  },
+  "Register online, pay the entry fee and chase the prize pool.": {
+    "fr": "Inscrivez-vous en ligne, réglez les frais et visez la victoire.",
+    "ar": "سجّل عبر الإنترنت وادفع رسوم المشاركة ونافس على الجوائز."
+  },
+  "Registered players": {
+    "fr": "Joueurs inscrits",
+    "ar": "اللاعبون المسجلون"
+  },
+  "Registering": {
+    "fr": "Inscriptions ouvertes",
+    "ar": "التسجيل مفتوح"
+  },
+  "Registration": {
+    "fr": "Inscription",
+    "ar": "التسجيل"
+  },
+  "Registration failed": {
+    "fr": "L’inscription a échoué",
+    "ar": "تعذر التسجيل"
+  },
+  "Registration open": {
+    "fr": "Inscriptions ouvertes",
+    "ar": "التسجيل مفتوح"
+  },
+  "Request reservation": {
+    "fr": "Demander une réservation",
+    "ar": "طلب حجز"
+  },
+  "Reservation cancelled": {
+    "fr": "Réservation annulée",
+    "ar": "تم إلغاء الحجز"
+  },
+  "Reservation confirmed": {
+    "fr": "Réservation confirmée",
+    "ar": "تم تأكيد الحجز"
+  },
+  "Reservation requested — staff will confirm shortly.": {
+    "fr": "Réservation demandée — confirmation du personnel à venir.",
+    "ar": "تم طلب الحجز — سيؤكده الموظفون قريبًا."
+  },
+  "Reservations": {
+    "fr": "Réservations",
+    "ar": "الحجوزات"
+  },
+  "Reserve your next session": {
+    "fr": "Réserver votre prochaine session",
+    "ar": "احجز جلستك القادمة"
+  },
+  "Rewards": {
+    "fr": "Récompenses",
+    "ar": "المكافآت"
+  },
+  "Rewards catalog": {
+    "fr": "Catalogue des récompenses",
+    "ar": "كتالوج المكافآت"
+  },
+  "Round": {
+    "fr": "Tour",
+    "ar": "الدور"
+  },
+  "Round of 16": {
+    "fr": "Huitièmes de finale",
+    "ar": "دور الـ16"
+  },
+  "Round robin": {
+    "fr": "Toutes rondes",
+    "ar": "دوري من دور واحد"
+  },
+  "Rules": {
+    "fr": "Règlement",
+    "ar": "القواعد"
+  },
+  "Run matches, confirm bookings and check players in.": {
+    "fr": "Gérez les matchs, confirmez les réservations et enregistrez les présences.",
+    "ar": "أدر المباريات وأكّد الحجوزات وسجّل حضور اللاعبين."
+  },
+  "STARTS HERE.": {
+    "fr": "COMMENCE ICI.",
+    "ar": "يبدأ هنا."
+  },
+  "Save as live": {
+    "fr": "Enregistrer en direct",
+    "ar": "حفظ كمباشر"
+  },
+  "Save changes": {
+    "fr": "Enregistrer les modifications",
+    "ar": "حفظ التغييرات"
+  },
+  "Save settings": {
+    "fr": "Enregistrer les paramètres",
+    "ar": "حفظ الإعدادات"
+  },
+  "Scan check-in": {
+    "fr": "Scanner une présence",
+    "ar": "مسح رمز الحضور"
+  },
+  "Schedule & rules": {
+    "fr": "Calendrier et règlement",
+    "ar": "الجدول والقواعد"
+  },
+  "Score updated": {
+    "fr": "Score mis à jour",
+    "ar": "تم تحديث النتيجة"
+  },
+  "Search players": {
+    "fr": "Rechercher des joueurs",
+    "ar": "البحث عن لاعبين"
+  },
+  "Search players…": {
+    "fr": "Rechercher des joueurs…",
+    "ar": "ابحث عن لاعبين…"
+  },
+  "See what you can redeem": {
+    "fr": "Découvrez vos récompenses disponibles",
+    "ar": "اطّلع على المكافآت المتاحة"
+  },
+  "Select an available slot": {
+    "fr": "Sélectionnez un créneau disponible",
+    "ar": "اختر موعدًا متاحًا"
+  },
+  "Select player…": {
+    "fr": "Choisir un joueur…",
+    "ar": "اختر لاعبًا…"
+  },
+  "Service": {
+    "fr": "Service",
+    "ar": "الخدمة"
+  },
+  "Service rating": {
+    "fr": "Évaluation du service",
+    "ar": "تقييم الخدمة"
+  },
+  "Service rating (": {
+    "fr": "Évaluation du service (",
+    "ar": "تقييم الخدمة ("
+  },
+  "Session total": {
+    "fr": "Total de la session",
+    "ar": "إجمالي الجلسة"
+  },
+  "Settings": {
+    "fr": "Paramètres",
+    "ar": "الإعدادات"
+  },
+  "Settings saved": {
+    "fr": "Paramètres enregistrés",
+    "ar": "تم حفظ الإعدادات"
+  },
+  "Show password": {
+    "fr": "Afficher le mot de passe",
+    "ar": "إظهار كلمة المرور"
+  },
+  "Show this at the club kiosk or to any staff member. Checking in marks your attendance and unlocks reservations & match creation.": {
+    "fr": "Présentez ce code à l’accueil ou au personnel. Votre présence est enregistrée et permet les réservations et la création de matchs.",
+    "ar": "أظهر هذا الرمز في النادي أو لأي موظف. تسجيل الحضور يتيح الحجوزات وإنشاء المباريات."
+  },
+  "Sign out": {
+    "fr": "Se déconnecter",
+    "ar": "تسجيل الخروج"
+  },
+  "Skip to content": {
+    "fr": "Aller au contenu",
+    "ar": "الانتقال إلى المحتوى"
+  },
+  "Snooker tables beneath warm pendant lights at the club": {
+    "fr": "Tables de snooker sous les lumières chaleureuses du club",
+    "ar": "طاولات سنوكر تحت أضواء النادي الدافئة"
+  },
+  "Staff & badges": {
+    "fr": "Personnel et badges",
+    "ar": "الموظفون والشارات"
+  },
+  "Staff & trust badges": {
+    "fr": "Personnel et badges de confiance",
+    "ar": "الموظفون وشارات الثقة"
+  },
+  "Staff Desk": {
+    "fr": "Accueil du personnel",
+    "ar": "مكتب الموظفين"
+  },
+  "Staff accounts": {
+    "fr": "Comptes du personnel",
+    "ar": "حسابات الموظفين"
+  },
+  "Staff desk": {
+    "fr": "Accueil du personnel",
+    "ar": "مكتب الموظفين"
+  },
+  "Standard member": {
+    "fr": "Membre standard",
+    "ar": "عضو عادي"
+  },
+  "Standard weight": {
+    "fr": "Impact standard",
+    "ar": "تأثير عادي"
+  },
+  "Start camera": {
+    "fr": "Démarrer la caméra",
+    "ar": "تشغيل الكاميرا"
+  },
+  "Start date": {
+    "fr": "Date de début",
+    "ar": "تاريخ البدء"
+  },
+  "Step into the competition": {
+    "fr": "Entrez dans la compétition",
+    "ar": "انطلق في المنافسة"
+  },
+  "Stop": {
+    "fr": "Arrêter",
+    "ar": "إيقاف"
+  },
+  "Stream title": {
+    "fr": "Titre du direct",
+    "ar": "عنوان البث"
+  },
+  "Streaming is OFF": {
+    "fr": "Diffusion désactivée",
+    "ar": "البث متوقف"
+  },
+  "Streaming is ON — LIVE badge shows across the site": {
+    "fr": "Diffusion activée — le badge DIRECT apparaît sur le site",
+    "ar": "البث مفعّل — تظهر شارة مباشر في أنحاء الموقع"
+  },
+  "Submit rating": {
+    "fr": "Envoyer l’évaluation",
+    "ar": "إرسال التقييم"
+  },
+  "Submitting…": {
+    "fr": "Envoi…",
+    "ar": "جارٍ الإرسال…"
+  },
+  "Swipe for more times": {
+    "fr": "Balayez pour plus d’horaires",
+    "ar": "اسحب لعرض المزيد من الأوقات"
+  },
+  "Switch to dark mode": {
+    "fr": "Activer le thème sombre",
+    "ar": "التبديل إلى المظهر الداكن"
+  },
+  "Switch to light mode": {
+    "fr": "Activer le thème clair",
+    "ar": "التبديل إلى المظهر الفاتح"
+  },
+  "THE ONES": {
+    "fr": "LES JOUEURS",
+    "ar": "نجوم النادي"
+  },
+  "TO": {
+    "fr": "À",
+    "ar": "اسعَ إلى"
+  },
+  "Table": {
+    "fr": "Table",
+    "ar": "الطاولة"
+  },
+  "Table availability, scroll horizontally for all times": {
+    "fr": "Disponibilité des tables, faites défiler horizontalement pour tous les horaires",
+    "ar": "توفر الطاولات، مرر أفقيًا لعرض جميع الأوقات"
+  },
+  "Table condition": {
+    "fr": "État de la table",
+    "ar": "حالة الطاولة"
+  },
+  "Table utilization": {
+    "fr": "Utilisation des tables",
+    "ar": "استخدام الطاولات"
+  },
+  "Tables to play": {
+    "fr": "Tables de jeu",
+    "ar": "طاولات اللعب"
+  },
+  "Temporary password": {
+    "fr": "Mot de passe temporaire",
+    "ar": "كلمة مرور مؤقتة"
+  },
+  "Thanks for the feedback!": {
+    "fr": "Merci pour votre avis !",
+    "ar": "شكرًا لملاحظاتك!"
+  },
+  "That email and password don’t match. Please try again.": {
+    "fr": "L’e-mail et le mot de passe ne correspondent pas. Réessayez.",
+    "ar": "البريد الإلكتروني وكلمة المرور غير متطابقين. حاول مجددًا."
+  },
+  "The city's home of snooker. Championship tables, ranked play, tournaments and a community that lives for the game.": {
+    "fr": "Le rendez-vous du snooker. Tables de compétition, matchs classés, tournois et passion du jeu.",
+    "ar": "موطن السنوكر في المدينة. طاولات احترافية ومباريات مصنفة وبطولات ومجتمع يعشق اللعبة."
+  },
+  "The club": {
+    "fr": "Le club",
+    "ar": "النادي"
+  },
+  "The club in numbers": {
+    "fr": "Le club en chiffres",
+    "ar": "النادي بالأرقام"
+  },
+  "The club leaderboard": {
+    "fr": "Le classement du club",
+    "ar": "ترتيب النادي"
+  },
+  "The game. The people. The club.": {
+    "fr": "Le jeu. Les rencontres. Le club.",
+    "ar": "اللعبة. الأصدقاء. النادي."
+  },
+  "The next challenge is on its way.": {
+    "fr": "Le prochain défi arrive.",
+    "ar": "التحدي القادم في الطريق."
+  },
+  "The whole club at a glance.": {
+    "fr": "Tout le club en un coup d’œil.",
+    "ar": "النادي بأكمله في لمحة."
+  },
+  "There’s a great frame ahead of you.": {
+    "fr": "Une belle partie vous attend.",
+    "ar": "شوط رائع بانتظارك."
+  },
+  "This month": {
+    "fr": "Ce mois-ci",
+    "ar": "هذا الشهر"
+  },
+  "This week": {
+    "fr": "Cette semaine",
+    "ar": "هذا الأسبوع"
+  },
+  "Three quick steps — basics, format & money, schedule & rules. Players get notified the moment registration opens.": {
+    "fr": "Trois étapes : informations, format et tarifs, calendrier et règlement. Les joueurs sont notifiés à l’ouverture des inscriptions.",
+    "ar": "ثلاث خطوات سريعة: الأساسيات، النظام والرسوم، الجدول والقواعد. يتم إشعار اللاعبين فور فتح التسجيل."
+  },
+  "Top tier — enjoy the perks": {
+    "fr": "Niveau maximal — profitez des avantages",
+    "ar": "أعلى فئة — استمتع بالمزايا"
+  },
+  "Total revenue": {
+    "fr": "Revenus totaux",
+    "ar": "إجمالي الإيرادات"
+  },
+  "Tournament": {
+    "fr": "Tournoi",
+    "ar": "البطولة"
+  },
+  "Tournament applications": {
+    "fr": "Inscriptions aux tournois",
+    "ar": "طلبات المشاركة في البطولات"
+  },
+  "Tournament created — players notified!": {
+    "fr": "Tournoi créé — joueurs notifiés !",
+    "ar": "تم إنشاء البطولة وإشعار اللاعبين!"
+  },
+  "Tournament entries need staff approval": {
+    "fr": "Les inscriptions nécessitent l’accord du personnel",
+    "ar": "المشاركة في البطولات تتطلب موافقة الموظفين"
+  },
+  "Tournament name": {
+    "fr": "Nom du tournoi",
+    "ar": "اسم البطولة"
+  },
+  "Tournaments": {
+    "fr": "Tournois",
+    "ar": "البطولات"
+  },
+  "Trust badge — instant tournament entry": {
+    "fr": "Badge de confiance — inscription immédiate",
+    "ar": "شارة الثقة — مشاركة فورية في البطولات"
+  },
+  "Trust badges": {
+    "fr": "Badges de confiance",
+    "ar": "شارات الثقة"
+  },
+  "Trusted": {
+    "fr": "De confiance",
+    "ar": "موثوق"
+  },
+  "Trusted member": {
+    "fr": "Membre de confiance",
+    "ar": "عضو موثوق"
+  },
+  "Upcoming": {
+    "fr": "À venir",
+    "ar": "القادمة"
+  },
+  "Upcoming & live": {
+    "fr": "À venir et en direct",
+    "ar": "القادمة والمباشرة"
+  },
+  "Update score": {
+    "fr": "Mettre à jour le score",
+    "ar": "تحديث النتيجة"
+  },
+  "View full leaderboard": {
+    "fr": "Voir tout le classement",
+    "ar": "عرض الترتيب الكامل"
+  },
+  "View tournament": {
+    "fr": "Voir le tournoi",
+    "ar": "عرض البطولة"
+  },
+  "Visit us": {
+    "fr": "Nous rendre visite",
+    "ar": "زرنا"
+  },
+  "Watch live": {
+    "fr": "Voir le direct",
+    "ar": "شاهد مباشرة"
+  },
+  "Watch the action": {
+    "fr": "Suivre les matchs",
+    "ar": "تابع المباريات"
+  },
+  "We couldn’t confirm your request. Check your reservations before trying again.": {
+    "fr": "Impossible de confirmer la demande. Vérifiez vos réservations avant de réessayer.",
+    "ar": "تعذر تأكيد طلبك. تحقق من حجوزاتك قبل المحاولة مجددًا."
+  },
+  "We couldn’t connect. Please check your connection and try again.": {
+    "fr": "Connexion impossible. Vérifiez votre connexion et réessayez.",
+    "ar": "تعذر الاتصال. تحقق من اتصالك وحاول مجددًا."
+  },
+  "We couldn’t create your account. Please try again.": {
+    "fr": "Impossible de créer votre compte. Réessayez.",
+    "ar": "تعذر إنشاء حسابك. حاول مجددًا."
+  },
+  "We couldn’t finish your request. If your account was created, try logging in.": {
+    "fr": "Impossible de terminer la demande. Si le compte a été créé, essayez de vous connecter.",
+    "ar": "تعذر إكمال طلبك. إذا تم إنشاء حسابك، حاول تسجيل الدخول."
+  },
+  "Welcome back": {
+    "fr": "Bon retour",
+    "ar": "مرحبًا بعودتك"
+  },
+  "Welcome back!": {
+    "fr": "Bon retour !",
+    "ar": "مرحبًا بعودتك!"
+  },
+  "Welcome to the club!": {
+    "fr": "Bienvenue au club !",
+    "ar": "مرحبًا بك في النادي!"
+  },
+  "What makes this event special?": {
+    "fr": "Qu’est-ce qui rend cet événement unique ?",
+    "ar": "ما الذي يميز هذه الفعالية؟"
+  },
+  "Win rate": {
+    "fr": "Taux de victoire",
+    "ar": "نسبة الفوز"
+  },
+  "Won": {
+    "fr": "Gagné",
+    "ar": "فوز"
+  },
+  "Won by": {
+    "fr": "Vainqueur :",
+    "ar": "الفائز:"
+  },
+  "XP": {
+    "fr": "XP",
+    "ar": "خبرة"
+  },
+  "XP to level": {
+    "fr": "XP avant le niveau",
+    "ar": "نقطة خبرة للوصول إلى المستوى"
+  },
+  "YOUR CLUB. YOUR NEXT LEVEL.": {
+    "fr": "VOTRE CLUB. VOTRE PROCHAIN NIVEAU.",
+    "ar": "ناديك. مستواك القادم."
+  },
+  "YOUR NEXT": {
+    "fr": "VOTRE PROCHAINE",
+    "ar": "شوطك"
+  },
+  "You're confirmed — see you at the table.": {
+    "fr": "Inscription confirmée — rendez-vous à la table.",
+    "ar": "تم تأكيد مشاركتك — نراك على الطاولة."
+  },
+  "You're in": {
+    "fr": "Vous êtes inscrit",
+    "ar": "أنت مسجّل"
+  },
+  "Your QR is personal — each scan earns loyalty points for your visit.": {
+    "fr": "Votre QR est personnel — chaque scan rapporte des points de fidélité.",
+    "ar": "رمزك شخصي — كل مسح يمنحك نقاط ولاء لزيارتك."
+  },
+  "Your account is ready. Please log in to continue.": {
+    "fr": "Votre compte est prêt. Connectez-vous pour continuer.",
+    "ar": "حسابك جاهز. سجّل الدخول للمتابعة."
+  },
+  "Your application wasn't accepted this time.": {
+    "fr": "Votre inscription n’a pas été acceptée cette fois.",
+    "ar": "لم يتم قبول طلبك هذه المرة."
+  },
+  "Your booking is a request until the club staff confirms it. You can track its status in your reservations.": {
+    "fr": "Votre réservation reste une demande jusqu’à confirmation du personnel. Suivez son état dans vos réservations.",
+    "ar": "يبقى حجزك طلبًا حتى يؤكده الموظفون. يمكنك متابعة حالته في حجوزاتك."
+  },
+  "Your club": {
+    "fr": "Votre club",
+    "ar": "ناديك"
+  },
+  "Your full match log — friendlies, ranked play, tournaments and championships.": {
+    "fr": "Votre historique complet : matchs amicaux, classés, tournois et championnats.",
+    "ar": "سجل مبارياتك الكامل — الوديات والمصنفة والبطولات وبطولات الأبطال."
+  },
+  "Your game, at a glance": {
+    "fr": "Votre jeu en un coup d’œil",
+    "ar": "أداؤك في لمحة"
+  },
+  "Your next challenge": {
+    "fr": "Votre prochain défi",
+    "ar": "تحديك القادم"
+  },
+  "Your next chapter starts with a player profile. Join the club to book tables, enter tournaments, and make every frame count.": {
+    "fr": "Votre prochain chapitre commence par un profil joueur. Rejoignez le club pour réserver, participer et faire compter chaque partie.",
+    "ar": "تبدأ رحلتك القادمة بملف لاعب. انضم إلى النادي لحجز الطاولات والمشاركة في البطولات واجعل كل شوط مهمًا."
+  },
+  "Your place at the table": {
+    "fr": "Votre place à la table",
+    "ar": "مكانك على الطاولة"
+  },
+  "Your place in the club": {
+    "fr": "Votre place au club",
+    "ar": "مكانك في النادي"
+  },
+  "Your reservation is confirmed": {
+    "fr": "Votre réservation est confirmée",
+    "ar": "تم تأكيد حجزك"
+  },
+  "Your results will appear here after your first match. Book a table and ask the staff to set up a match.": {
+    "fr": "Vos résultats apparaîtront après votre premier match. Réservez une table et demandez au personnel d’organiser un match.",
+    "ar": "ستظهر نتائجك هنا بعد مباراتك الأولى. احجز طاولة واطلب من الموظفين إعداد مباراة."
+  },
+  "Your story starts with a frame.": {
+    "fr": "Votre histoire commence par une partie.",
+    "ar": "تبدأ قصتك بشوط."
+  },
+  "Your upcoming matches": {
+    "fr": "Vos prochains matchs",
+    "ar": "مبارياتك القادمة"
+  },
+  "Yours": {
+    "fr": "Les vôtres",
+    "ar": "حجوزاتك"
+  },
+  "as a player to register.": {
+    "fr": "avec un compte joueur pour vous inscrire.",
+    "ar": "بحساب لاعب للتسجيل."
+  },
+  "check-ins": {
+    "fr": "présences",
+    "ar": "تسجيلات حضور"
+  },
+  "confirmed": {
+    "fr": "confirmé",
+    "ar": "مؤكد"
+  },
+  "entries ·": {
+    "fr": "inscriptions ·",
+    "ar": "مشاركات ·"
+  },
+  "entry": {
+    "fr": "inscription",
+    "ar": "المشاركة"
+  },
+  "frames": {
+    "fr": "manches",
+    "ar": "أشواط"
+  },
+  "frames. Enter frames won by each player.": {
+    "fr": "manches. Indiquez les manches gagnées par chaque joueur.",
+    "ar": "أشواط. أدخل عدد الأشواط التي فاز بها كل لاعب."
+  },
+  "friendly, no points": {
+    "fr": "amical, sans points",
+    "ar": "ودية، دون نقاط"
+  },
+  "hour": {
+    "fr": "heure",
+    "ar": "ساعة"
+  },
+  "in the club ·": {
+    "fr": "au club ·",
+    "ar": "في النادي ·"
+  },
+  "last 90 days": {
+    "fr": "90 derniers jours",
+    "ar": "آخر 90 يومًا"
+  },
+  "lifetime points to": {
+    "fr": "points cumulés avant",
+    "ar": "نقطة إجمالية للوصول إلى"
+  },
+  "matches + bookings": {
+    "fr": "matchs + réservations",
+    "ar": "مباريات + حجوزات"
+  },
+  "matches managed": {
+    "fr": "matchs gérés",
+    "ar": "مباريات مُدارة"
+  },
+  "matches ·": {
+    "fr": "matchs ·",
+    "ar": "مباريات ·"
+  },
+  "min 8 characters": {
+    "fr": "8 caractères minimum",
+    "ar": "8 أحرف على الأقل"
+  },
+  "of": {
+    "fr": "sur",
+    "ar": "من"
+  },
+  "owner": {
+    "fr": "propriétaire",
+    "ar": "المالك"
+  },
+  "pending": {
+    "fr": "en attente",
+    "ar": "قيد الانتظار"
+  },
+  "players": {
+    "fr": "joueurs",
+    "ar": "لاعبين"
+  },
+  "points": {
+    "fr": "points",
+    "ar": "نقاط"
+  },
+  "prize pool": {
+    "fr": "dotation",
+    "ar": "مجموع الجوائز"
+  },
+  "pts": {
+    "fr": "pts",
+    "ar": "نقطة"
+  },
+  "pts · applied": {
+    "fr": "pts · inscription",
+    "ar": "نقطة · تم تقديم الطلب"
+  },
+  "registered ·": {
+    "fr": "inscrits ·",
+    "ar": "مسجّل ·"
+  },
+  "trusted": {
+    "fr": "de confiance",
+    "ar": "موثوق"
+  },
+  "trusted players": {
+    "fr": "joueurs de confiance",
+    "ar": "لاعبون موثوقون"
+  },
+  "unlocked": {
+    "fr": "débloqués",
+    "ar": "مكتسبة"
+  },
+  "unpaid": {
+    "fr": "non payé",
+    "ar": "غير مدفوع"
+  },
+  "vs": {
+    "fr": "contre",
+    "ar": "ضد"
+  },
+  "wins": {
+    "fr": "victoires",
+    "ar": "انتصارات"
+  },
+  "· already checked in today": {
+    "fr": "· présence déjà enregistrée aujourd’hui",
+    "ar": "· تم تسجيل الحضور اليوم بالفعل"
+  },
+  "· checked in": {
+    "fr": "· présence enregistrée",
+    "ar": "· تم تسجيل الحضور"
+  },
+  "· starting": {
+    "fr": "· à partir de",
+    "ar": "· ابتداءً من"
+  },
+  "· ✓ here": {
+    "fr": "· ✓ présent",
+    "ar": "· ✓ حاضر"
+  },
+  ". Available slots are marked with a plus, booked slots with a cross, and your bookings with a check.": {
+    "fr": ". Les créneaux disponibles portent un plus, les réservés une croix et les vôtres une coche.",
+    "ar": ". المواعيد المتاحة بعلامة زائد، والمحجوزة بعلامة تقاطع، وحجوزاتك بعلامة صح."
+  },
+  "FRIENDLY": {
+    "fr": "Amical — sans classement",
+    "ar": "ودية — دون تصنيف"
+  },
+  "RANKED": {
+    "fr": "Classé — points mis à jour",
+    "ar": "مصنفة — تحديث التصنيف"
+  },
+  "TOURNAMENT": {
+    "fr": "Tournoi",
+    "ar": "البطولة"
+  },
+  "CHAMPIONSHIP": {
+    "fr": "Championnat",
+    "ar": "بطولة الأبطال"
+  },
+  "REGISTRATION": {
+    "fr": "Inscription",
+    "ar": "التسجيل"
+  },
+  "IN_PROGRESS": {
+    "fr": "En cours",
+    "ar": "جارٍ"
+  },
+  "COMPLETED": {
+    "fr": "Terminé",
+    "ar": "مكتمل"
+  },
+  "CANCELLED": {
+    "fr": "Annulé",
+    "ar": "ملغى"
+  },
+  "PENDING": {
+    "fr": "en attente",
+    "ar": "قيد الانتظار"
+  },
+  "CONFIRMED": {
+    "fr": "confirmé",
+    "ar": "مؤكد"
+  },
+  "APPROVED": {
+    "fr": "Inscription approuvée",
+    "ar": "تمت الموافقة على الطلب"
+  },
+  "REJECTED": {
+    "fr": "Inscription refusée",
+    "ar": "تم رفض الطلب"
+  },
+  "LIVE": {
+    "fr": "En direct",
+    "ar": "مباشر"
+  },
+  "SCHEDULED": {
+    "fr": "À venir",
+    "ar": "القادمة"
+  },
+  "DRAFT": {
+    "fr": "Brouillon",
+    "ar": "مسودة"
+  },
+  "PLAYER": {
+    "fr": "Joueur",
+    "ar": "لاعب"
+  },
+  "EMPLOYEE": {
+    "fr": "Employé",
+    "ar": "موظف"
+  },
+  "CHEF": {
+    "fr": "propriétaire",
+    "ar": "المالك"
+  },
+  "ALL": {
+    "fr": "Tous",
+    "ar": "الكل"
+  },
+  "KNOCKOUT": {
+    "fr": "Élimination directe",
+    "ar": "خروج المغلوب"
+  },
+  "GROUPS_KNOCKOUT": {
+    "fr": "Groupes + élimination directe",
+    "ar": "مجموعات + خروج المغلوب"
+  },
+  "ROUND_ROBIN": {
+    "fr": "Toutes rondes",
+    "ar": "دوري من دور واحد"
+  },
+  "PAID": {
+    "fr": "Payé",
+    "ar": "مدفوع"
+  },
+  "WITHDRAWN": {
+    "fr": "Retiré",
+    "ar": "منسحب"
+  },
+  "Friendly": {
+    "fr": "Amical",
+    "ar": "ودية"
+  },
+  "Ranked": {
+    "fr": "Classé",
+    "ar": "مصنفة"
+  },
+  "Bronze": {
+    "fr": "Bronze",
+    "ar": "برونزي"
+  },
+  "Silver": {
+    "fr": "Argent",
+    "ar": "فضي"
+  },
+  "Gold": {
+    "fr": "Or",
+    "ar": "ذهبي"
+  },
+  "Elite": {
+    "fr": "Élite",
+    "ar": "نخبة"
+  },
+  "Language": {
+    "fr": "Langue",
+    "ar": "اللغة"
+  },
+  "Changing language…": {
+    "fr": "Changement de langue…",
+    "ar": "جارٍ تغيير اللغة…"
+  },
+  "12 Break Street, Downtown": {
+    "fr": "12 Break Street, centre-ville",
+    "ar": "12 شارع بريك، وسط المدينة"
+  },
+  "in": {
+    "fr": "dans",
+    "ar": "في"
+  },
+  "tier": {
+    "fr": "niveau",
+    "ar": "الفئة"
+  },
+  "tables": {
+    "fr": "tables",
+    "ar": "طاولات"
+  },
+  "Quarter-final": {
+    "fr": "Quart de finale",
+    "ar": "ربع النهائي"
+  },
+  "Semi-final": {
+    "fr": "Demi-finale",
+    "ar": "نصف النهائي"
+  },
+  "Check-in failed": {
+    "fr": "Échec de l’enregistrement de présence",
+    "ar": "تعذر تسجيل الحضور"
+  },
+  "Check-in QR code for {name}": {
+    "fr": "Code QR de présence de {name}",
+    "ar": "رمز تسجيل الحضور للاعب {name}"
+  },
+  "Unlocked {date}": {
+    "fr": "Débloqué le {date}",
+    "ar": "تم الحصول عليها في {date}"
+  },
+  "+{points} XP": {
+    "fr": "+{points} XP",
+    "ar": "+{points} نقطة خبرة"
+  },
+  "— managed by {name}": {
+    "fr": "— géré par {name}",
+    "ar": "— بإدارة {name}"
+  },
+  "Notifications ({count} unread)": {
+    "fr": "Notifications ({count} non lues)",
+    "ar": "الإشعارات ({count} غير مقروءة)"
+  },
+  "{count} out of 5 stars": {
+    "fr": "{count} étoiles sur 5",
+    "ar": "{count} من 5 نجوم"
+  },
+  "· pay {amount}": {
+    "fr": "· payer {amount}",
+    "ar": "· ادفع {amount}"
+  },
+  "{name} already checked in today": {
+    "fr": "La présence de {name} est déjà enregistrée aujourd’hui",
+    "ar": "تم تسجيل حضور {name} اليوم بالفعل"
+  },
+  "{name} checked in!": {
+    "fr": "Présence de {name} enregistrée !",
+    "ar": "تم تسجيل حضور {name}!"
+  },
+  "{name} — Level {level} · {points} pts": {
+    "fr": "{name} — Niveau {level} · {points} pts",
+    "ar": "{name} — المستوى {level} · {points} نقطة"
+  },
+  "{winner} wins — {result}": {
+    "fr": "{winner} gagne — {result}",
+    "ar": "فاز {winner} — {result}"
+  },
+  "+{points} pts exchanged": {
+    "fr": "+{points} pts échangés",
+    "ar": "+{points} نقطة متبادلة"
+  },
+  "{points} reward points": {
+    "fr": "{points} points de fidélité",
+    "ar": "{points} نقطة مكافآت"
+  },
+  "Remove {name}'s staff account? This can't be undone.": {
+    "fr": "Supprimer le compte employé de {name} ? Cette action est irréversible.",
+    "ar": "هل تريد حذف حساب الموظف {name}؟ لا يمكن التراجع عن هذا الإجراء."
+  },
+  "Remove {name}": {
+    "fr": "Supprimer {name}",
+    "ar": "إزالة {name}"
+  },
+  "{name} is now trusted": {
+    "fr": "{name} est désormais de confiance",
+    "ar": "أصبح {name} موثوقًا الآن"
+  },
+  "Trust badge removed from {name}": {
+    "fr": "Badge de confiance retiré à {name}",
+    "ar": "تمت إزالة شارة الثقة من {name}"
+  },
+  "Trust badge for {name}": {
+    "fr": "Badge de confiance de {name}",
+    "ar": "شارة الثقة للاعب {name}"
+  },
+  "paid {amount}": {
+    "fr": "payé {amount}",
+    "ar": "مدفوع {amount}"
+  },
+  "Table booked for {name}": {
+    "fr": "Table réservée pour {name}",
+    "ar": "تم حجز طاولة للاعب {name}"
+  },
+  "{table} at {time} — {state}": {
+    "fr": "{table} à {time} — {state}",
+    "ar": "{table} عند {time} — {state}"
+  },
+  "1 hour": {
+    "fr": "1 heure",
+    "ar": "ساعة واحدة"
+  },
+  "2 hours": {
+    "fr": "2 heures",
+    "ar": "ساعتان"
+  },
+  "3 hours": {
+    "fr": "3 heures",
+    "ar": "3 ساعات"
+  },
+  "(me)": {
+    "fr": "(moi)",
+    "ar": "(أنا)"
+  },
+  "(you)": {
+    "fr": "(vous)",
+    "ar": "(أنت)"
+  },
+  "free": {
+    "fr": "libre",
+    "ar": "متاح"
+  },
+  "taken": {
+    "fr": "occupé",
+    "ar": "محجوز"
+  },
+  "mine": {
+    "fr": "à moi",
+    "ar": "حجزي"
+  },
+  "past": {
+    "fr": "passé",
+    "ar": "مضى"
+  },
+  "This browser doesn't support in-page QR scanning — use manual entry below, or Chrome/Edge on the kiosk tablet.": {
+    "fr": "Ce navigateur ne permet pas de scanner un QR ici. Utilisez la saisie manuelle ou Chrome/Edge sur la tablette.",
+    "ar": "هذا المتصفح لا يدعم مسح QR داخل الصفحة. استخدم الإدخال اليدوي أو Chrome/Edge على جهاز النادي."
+  },
+  "masters-checkin:… or raw token": {
+    "fr": "masters-checkin:… ou code brut",
+    "ar": "masters-checkin:… أو الرمز مباشرة"
+  },
+  "Championship Final Night": {
+    "fr": "Soirée de finale du championnat",
+    "ar": "ليلة نهائي البطولة"
+  },
+  "Autumn Masters Cup": {
+    "fr": "Coupe Masters d’automne",
+    "ar": "كأس ماسترز الخريفي"
+  },
+  "YouTube: use the /embed/VIDEO_ID URL. Twitch: https://player.twitch.tv/?channel=NAME&parent=yourdomain.com": {
+    "fr": "YouTube : utilisez l’URL /embed/VIDEO_ID. Twitch : https://player.twitch.tv/?channel=NAME&parent=yourdomain.com",
+    "ar": "YouTube: استخدم الرابط /embed/VIDEO_ID. Twitch: https://player.twitch.tv/?channel=NAME&parent=yourdomain.com"
+  },
+  "Member pricing on table time": {
+    "fr": "Tarifs membres pour les tables",
+    "ar": "أسعار خاصة للأعضاء على وقت الطاولة"
+  },
+  "5% off reservations + priority booking": {
+    "fr": "5 % de réduction + réservation prioritaire",
+    "ar": "خصم 5٪ على الحجوزات + أولوية الحجز"
+  },
+  "10% off + free cue rental + guest passes": {
+    "fr": "10 % de réduction + queue gratuite + invitations",
+    "ar": "خصم 10٪ + تأجير عصا مجاني + دعوات للضيوف"
+  },
+  "15% off + reserved locker + VIP events": {
+    "fr": "15 % de réduction + casier réservé + événements VIP",
+    "ar": "خصم 15٪ + خزانة خاصة + فعاليات VIP"
+  },
+  "First Victory": {
+    "fr": "Première victoire",
+    "ar": "أول انتصار"
+  },
+  "Win your first match": {
+    "fr": "Gagnez votre premier match",
+    "ar": "فز بمباراتك الأولى"
+  },
+  "Ten Wins": {
+    "fr": "Dix victoires",
+    "ar": "عشرة انتصارات"
+  },
+  "Win 10 matches": {
+    "fr": "Gagnez 10 matchs",
+    "ar": "فز بعشر مباريات"
+  },
+  "Half Century": {
+    "fr": "Demi-siècle",
+    "ar": "خمسون انتصارًا"
+  },
+  "Win 50 matches": {
+    "fr": "Gagnez 50 matchs",
+    "ar": "فز بخمسين مباراة"
+  },
+  "Centurion": {
+    "fr": "Centurion",
+    "ar": "المئوي"
+  },
+  "Play 100 matches": {
+    "fr": "Jouez 100 matchs",
+    "ar": "العب مئة مباراة"
+  },
+  "On Fire": {
+    "fr": "En feu",
+    "ar": "متألق"
+  },
+  "Win 5 matches in a row": {
+    "fr": "Gagnez 5 matchs d’affilée",
+    "ar": "فز بخمس مباريات متتالية"
+  },
+  "Giant Slayer": {
+    "fr": "Tombeur de géants",
+    "ar": "قاهر الكبار"
+  },
+  "Beat a player 3+ levels above you": {
+    "fr": "Battez un joueur au moins 3 niveaux au-dessus",
+    "ar": "اهزم لاعبًا أعلى منك بثلاثة مستويات أو أكثر"
+  },
+  "Win a tournament": {
+    "fr": "Remportez un tournoi",
+    "ar": "فز ببطولة"
+  },
+  "Club Regular": {
+    "fr": "Habitué du club",
+    "ar": "من رواد النادي"
+  },
+  "Check in 20 times": {
+    "fr": "Enregistrez 20 présences",
+    "ar": "سجّل حضورك 20 مرة"
+  },
+  "Night Owl": {
+    "fr": "Oiseau de nuit",
+    "ar": "ساهر الليل"
+  },
+  "Play a match after 10 PM": {
+    "fr": "Jouez un match après 22 h",
+    "ar": "العب مباراة بعد العاشرة مساءً"
+  },
+  "Socialite": {
+    "fr": "Sociable",
+    "ar": "اجتماعي"
+  },
+  "Play against 10 different opponents": {
+    "fr": "Affrontez 10 adversaires différents",
+    "ar": "العب ضد عشرة منافسين مختلفين"
+  },
+  "1 Hour Free Table Time": {
+    "fr": "1 heure de table gratuite",
+    "ar": "ساعة طاولة مجانية"
+  },
+  "Redeem for a free hour on any standard table": {
+    "fr": "Une heure gratuite sur une table standard",
+    "ar": "ساعة مجانية على أي طاولة عادية"
+  },
+  "20% Off Next Reservation": {
+    "fr": "20 % sur la prochaine réservation",
+    "ar": "خصم 20٪ على الحجز القادم"
+  },
+  "Discount voucher for your next booking": {
+    "fr": "Bon de réduction pour votre prochaine réservation",
+    "ar": "قسيمة خصم لحجزك القادم"
+  },
+  "Club T-Shirt": {
+    "fr": "T-shirt du club",
+    "ar": "قميص النادي"
+  },
+  "Official Master's Snooker merch tee": {
+    "fr": "T-shirt officiel Master's Snooker",
+    "ar": "قميص Master's Snooker الرسمي"
+  },
+  "Pro Cue Rental (Free Day)": {
+    "fr": "Queue professionnelle gratuite une journée",
+    "ar": "تأجير عصا احترافية ليوم مجاني"
+  },
+  "Use a professional cue free for one day": {
+    "fr": "Utilisez une queue professionnelle gratuitement pendant une journée",
+    "ar": "استخدم عصا احترافية مجانًا ليوم واحد"
+  },
+  "VIP Table Upgrade": {
+    "fr": "Surclassement en table VIP",
+    "ar": "ترقية إلى طاولة VIP"
+  },
+  "Upgrade any booking to the VIP table": {
+    "fr": "Passez votre réservation à la table VIP",
+    "ar": "رقّ أي حجز إلى طاولة VIP"
+  },
+  "Free Coaching Session": {
+    "fr": "Séance d’entraînement gratuite",
+    "ar": "جلسة تدريب مجانية"
+  },
+  "30-minute session with a club coach": {
+    "fr": "Séance de 30 minutes avec un entraîneur du club",
+    "ar": "جلسة مدتها 30 دقيقة مع مدرب النادي"
+  },
+  "VIP Championship Table": {
+    "fr": "Table VIP de championnat",
+    "ar": "طاولة بطولة VIP"
+  },
+  "Match Referee": {
+    "fr": "Arbitre de match",
+    "ar": "حكم المباراة"
+  },
+  "Unauthorized": {
+    "fr": "Veuillez vous connecter",
+    "ar": "يرجى تسجيل الدخول"
+  },
+  "Staff only": {
+    "fr": "Réservé au personnel",
+    "ar": "للموظفين فقط"
+  },
+  "Chef only": {
+    "fr": "Réservé au propriétaire",
+    "ar": "للمالك فقط"
+  },
+  "Invalid input": {
+    "fr": "Vérifiez les informations saisies",
+    "ar": "تحقق من المعلومات المُدخلة"
+  },
+  "Player not found": {
+    "fr": "Joueur introuvable",
+    "ar": "اللاعب غير موجود"
+  },
+  "Player profile required": {
+    "fr": "Un profil joueur est nécessaire",
+    "ar": "يلزم وجود ملف لاعب"
+  },
+  "Cannot book in the past": {
+    "fr": "Impossible de réserver dans le passé",
+    "ar": "لا يمكن الحجز في وقت مضى"
+  },
+  "That slot was just taken — pick another.": {
+    "fr": "Ce créneau vient d’être réservé — choisissez-en un autre.",
+    "ar": "تم حجز هذا الموعد للتو — اختر موعدًا آخر."
+  },
+  "Not found": {
+    "fr": "Introuvable",
+    "ar": "غير موجود"
+  },
+  "Forbidden": {
+    "fr": "Accès refusé",
+    "ar": "الوصول غير مسموح"
+  },
+  "Players only": {
+    "fr": "Réservé aux joueurs",
+    "ar": "للاعبين فقط"
+  },
+  "Tournament not found": {
+    "fr": "Tournoi introuvable",
+    "ar": "البطولة غير موجودة"
+  },
+  "Registration is closed": {
+    "fr": "Les inscriptions sont closes",
+    "ar": "التسجيل مغلق"
+  },
+  "Tournament is full": {
+    "fr": "Le tournoi est complet",
+    "ar": "اكتمل عدد المشاركين"
+  },
+  "Already registered": {
+    "fr": "Déjà inscrit",
+    "ar": "مسجّل بالفعل"
+  },
+  "Match not found": {
+    "fr": "Match introuvable",
+    "ar": "المباراة غير موجودة"
+  },
+  "Match already completed": {
+    "fr": "Match déjà terminé",
+    "ar": "المباراة مكتملة بالفعل"
+  },
+  "Snooker has no draws — enter a winner": {
+    "fr": "Pas de match nul au snooker — indiquez le vainqueur",
+    "ar": "لا تعادل في السنوكر — حدّد الفائز"
+  },
+  "Not your match": {
+    "fr": "Ce n’est pas votre match",
+    "ar": "هذه ليست مباراتك"
+  },
+  "Reward unavailable": {
+    "fr": "Récompense indisponible",
+    "ar": "المكافأة غير متاحة"
+  },
+  "Entry not found": {
+    "fr": "Inscription introuvable",
+    "ar": "طلب المشاركة غير موجود"
+  },
+  "Unknown QR code": {
+    "fr": "Code QR inconnu",
+    "ar": "رمز QR غير معروف"
+  },
+  "An account with this email already exists": {
+    "fr": "Un compte existe déjà avec cet e-mail",
+    "ar": "يوجد حساب بهذا البريد الإلكتروني بالفعل"
+  },
+  "Email already in use": {
+    "fr": "E-mail déjà utilisé",
+    "ar": "البريد الإلكتروني مستخدم بالفعل"
+  },
+  "You can't remove yourself": {
+    "fr": "Vous ne pouvez pas vous supprimer",
+    "ar": "لا يمكنك إزالة حسابك بنفسك"
+  },
+  "Not a removable employee": {
+    "fr": "Ce compte ne peut pas être supprimé",
+    "ar": "لا يمكن إزالة هذا الموظف"
+  },
+  "You need {points} more points": {
+    "fr": "Il vous manque {points} points",
+    "ar": "تحتاج إلى {points} نقطة إضافية"
+  },
+  "Match scheduled": {
+    "fr": "Match programmé",
+    "ar": "تمت جدولة المباراة"
+  },
+  "Rate your match experience": {
+    "fr": "Évaluez votre expérience de match",
+    "ar": "قيّم تجربتك في المباراة"
+  },
+  "How were the table, the service and the overall session?": {
+    "fr": "Comment étaient la table, le service et la session ?",
+    "ar": "كيف كانت الطاولة والخدمة والجلسة بشكل عام؟"
+  },
+  "Reward redeemed!": {
+    "fr": "Récompense échangée !",
+    "ar": "تم استبدال المكافأة!"
+  },
+  "Club visit check-in": {
+    "fr": "Présence au club",
+    "ar": "تسجيل زيارة النادي"
+  },
+  "Checked in — welcome!": {
+    "fr": "Présence enregistrée — bienvenue !",
+    "ar": "تم تسجيل حضورك — أهلًا بك!"
+  },
+  "Welcome to Master's Snooker!": {
+    "fr": "Bienvenue chez Master's Snooker !",
+    "ar": "مرحبًا بك في Master's Snooker!"
+  },
+  "Complete your profile, reserve a table and play your first ranked match to start earning points.": {
+    "fr": "Complétez votre profil, réservez une table et jouez un match classé pour gagner des points.",
+    "ar": "أكمل ملفك واحجز طاولة والعب أول مباراة مصنفة لتبدأ في كسب النقاط."
+  },
+  "You've been awarded the club trust badge": {
+    "fr": "Vous avez reçu le badge de confiance du club",
+    "ar": "لقد حصلت على شارة الثقة من النادي"
+  },
+  "You can now enter tournaments without staff approval. Wear it well!": {
+    "fr": "Vous pouvez maintenant participer aux tournois sans approbation du personnel. Félicitations !",
+    "ar": "يمكنك الآن المشاركة في البطولات دون موافقة الموظفين. تهانينا!"
+  },
+  "Table booked for you": {
+    "fr": "Une table a été réservée pour vous",
+    "ar": "تم حجز طاولة لك"
+  },
+  "Reservation requested": {
+    "fr": "Réservation demandée",
+    "ar": "تم طلب الحجز"
+  },
+  "Table {number}": {
+    "fr": "Table {number}",
+    "ar": "الطاولة {number}"
+  },
+  "BRONZE": {
+    "fr": "Bronze",
+    "ar": "برونزي"
+  },
+  "bronze": {
+    "fr": "Bronze",
+    "ar": "برونزي"
+  },
+  "SILVER": {
+    "fr": "Argent",
+    "ar": "فضي"
+  },
+  "silver": {
+    "fr": "Argent",
+    "ar": "فضي"
+  },
+  "GOLD": {
+    "fr": "Or",
+    "ar": "ذهبي"
+  },
+  "gold": {
+    "fr": "Or",
+    "ar": "ذهبي"
+  },
+  "ELITE": {
+    "fr": "Élite",
+    "ar": "نخبة"
+  },
+  "elite": {
+    "fr": "Élite",
+    "ar": "نخبة"
+  },
+  "player": {
+    "fr": "Joueur",
+    "ar": "لاعب"
+  },
+  "employee": {
+    "fr": "Employé",
+    "ar": "موظف"
+  },
+  "chef": {
+    "fr": "propriétaire",
+    "ar": "المالك"
+  },
+  "friendly": {
+    "fr": "Amical",
+    "ar": "ودية"
+  },
+  "ranked": {
+    "fr": "Classé",
+    "ar": "مصنفة"
+  },
+  "tournament": {
+    "fr": "Tournoi",
+    "ar": "البطولة"
+  },
+  "championship": {
+    "fr": "Championnat",
+    "ar": "بطولة الأبطال"
+  },
+  "approved": {
+    "fr": "Inscription approuvée",
+    "ar": "تمت الموافقة على الطلب"
+  },
+  "rejected": {
+    "fr": "Inscription refusée",
+    "ar": "تم رفض الطلب"
+  },
+  "paid": {
+    "fr": "Payé",
+    "ar": "مدفوع"
+  },
+  "withdrawn": {
+    "fr": "Retiré",
+    "ar": "منسحب"
+  },
+  "cancelled": {
+    "fr": "Annulé",
+    "ar": "ملغى"
+  },
+  "completed": {
+    "fr": "Terminé",
+    "ar": "مكتمل"
+  },
+  "live": {
+    "fr": "En direct",
+    "ar": "مباشر"
+  },
+  "scheduled": {
+    "fr": "À venir",
+    "ar": "القادمة"
+  },
+  "registration": {
+    "fr": "Inscription",
+    "ar": "التسجيل"
+  },
+  "You're in: {name}": {
+    "fr": "Vous êtes inscrit : {name}",
+    "ar": "تم تسجيلك: {name}"
+  },
+  "Application received: {name}": {
+    "fr": "Inscription reçue : {name}",
+    "ar": "تم استلام الطلب: {name}"
+  },
+  "Your trust badge fast-tracked your entry. Good luck!": {
+    "fr": "Votre badge de confiance a accéléré votre inscription. Bonne chance !",
+    "ar": "شارة الثقة أتاحت مشاركتك مباشرة. بالتوفيق!"
+  },
+  "Your application is pending staff approval. We'll notify you once reviewed.": {
+    "fr": "Votre inscription attend l’approbation du personnel. Nous vous notifierons après examen.",
+    "ar": "طلبك بانتظار موافقة الموظفين. سنُشعرك بعد المراجعة."
+  },
+  "Accepted: {name}": {
+    "fr": "Accepté : {name}",
+    "ar": "تم القبول: {name}"
+  },
+  "Not accepted: {name}": {
+    "fr": "Non accepté : {name}",
+    "ar": "لم يتم القبول: {name}"
+  },
+  "Your application was approved. Check the schedule and bring your cue!": {
+    "fr": "Votre inscription est approuvée. Consultez le calendrier et préparez votre queue !",
+    "ar": "تمت الموافقة على طلبك. راجع الجدول وجهّز عصاك!"
+  },
+  "Your application wasn't accepted this time. Entry fees are refunded at the front desk.": {
+    "fr": "Votre inscription n’a pas été acceptée. Les frais sont remboursés à l’accueil.",
+    "ar": "لم يتم قبول طلبك هذه المرة. تُسترد رسوم المشاركة من الاستقبال."
+  },
+  "Badge unlocked: {name}": {
+    "fr": "Badge débloqué : {name}",
+    "ar": "شارة جديدة: {name}"
+  },
+  "New tournament: {name}": {
+    "fr": "Nouveau tournoi : {name}",
+    "ar": "بطولة جديدة: {name}"
+  },
+  "Registration is open — {spots} spots. Entry {amount}.": {
+    "fr": "Inscriptions ouvertes — {spots} places. Frais : {amount}.",
+    "ar": "التسجيل مفتوح — {spots} مقعدًا. رسوم المشاركة {amount}."
+  },
+  "Redeemed: {name}": {
+    "fr": "Échangé : {name}",
+    "ar": "تم الاستبدال: {name}"
+  },
+  "{name} — show this notification at the front desk to claim it.": {
+    "fr": "{name} — présentez cette notification à l’accueil pour en bénéficier.",
+    "ar": "{name} — أظهر هذا الإشعار للاستقبال لاستلام المكافأة."
+  },
+  "+{points} loyalty points for today's visit. Enjoy your session!": {
+    "fr": "+{points} points de fidélité pour votre visite. Bonne session !",
+    "ar": "+{points} نقطة ولاء لزيارتك اليوم. استمتع بجلستك!"
+  },
+  "Victory! {score} vs {name}": {
+    "fr": "Victoire ! {score} contre {name}",
+    "ar": "انتصار! {score} ضد {name}"
+  },
+  "Tough one vs {name}": {
+    "fr": "Match difficile contre {name}",
+    "ar": "مباراة صعبة ضد {name}"
+  },
+  "+{points} ranking points, +{xp} XP. Keep the streak going!": {
+    "fr": "+{points} points de classement, +{xp} XP. Continuez sur votre lancée !",
+    "ar": "+{points} نقطة تصنيف و+{xp} نقطة خبرة. واصل سلسلة الانتصارات!"
+  },
+  "{points} ranking points, +{xp} XP. Win it back on the table.": {
+    "fr": "{points} points de classement, +{xp} XP. Reprenez-les à la table.",
+    "ar": "{points} نقطة تصنيف و+{xp} نقطة خبرة. عوّضها على الطاولة."
+  },
+  "Friendly match — no ranking change. +{xp} XP for playing.": {
+    "fr": "Match amical — classement inchangé. +{xp} XP pour avoir joué.",
+    "ar": "مباراة ودية — دون تغيير في التصنيف. +{xp} نقطة خبرة للعب."
+  },
+  "Played a {type} match": {
+    "fr": "Match {type} joué",
+    "ar": "لعب مباراة {type}"
+  },
+  "{name1} vs {name2} — {type} match. Check your dashboard for details.": {
+    "fr": "{name1} contre {name2} — match {type}. Consultez votre tableau de bord.",
+    "ar": "{name1} ضد {name2} — مباراة {type}. راجع لوحة التحكم للتفاصيل."
+  },
+  "{table} — {date}. See you there!": {
+    "fr": "{table} — {date}. À bientôt !",
+    "ar": "{table} — {date}. نراك هناك!"
+  },
+  "{table} on {date} — pending staff confirmation.": {
+    "fr": "{table} le {date} — en attente de confirmation du personnel.",
+    "ar": "{table} في {date} — بانتظار تأكيد الموظفين."
+  },
+  "Master's Snooker — Premier Snooker & Billiards Club": {
+    "fr": "Master's Snooker — Club de snooker et de billard",
+    "ar": "Master's Snooker — نادي السنوكر والبلياردو"
+  },
+  "Master's Snooker club: championship tables, ranked matches, tournaments, live streams and a players' community. Book a table, climb the leaderboard.": {
+    "fr": "Tables de compétition, matchs classés, tournois et communauté de joueurs. Réservez une table et progressez au classement.",
+    "ar": "طاولات احترافية ومباريات مصنفة وبطولات وبث مباشر ومجتمع لاعبين. احجز طاولة وتقدم في الترتيب."
+  },
+  "Name is too short": {
+    "fr": "Le nom est trop court",
+    "ar": "الاسم قصير جدًا"
+  },
+  "Invalid email": {
+    "fr": "Adresse e-mail invalide",
+    "ar": "البريد الإلكتروني غير صالح"
+  },
+  "Invalid email address": {
+    "fr": "Adresse e-mail invalide",
+    "ar": "عنوان البريد الإلكتروني غير صالح"
+  },
+  "Password must be at least 8 characters": {
+    "fr": "Le mot de passe doit contenir au moins 8 caractères",
+    "ar": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل"
+  },
+  "Too small: expected string to have >={count} characters": {
+    "fr": "Saisissez au moins {count} caractères",
+    "ar": "أدخل {count} أحرف على الأقل"
+  },
+  "Too big: expected string to have <={count} characters": {
+    "fr": "Saisissez au maximum {count} caractères",
+    "ar": "أدخل {count} حرفًا كحد أقصى"
+  },
+  "Too small: expected number to be >={count}": {
+    "fr": "La valeur minimale est {count}",
+    "ar": "القيمة الدنيا هي {count}"
+  },
+  "Too big: expected number to be <={count}": {
+    "fr": "La valeur maximale est {count}",
+    "ar": "القيمة القصوى هي {count}"
+  },
+  "Invalid URL": {
+    "fr": "URL invalide",
+    "ar": "الرابط غير صالح"
+  },
+  "Invalid ISO datetime": {
+    "fr": "Date ou heure invalide",
+    "ar": "التاريخ أو الوقت غير صالح"
+  },
+  "Invalid input: expected number, received string": {
+    "fr": "Saisissez un nombre valide",
+    "ar": "أدخل رقمًا صالحًا"
+  }
+}

@@ -1,39 +1,43 @@
+import { getI18n } from "@/lib/i18n/server";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { getClubSettings } from "@/lib/club";
 import { Logo } from "./logo";
+import { LanguageSwitcher } from "./language-switcher";
 import { ThemeToggle } from "./theme-toggle";
 import { PublicMobileNav } from "./public-mobile-nav";
 import { buttonVariants } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
 
 export async function PublicHeader() {
+  const { tr } = await getI18n();
+
   const [session, settings] = await Promise.all([auth(), getClubSettings()]);
   return (
     <header className="glass sticky top-0 z-40 border-b border-border">
-      <div className="mx-auto flex h-20 max-w-7xl items-center gap-3 px-4 sm:px-6 lg:gap-8">
+      <div className="mx-auto flex h-20 max-w-7xl items-center gap-3 px-4 sm:px-6 lg:gap-4">
         <Logo />
         <nav
-          aria-label="Public"
-          className="hidden flex-1 items-center justify-center gap-6 text-sm font-medium text-muted lg:flex"
+          aria-label={tr("Public")}
+          className="hidden flex-1 items-center justify-center gap-6 text-sm font-medium text-muted xl:flex"
         >
           <Link
             href="/#about"
             className="py-3 transition-colors hover:text-foreground"
           >
-            The club
+            {tr("The club")}
           </Link>
           <Link
             href="/#tournaments"
             className="py-3 transition-colors hover:text-foreground"
           >
-            Tournaments
+            {tr("Tournaments")}
           </Link>
           <Link
             href="/leaderboard"
             className="py-3 transition-colors hover:text-foreground"
           >
-            Rankings
+            {tr("Rankings")}
           </Link>
           <Link
             href="/live"
@@ -42,16 +46,17 @@ export async function PublicHeader() {
             <span
               className={`h-1.5 w-1.5 rounded-full ${settings.isLive ? "bg-live animate-pulse-live" : "bg-faint"}`}
             />
-            Watch live
+            {tr("Watch live")}
           </Link>
         </nav>
-        <div className="ml-auto flex items-center gap-1 sm:gap-2">
+        <div className="ms-auto flex items-center gap-1 sm:gap-2">
+          <LanguageSwitcher />
           <ThemeToggle />
           <Link
             href={session ? "/dashboard" : "/login"}
             className="hidden px-3 py-3 text-sm font-semibold text-muted hover:text-foreground xl:block"
           >
-            {session ? "Dashboard" : "Log in"}
+            {session ? tr("Dashboard") : tr("Log in")}
           </Link>
           <Link
             href={session ? "/reservations" : "/register"}
@@ -61,7 +66,7 @@ export async function PublicHeader() {
               className: "hidden sm:inline-flex",
             })}
           >
-            {session ? "Book a table" : "Join the club"}
+            {session ? tr("Book a table") : tr("Join the club")}
             <ArrowUpRight size={16} />
           </Link>
           <PublicMobileNav signedIn={!!session} />

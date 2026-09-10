@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -26,6 +28,8 @@ export function EnterResultButton({
   score1: number;
   score2: number;
 }) {
+  const { tr } = useI18n();
+
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -42,15 +46,25 @@ export function EnterResultButton({
     const data = await res.json().catch(() => ({}));
     setLoading(false);
     if (!res.ok) {
-      toast.error(data.error ?? "Could not save result");
+      toast.error(tr(data.error ?? tr("Could not save result")));
       return;
     }
     if (status === "COMPLETED" && data.result) {
       toast.success(
-        `${data.result.winner} wins — ${data.result.winnerDelta > 0 ? `+${data.result.winnerDelta} pts exchanged` : "friendly, no points"}`
+        tr("{winner} wins — {result}", {
+          winner: data.result.winner,
+          result:
+            data.result.winnerDelta > 0
+              ? tr("+{points} pts exchanged", {
+                  points: data.result.winnerDelta,
+                })
+              : tr("friendly, no points"),
+        }),
       );
     } else {
-      toast.success(status === "LIVE" ? "Score updated" : "Match cancelled");
+      toast.success(
+        status === "LIVE" ? tr("Score updated") : tr("Match cancelled"),
+      );
     }
     setOpen(false);
     router.refresh();
@@ -59,16 +73,24 @@ export function EnterResultButton({
   return (
     <>
       <Button variant="outline" size="sm" onClick={() => setOpen(true)}>
-        <Flag size={14} /> {currentStatus === "LIVE" ? "Update score" : "Manage"}
+        <Flag size={14} />{" "}
+        {currentStatus === "LIVE" ? tr("Update score") : tr("Manage")}
       </Button>
-      <Dialog open={open} onClose={() => setOpen(false)} title="Match result">
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        title={tr("Match result")}
+      >
         <div className="space-y-5">
           <p className="text-sm text-muted">
-            Best of {frames} frames. Enter frames won by each player.
+            {tr("Best of")} {frames}{" "}
+            {tr("frames. Enter frames won by each player.")}
           </p>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="s1" className="truncate">{player1}</Label>
+              <Label htmlFor="s1" className="truncate">
+                {player1}
+              </Label>
               <Input
                 id="s1"
                 type="number"
@@ -80,7 +102,9 @@ export function EnterResultButton({
               />
             </div>
             <div>
-              <Label htmlFor="s2" className="truncate">{player2}</Label>
+              <Label htmlFor="s2" className="truncate">
+                {player2}
+              </Label>
               <Input
                 id="s2"
                 type="number"
@@ -93,20 +117,24 @@ export function EnterResultButton({
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <Button variant="secondary" onClick={() => submit("LIVE")} disabled={loading}>
+            <Button
+              variant="secondary"
+              onClick={() => submit("LIVE")}
+              disabled={loading}
+            >
               {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-              Save as live
+              {tr("Save as live")}
             </Button>
             <Button onClick={() => submit("COMPLETED")} disabled={loading}>
               {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-              Complete match
+              {tr("Complete match")}
             </Button>
           </div>
           <button
             onClick={() => submit("CANCELLED")}
             className="w-full text-center text-xs text-live/80 hover:text-live"
           >
-            Cancel this match
+            {tr("Cancel this match")}
           </button>
         </div>
       </Dialog>

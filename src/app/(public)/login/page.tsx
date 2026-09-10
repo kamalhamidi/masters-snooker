@@ -1,7 +1,11 @@
+import { getI18n } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { LoginForm } from "./login-form";
 
-export const metadata: Metadata = { title: "Log in" };
+export async function generateMetadata(): Promise<Metadata> {
+  const { tr } = await getI18n();
+  return { title: tr("Log in") };
+}
 
 export default function LoginPage() {
   return (

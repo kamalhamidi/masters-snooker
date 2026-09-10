@@ -1,9 +1,17 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
-import { Camera, CameraOff, CheckCircle2, Loader2, UserCheck } from "lucide-react";
+import {
+  Camera,
+  CameraOff,
+  CheckCircle2,
+  Loader2,
+  UserCheck,
+} from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,6 +25,8 @@ type ScanResult = {
 };
 
 export function ScanInterface() {
+  const { tr } = useI18n();
+
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const scanningRef = useRef(false);
@@ -26,30 +36,40 @@ export function ScanInterface() {
   const [loading, setLoading] = useState(false);
   const [lastResult, setLastResult] = useState<ScanResult | null>(null);
 
-  const submit = useCallback(async (code: string) => {
-    setLoading(true);
-    const res = await fetch("/api/checkin", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ code }),
-    });
-    const data = await res.json().catch(() => ({}));
-    setLoading(false);
+  const submit = useCallback(
+    async (code: string) => {
+      setLoading(true);
+      const res = await fetch("/api/checkin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code }),
+      });
+      const data = await res.json().catch(() => ({}));
+      setLoading(false);
 
-    if (!res.ok) {
-      toast.error(data.error ?? "Check-in failed");
-      return false;
-    }
-    const result: ScanResult = { ...data.player, duplicate: data.duplicate };
-    setLastResult(result);
-    if (data.duplicate) {
-      toast.info(`${result.name} already checked in today`);
-    } else {
-      confetti({ particleCount: 60, spread: 55, origin: { y: 0.7 }, colors: ["#10b981", "#d4af37"] });
-      toast.success(`${result.name} checked in!`);
-    }
-    return true;
-  }, []);
+      if (!res.ok) {
+        toast.error(tr(data.error ?? tr("Check-in failed")));
+        return false;
+      }
+      const result: ScanResult = { ...data.player, duplicate: data.duplicate };
+      setLastResult(result);
+      if (data.duplicate) {
+        toast.info(
+          tr("{name} already checked in today", { name: result.name }),
+        );
+      } else {
+        confetti({
+          particleCount: 60,
+          spread: 55,
+          origin: { y: 0.7 },
+          colors: ["#10b981", "#d4af37"],
+        });
+        toast.success(tr("{name} checked in!", { name: result.name }));
+      }
+      return true;
+    },
+    [tr],
+  );
 
   const stopCamera = useCallback(() => {
     scanningRef.current = false;
@@ -62,7 +82,7 @@ export function ScanInterface() {
     setCameraError(null);
     if (!("BarcodeDetector" in window)) {
       setCameraError(
-        "This browser doesn't support in-page QR scanning — use manual entry below, or Chrome/Edge on the kiosk tablet."
+        "This browser doesn't support in-page QR scanning — use manual entry below, or Chrome/Edge on the kiosk tablet.",
       );
       return;
     }
@@ -79,7 +99,9 @@ export function ScanInterface() {
       scanningRef.current = true;
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const detector = new (window as any).BarcodeDetector({ formats: ["qr_code"] });
+      const detector = new (window as any).BarcodeDetector({
+        formats: ["qr_code"],
+      });
       const tick = async () => {
         if (!scanningRef.current || !videoRef.current) return;
         try {
@@ -102,7 +124,9 @@ export function ScanInterface() {
       };
       requestAnimationFrame(tick);
     } catch {
-      setCameraError("Camera unavailable — check permissions, or use manual entry.");
+      setCameraError(
+        "Camera unavailable — check permissions, or use manual entry.",
+      );
     }
   }, [submit]);
 
@@ -121,9 +145,11 @@ export function ScanInterface() {
           {!cameraOn && (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
               <Camera className="h-10 w-10 text-faint" />
-              {cameraError && <p className="text-sm text-muted">{cameraError}</p>}
+              {cameraError && (
+                <p className="text-sm text-muted">{tr(cameraError)}</p>
+              )}
               <Button onClick={startCamera}>
-                <Camera size={16} /> Start camera
+                <Camera size={16} /> {tr("Start camera")}
               </Button>
             </div>
           )}
@@ -134,9 +160,9 @@ export function ScanInterface() {
                 variant="secondary"
                 size="sm"
                 onClick={stopCamera}
-                className="absolute right-3 top-3"
+                className="absolute end-3 top-3"
               >
-                <CameraOff size={14} /> Stop
+                <CameraOff size={14} /> {tr("Stop")}
               </Button>
             </>
           )}
@@ -145,7 +171,7 @@ export function ScanInterface() {
 
       {/* Manual entry */}
       <Card>
-        <p className="mb-3 text-sm font-semibold">Manual entry</p>
+        <p className="mb-3 text-sm font-semibold">{tr("Manual entry")}</p>
         <form
           className="flex gap-2"
           onSubmit={async (e) => {
@@ -158,11 +184,15 @@ export function ScanInterface() {
           <Input
             value={manual}
             onChange={(e) => setManual(e.target.value)}
-            placeholder="masters-checkin:… or raw token"
-            aria-label="QR code value"
+            placeholder={tr("masters-checkin:… or raw token")}
+            aria-label={tr("QR code value")}
           />
           <Button disabled={loading || !manual.trim()}>
-            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <UserCheck size={16} />}
+            {loading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <UserCheck size={16} />
+            )}
           </Button>
         </form>
       </Card>
@@ -174,11 +204,15 @@ export function ScanInterface() {
           <div className="flex-1">
             <p className="font-semibold">{lastResult.name}</p>
             <p className="text-sm text-muted">
-              Level {lastResult.level}
-              {lastResult.duplicate ? " · already checked in today" : " · checked in"}
+              {tr("Level")} {lastResult.level}
+              {lastResult.duplicate
+                ? tr(" · already checked in today")
+                : tr(" · checked in")}
             </p>
           </div>
-          {lastResult.trustBadge && <Badge variant="emerald">trusted</Badge>}
+          {lastResult.trustBadge && (
+            <Badge variant="emerald">{tr("trusted")}</Badge>
+          )}
         </Card>
       )}
     </div>

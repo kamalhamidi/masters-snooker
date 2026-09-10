@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import {
   Area,
   AreaChart,
@@ -14,10 +16,12 @@ export function PointsChart({
 }: {
   data: { date: string; points: number }[];
 }) {
+  const { tr, locale } = useI18n();
+
   if (data.length < 2) {
     return (
       <div className="flex h-56 items-center justify-center text-sm text-faint">
-        Play ranked matches to build your points history.
+        {tr("Play ranked matches to build your points history.")}
       </div>
     );
   }
@@ -25,7 +29,10 @@ export function PointsChart({
   return (
     <div className="h-56 w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: -14 }}>
+        <AreaChart
+          data={data}
+          margin={{ top: 8, right: 8, bottom: 0, left: -14 }}
+        >
           <defs>
             <linearGradient id="pointsFill" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#10b981" stopOpacity={0.35} />
@@ -39,7 +46,10 @@ export function PointsChart({
             axisLine={false}
             minTickGap={40}
             tickFormatter={(d: string) =>
-              new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric" })
+              new Date(d).toLocaleDateString(locale, {
+                month: "short",
+                day: "numeric",
+              })
             }
           />
           <YAxis
@@ -57,7 +67,7 @@ export function PointsChart({
               fontSize: 13,
             }}
             labelFormatter={(d) =>
-              new Date(d as string).toLocaleDateString("en-US", {
+              new Date(d as string).toLocaleDateString(locale, {
                 month: "long",
                 day: "numeric",
               })
@@ -66,6 +76,7 @@ export function PointsChart({
           <Area
             type="monotone"
             dataKey="points"
+            name={tr("Points")}
             stroke="#34d399"
             strokeWidth={2.5}
             fill="url(#pointsFill)"

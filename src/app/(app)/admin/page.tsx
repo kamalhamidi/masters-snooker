@@ -1,8 +1,17 @@
+import { getI18n } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import {
-  DollarSign, Users, Table2, Trophy, PlusCircle, Inbox, Settings, UserCog, Star,
+  DollarSign,
+  Users,
+  Table2,
+  Trophy,
+  PlusCircle,
+  Inbox,
+  Settings,
+  UserCog,
+  Star,
 } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -13,9 +22,14 @@ import { Badge } from "@/components/ui/badge";
 import { StatCounter } from "@/components/ui/stat-counter";
 import { SimpleBarChart } from "@/components/charts/bar-chart";
 
-export const metadata: Metadata = { title: "Admin" };
+export async function generateMetadata(): Promise<Metadata> {
+  const { tr } = await getI18n();
+  return { title: tr("Admin") };
+}
 
 export default async function AdminPage() {
+  const { locale, tr } = await getI18n();
+
   const session = await auth();
   if (session?.user.role !== "CHEF") redirect("/dashboard");
 
@@ -55,7 +69,10 @@ export default async function AdminPage() {
     }),
   ]);
 
-  const totalEntryRevenue = entryRevenue.reduce((s, e) => s + e.tournament.entryFee, 0);
+  const totalEntryRevenue = entryRevenue.reduce(
+    (s, e) => s + e.tournament.entryFee,
+    0,
+  );
   const reservationRevenue = reservations.reduce((s, r) => {
     const hours = (r.endTime.getTime() - r.startTime.getTime()) / 3_600_000;
     return s + Math.round(hours * r.table.hourlyRate);
@@ -70,39 +87,52 @@ export default async function AdminPage() {
     const end = new Date();
     end.setDate(end.getDate() - w * 7);
     weeks.push({
-      label: end.toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+      label: end.toLocaleDateString(locale, { month: "short", day: "numeric" }),
       value: completedMatches.filter(
-        (m) => m.completedAt! >= start && m.completedAt! < end
+        (m) => m.completedAt! >= start && m.completedAt! < end,
       ).length,
     });
   }
 
-  const maxTableUse = Math.max(...tables.map((t) => t._count.matches + t._count.reservations), 1);
+  const maxTableUse = Math.max(
+    ...tables.map((t) => t._count.matches + t._count.reservations),
+    1,
+  );
 
   return (
     <div className="space-y-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-4xl tracking-wide">Admin dashboard</h1>
-          <p className="text-sm text-muted">The whole club at a glance.</p>
+          <h1 className="font-display text-4xl tracking-wide">
+            {tr("Admin dashboard")}
+          </h1>
+          <p className="text-sm text-muted">
+            {tr("The whole club at a glance.")}
+          </p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Link href="/admin/applications">
             <Button variant="secondary">
-              <Inbox size={16} /> Applications
+              <Inbox size={16} /> {tr("Applications")}
               {pendingApplications > 0 && (
                 <Badge variant="live">{pendingApplications}</Badge>
               )}
             </Button>
           </Link>
           <Link href="/admin/staff">
-            <Button variant="secondary"><UserCog size={16} /> Staff & badges</Button>
+            <Button variant="secondary">
+              <UserCog size={16} /> {tr("Staff & badges")}
+            </Button>
           </Link>
           <Link href="/admin/settings">
-            <Button variant="secondary"><Settings size={16} /> Settings</Button>
+            <Button variant="secondary">
+              <Settings size={16} /> {tr("Settings")}
+            </Button>
           </Link>
           <Link href="/admin/tournaments/new">
-            <Button variant="gold"><PlusCircle size={16} /> New tournament</Button>
+            <Button variant="gold">
+              <PlusCircle size={16} /> {tr("New tournament")}
+            </Button>
           </Link>
         </div>
       </div>
@@ -111,26 +141,35 @@ export default async function AdminPage() {
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <Card>
           <DollarSign className="mb-2 h-5 w-5 text-gold" />
-          <p className="font-display text-3xl tracking-wide">{formatCents(totalRevenue)}</p>
-          <p className="text-xs text-muted">Total revenue</p>
+          <p className="font-display text-3xl tracking-wide">
+            {formatCents(totalRevenue, locale)}
+          </p>
+          <p className="text-xs text-muted">{tr("Total revenue")}</p>
           <p className="mt-1 text-[11px] text-faint">
-            {formatCents(totalEntryRevenue)} entries · {formatCents(reservationRevenue)} tables
+            {formatCents(totalEntryRevenue, locale)} {tr("entries ·")}{" "}
+            {formatCents(reservationRevenue, locale)} {tr("tables")}
           </p>
         </Card>
         <Card>
           <Users className="mb-2 h-5 w-5 text-emerald-bright" />
-          <p className="font-display text-3xl tracking-wide"><StatCounter value={memberCount} /></p>
-          <p className="text-xs text-muted">Registered players</p>
+          <p className="font-display text-3xl tracking-wide">
+            <StatCounter value={memberCount} />
+          </p>
+          <p className="text-xs text-muted">{tr("Registered players")}</p>
         </Card>
         <Card>
           <Trophy className="mb-2 h-5 w-5 text-gold" />
-          <p className="font-display text-3xl tracking-wide"><StatCounter value={completedMatches.length} /></p>
-          <p className="text-xs text-muted">Matches completed</p>
+          <p className="font-display text-3xl tracking-wide">
+            <StatCounter value={completedMatches.length} />
+          </p>
+          <p className="text-xs text-muted">{tr("Matches completed")}</p>
         </Card>
         <Card>
           <Table2 className="mb-2 h-5 w-5 text-emerald-bright" />
-          <p className="font-display text-3xl tracking-wide"><StatCounter value={reservations.length} /></p>
-          <p className="text-xs text-muted">Confirmed bookings</p>
+          <p className="font-display text-3xl tracking-wide">
+            <StatCounter value={reservations.length} />
+          </p>
+          <p className="text-xs text-muted">{tr("Confirmed bookings")}</p>
         </Card>
       </div>
 
@@ -138,7 +177,7 @@ export default async function AdminPage() {
         {/* Activity chart */}
         <Card>
           <CardHeader>
-            <CardTitle>Matches per week</CardTitle>
+            <CardTitle>{tr("Matches per week")}</CardTitle>
           </CardHeader>
           <SimpleBarChart data={weeks} />
         </Card>
@@ -146,8 +185,8 @@ export default async function AdminPage() {
         {/* Table utilization */}
         <Card>
           <CardHeader>
-            <CardTitle>Table utilization</CardTitle>
-            <Badge variant="emerald">matches + bookings</Badge>
+            <CardTitle>{tr("Table utilization")}</CardTitle>
+            <Badge variant="emerald">{tr("matches + bookings")}</Badge>
           </CardHeader>
           <div className="space-y-3.5">
             {tables.map((t) => {
@@ -161,7 +200,9 @@ export default async function AdminPage() {
                   <div className="h-2.5 overflow-hidden rounded-full bg-surface-hover">
                     <div
                       className="h-full rounded-full bg-gradient-to-r from-felt-light to-emerald-accent"
-                      style={{ width: `${Math.round((use / maxTableUse) * 100)}%` }}
+                      style={{
+                        width: `${Math.round((use / maxTableUse) * 100)}%`,
+                      }}
                     />
                   </div>
                 </div>
@@ -174,33 +215,43 @@ export default async function AdminPage() {
       {/* Employee performance */}
       <Card className="p-0">
         <CardHeader className="mb-0 px-5 pt-5">
-          <CardTitle>Employee performance</CardTitle>
+          <CardTitle>{tr("Employee performance")}</CardTitle>
         </CardHeader>
         {/* Desktop table */}
         <div className="hidden overflow-x-auto sm:block">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-border text-left text-xs uppercase tracking-wider text-faint">
-                <th className="px-5 py-3">Employee</th>
-                <th className="px-5 py-3">Position</th>
-                <th className="px-5 py-3 text-right">Matches managed</th>
-                <th className="px-5 py-3 text-right">Check-ins</th>
-                <th className="px-5 py-3 text-right">Service rating</th>
+              <tr className="border-b border-border text-start text-xs uppercase tracking-wider text-faint">
+                <th className="px-5 py-3">{tr("Employee")}</th>
+                <th className="px-5 py-3">{tr("Position")}</th>
+                <th className="px-5 py-3 text-end">{tr("Matches managed")}</th>
+                <th className="px-5 py-3 text-end">{tr("Check-ins")}</th>
+                <th className="px-5 py-3 text-end">{tr("Service rating")}</th>
               </tr>
             </thead>
             <tbody>
               {employees.map((e) => {
                 const avg =
                   e.ratings.length > 0
-                    ? (e.ratings.reduce((s, r) => s + r.serviceStars, 0) / e.ratings.length).toFixed(1)
+                    ? (
+                        e.ratings.reduce((s, r) => s + r.serviceStars, 0) /
+                        e.ratings.length
+                      ).toFixed(1)
                     : "—";
                 return (
-                  <tr key={e.id} className="border-b border-border last:border-0">
+                  <tr
+                    key={e.id}
+                    className="border-b border-border last:border-0"
+                  >
                     <td className="px-5 py-3.5 font-semibold">{e.user.name}</td>
                     <td className="px-5 py-3.5 text-muted">{e.position}</td>
-                    <td className="px-5 py-3.5 text-right font-display text-lg">{e._count.matchesManaged}</td>
-                    <td className="px-5 py-3.5 text-right font-display text-lg">{e._count.checkInsDone}</td>
-                    <td className="px-5 py-3.5 text-right">
+                    <td className="px-5 py-3.5 text-end font-display text-lg">
+                      {e._count.matchesManaged}
+                    </td>
+                    <td className="px-5 py-3.5 text-end font-display text-lg">
+                      {e._count.checkInsDone}
+                    </td>
+                    <td className="px-5 py-3.5 text-end">
                       <span className="inline-flex items-center gap-1 text-gold">
                         <Star size={13} className="fill-gold" /> {avg}
                       </span>
@@ -216,7 +267,10 @@ export default async function AdminPage() {
           {employees.map((e) => {
             const avg =
               e.ratings.length > 0
-                ? (e.ratings.reduce((s, r) => s + r.serviceStars, 0) / e.ratings.length).toFixed(1)
+                ? (
+                    e.ratings.reduce((s, r) => s + r.serviceStars, 0) /
+                    e.ratings.length
+                  ).toFixed(1)
                 : "—";
             return (
               <div key={e.id} className="rounded-xl border border-border p-4">
@@ -228,7 +282,8 @@ export default async function AdminPage() {
                 </div>
                 <p className="text-xs text-muted">{e.position}</p>
                 <p className="mt-2 text-sm text-muted">
-                  {e._count.matchesManaged} matches · {e._count.checkInsDone} check-ins
+                  {e._count.matchesManaged} {tr("matches ·")}{" "}
+                  {e._count.checkInsDone} {tr("check-ins")}
                 </p>
               </div>
             );

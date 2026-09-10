@@ -1,9 +1,18 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
-  Trophy, Medal, CalendarClock, Star, Gift, Bell, Swords, CheckCheck,
+  Trophy,
+  Medal,
+  CalendarClock,
+  Star,
+  Gift,
+  Bell,
+  Swords,
+  CheckCheck,
 } from "lucide-react";
 import { cn, timeAgo } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -33,6 +42,8 @@ type Item = {
 };
 
 export function NotificationList({ notifications }: { notifications: Item[] }) {
+  const { tr, locale } = useI18n();
+
   const router = useRouter();
 
   async function markAll() {
@@ -60,7 +71,7 @@ export function NotificationList({ notifications }: { notifications: Item[] }) {
       {hasUnread && (
         <div className="flex justify-end">
           <Button variant="ghost" size="sm" onClick={markAll}>
-            <CheckCheck size={15} /> Mark all read
+            <CheckCheck size={15} /> {tr("Mark all read")}
           </Button>
         </div>
       )}
@@ -72,34 +83,53 @@ export function NotificationList({ notifications }: { notifications: Item[] }) {
               "flex gap-3.5 rounded-2xl border p-4 transition-colors",
               n.read
                 ? "border-border bg-surface"
-                : "border-emerald-accent/30 bg-emerald-accent/5 hover:bg-emerald-accent/10"
+                : "border-emerald-accent/30 bg-emerald-accent/5 hover:bg-emerald-accent/10",
             )}
           >
             <div
               className={cn(
                 "flex h-10 w-10 shrink-0 items-center justify-center rounded-full",
-                n.read ? "bg-surface-hover text-faint" : "bg-emerald-accent/15 text-emerald-bright"
+                n.read
+                  ? "bg-surface-hover text-faint"
+                  : "bg-emerald-accent/15 text-emerald-bright",
               )}
             >
               <Icon size={18} />
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-baseline justify-between gap-2">
-                <p className={cn("font-semibold", !n.read && "text-foreground")}>{n.title}</p>
-                <span className="shrink-0 text-xs text-faint">{timeAgo(n.createdAt)}</span>
+                <p
+                  className={cn("font-semibold", !n.read && "text-foreground")}
+                >
+                  {tr(n.title)}
+                </p>
+                <span className="shrink-0 text-xs text-faint">
+                  {timeAgo(n.createdAt, locale)}
+                </span>
               </div>
-              <p className="mt-0.5 text-sm text-muted">{n.body}</p>
+              <p className="mt-0.5 text-sm text-muted">{tr(n.body)}</p>
             </div>
-            {!n.read && <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-emerald-bright" />}
+            {!n.read && (
+              <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-emerald-bright" />
+            )}
           </div>
         );
 
         return n.link ? (
-          <Link key={n.id} href={n.link} onClick={() => markOne(n.id)} className="block">
+          <Link
+            key={n.id}
+            href={n.link}
+            onClick={() => markOne(n.id)}
+            className="block"
+          >
             {inner}
           </Link>
         ) : (
-          <button key={n.id} onClick={() => markOne(n.id)} className="block w-full text-left">
+          <button
+            key={n.id}
+            onClick={() => markOne(n.id)}
+            className="block w-full text-start"
+          >
             {inner}
           </button>
         );

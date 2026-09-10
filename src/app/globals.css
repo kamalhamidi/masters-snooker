@@ -254,3 +254,33 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+/* Arabic uses connected letterforms and logical layout directions. */
+html[lang="ar"] body,
+html[lang="ar"] .font-display {
+  font-family: Tahoma, Arial, sans-serif;
+  letter-spacing: normal;
+}
+html[lang="ar"] .font-display {
+  line-height: 1.4;
+}
+html[lang="ar"] .eyebrow {
+  letter-spacing: normal;
+  line-height: 1.6;
+}
+html[dir="rtl"] .lucide-arrow-right,
+html[dir="rtl"] .lucide-arrow-up-right,
+html[dir="rtl"] .lucide-chevron-right,
+html[dir="rtl"] .lucide-arrow-left,
+html[dir="rtl"] .lucide-chevron-left {
+  transform: scaleX(-1);
+}
+input[type="email"],
+input[type="url"],
+input[type="tel"] {
+  direction: ltr;
+  text-align: start;
+}
+.recharts-wrapper {
+  direction: ltr;
+}

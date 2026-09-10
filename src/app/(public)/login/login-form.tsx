@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
@@ -12,6 +14,8 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { Card } from "@/components/ui/card";
 
 function LoginFormInner() {
+  const { tr } = useI18n();
+
   const router = useRouter();
   const params = useSearchParams();
   const [loading, setLoading] = useState(false);
@@ -29,10 +33,10 @@ function LoginFormInner() {
         redirect: false,
       });
       if (res?.error) {
-        setError("That email and password don’t match. Please try again.");
+        setError(tr("That email and password don’t match. Please try again."));
         return;
       }
-      toast.success("Welcome back!");
+      toast.success(tr("Welcome back!"));
       const callback = params.get("callbackUrl");
       router.push(
         callback?.startsWith("/") && !callback.startsWith("//")
@@ -42,7 +46,7 @@ function LoginFormInner() {
       router.refresh();
     } catch {
       setError(
-        "We couldn’t connect. Please check your connection and try again.",
+        tr("We couldn’t connect. Please check your connection and try again."),
       );
     } finally {
       setLoading(false);
@@ -51,9 +55,13 @@ function LoginFormInner() {
 
   return (
     <Card className="w-full max-w-md p-6 sm:p-8">
-      <p className="eyebrow mb-3 text-gold">Back at the table</p>
-      <h1 className="font-display text-4xl tracking-wide">Welcome back</h1>
-      <p className="mt-1 text-sm text-muted">Log in to your club account.</p>
+      <p className="eyebrow mb-3 text-gold">{tr("Back at the table")}</p>
+      <h1 className="font-display text-4xl tracking-wide">
+        {tr("Welcome back")}
+      </h1>
+      <p className="mt-1 text-sm text-muted">
+        {tr("Log in to your club account.")}
+      </p>
 
       <form onSubmit={onSubmit} className="mt-7 space-y-4" aria-busy={loading}>
         {error && (
@@ -65,7 +73,7 @@ function LoginFormInner() {
           </p>
         )}
         <div>
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">{tr("Email")}</Label>
           <Input
             id="email"
             name="email"
@@ -76,7 +84,7 @@ function LoginFormInner() {
           />
         </div>
         <div>
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password">{tr("Password")}</Label>
           <PasswordInput
             id="password"
             name="password"
@@ -87,26 +95,26 @@ function LoginFormInner() {
         </div>
         <Button className="w-full" size="lg" disabled={loading}>
           {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-          {loading ? "Logging in…" : "Log in"}
+          {loading ? tr("Logging in…") : tr("Log in")}
         </Button>
       </form>
 
       <div className="mt-6 rounded-xl border border-border bg-elevated/60 p-4 text-xs text-muted">
         <p className="mb-1.5 font-semibold text-foreground">
-          Demo accounts (password: password123)
+          {tr("Demo accounts (password: password123)")}
         </p>
-        <p>Player — ronnie@demo.club</p>
-        <p>Employee — sara@masters.club</p>
-        <p>Owner — chef@masters.club</p>
+        <p>{tr("Player — ronnie@demo.club")}</p>
+        <p>{tr("Employee — sara@masters.club")}</p>
+        <p>{tr("Owner — chef@masters.club")}</p>
       </div>
 
       <p className="mt-6 text-center text-sm text-muted">
-        New to the club?{" "}
+        {tr("New to the club?")}{" "}
         <Link
           href="/register"
           className="font-semibold text-emerald-bright hover:underline"
         >
-          Create an account
+          {tr("Create an account")}
         </Link>
       </p>
     </Card>

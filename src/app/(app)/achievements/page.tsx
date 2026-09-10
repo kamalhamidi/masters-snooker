@@ -1,3 +1,4 @@
+import { getI18n } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
@@ -6,13 +7,18 @@ import { BadgeWall, type WallBadge } from "@/components/features/badge-wall";
 import { Progress } from "@/components/ui/progress";
 import { Card } from "@/components/ui/card";
 
-export const metadata: Metadata = { title: "Achievements" };
+export async function generateMetadata(): Promise<Metadata> {
+  const { tr } = await getI18n();
+  return { title: tr("Achievements") };
+}
 
 export default async function AchievementsPage({
   searchParams,
 }: {
   searchParams: Promise<{ celebrate?: string }>;
 }) {
+  const { tr } = await getI18n();
+
   const session = await auth();
   if (!session?.user.playerId) redirect("/login");
   const { celebrate } = await searchParams;
@@ -25,7 +31,9 @@ export default async function AchievementsPage({
     }),
   ]);
 
-  const unlockedMap = new Map(playerBadges.map((b) => [b.badgeId, b.unlockedAt]));
+  const unlockedMap = new Map(
+    playerBadges.map((b) => [b.badgeId, b.unlockedAt]),
+  );
   const badges: WallBadge[] = allBadges.map((b) => ({
     ...b,
     unlockedAt: unlockedMap.get(b.id)?.toISOString() ?? null,
@@ -36,20 +44,27 @@ export default async function AchievementsPage({
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-4xl tracking-wide">Achievements</h1>
+        <h1 className="font-display text-4xl tracking-wide">
+          {tr("Achievements")}
+        </h1>
         <p className="text-sm text-muted">
-          Earn badges by playing, winning and showing up. Each unlock pays XP.
+          {tr(
+            "Earn badges by playing, winning and showing up. Each unlock pays XP.",
+          )}
         </p>
       </div>
 
       <Card>
         <div className="mb-2 flex items-center justify-between text-sm">
           <span className="font-semibold">
-            {unlockedCount} of {allBadges.length} unlocked
+            {unlockedCount} {tr("of")} {allBadges.length} {tr("unlocked")}
           </span>
           <span className="text-gold">{pct}%</span>
         </div>
-        <Progress value={pct} barClassName="bg-gradient-to-r from-gold to-gold-soft" />
+        <Progress
+          value={pct}
+          barClassName="bg-gradient-to-r from-gold to-gold-soft"
+        />
       </Card>
 
       <BadgeWall badges={badges} celebrate={celebrate === "1"} />

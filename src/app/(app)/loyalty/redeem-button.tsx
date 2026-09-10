@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -14,6 +16,8 @@ export function RedeemButton({
   rewardId: string;
   affordable: boolean;
 }) {
+  const { tr } = useI18n();
+
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -27,11 +31,18 @@ export function RedeemButton({
     const data = await res.json().catch(() => ({}));
     setLoading(false);
     if (!res.ok) {
-      toast.error(data.error ?? "Redemption failed");
+      toast.error(tr(data.error ?? tr("Redemption failed")));
       return;
     }
-    confetti({ particleCount: 80, spread: 65, origin: { y: 0.6 }, colors: ["#d4af37", "#10b981"] });
-    toast.success("Redeemed! Show the front desk your notification to claim.");
+    confetti({
+      particleCount: 80,
+      spread: 65,
+      origin: { y: 0.6 },
+      colors: ["#d4af37", "#10b981"],
+    });
+    toast.success(
+      tr("Redeemed! Show the front desk your notification to claim."),
+    );
     router.refresh();
   }
 
@@ -44,7 +55,7 @@ export function RedeemButton({
       onClick={redeem}
     >
       {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-      {affordable ? "Redeem" : "Not enough points"}
+      {affordable ? tr("Redeem") : tr("Not enough points")}
     </Button>
   );
 }
