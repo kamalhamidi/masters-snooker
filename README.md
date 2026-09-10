@@ -186,16 +186,19 @@ Each deployment generates Prisma Client, applies pending migrations with
    initial deployment made before connecting the database may fail; after adding
    the variables, open **Deployments** and select **Redeploy**.
 
-5. For a demo or staging deployment, seed the club's sample data once:
+5. To add the three documented demo accounts without deleting users who
+   registered on the deployed site, run:
 
    ```bash
    npx vercel link
-   npx vercel env run -e production -- npx prisma db seed
+   npx vercel env run -e production -- npm run seed:demo-accounts
    ```
 
-   The seed contains publicly documented demo credentials, including
-   `chef@masters.club` / `password123`. Do not seed a real member database
-   until those demo accounts are replaced with a secure owner-onboarding flow.
+   This command only creates missing demo accounts and preserves existing data.
+   The full `npx prisma db seed` command clears the database first and is for
+   disposable local/demo databases only. The demo credentials are public,
+   including `chef@masters.club` / `password123`, so do not add these
+   accounts to a real member database.
 
 Environment variable changes only affect new deployments, so redeploy after
 changing `NEXT_PUBLIC_APP_URL`, Stripe keys, or the database connection. Do not
