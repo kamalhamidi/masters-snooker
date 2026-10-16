@@ -202,7 +202,7 @@ export function TableTypeManager({ types }: { types: TableTypeItem[] }) {
                   <h3 className="font-semibold text-foreground text-base">
                     {type.name}
                   </h3>
-                  <Badge variant="secondary" className="shrink-0 text-xs">
+                  <Badge variant="default" className="shrink-0 text-xs">
                     {type.tableCount} {tr(type.tableCount === 1 ? "table" : "tables")}
                   </Badge>
                 </div>

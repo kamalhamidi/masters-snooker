@@ -1,6 +1,7 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n/provider";
+import { useEffect, useState } from "react";
 
 import {
   Area,
@@ -17,6 +18,15 @@ export function PointsChart({
   data: { date: string; points: number }[];
 }) {
   const { tr, locale } = useI18n();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className="h-56 w-full animate-pulse rounded-xl bg-surface/50" />;
+  }
 
   if (data.length < 2) {
     return (

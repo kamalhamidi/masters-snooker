@@ -1,6 +1,7 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n/provider";
+import { useEffect, useState } from "react";
 
 import {
   Bar,
@@ -23,6 +24,16 @@ export function SimpleBarChart({
   valueFormatter?: (v: number) => string;
 }) {
   const { locale } = useI18n();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div style={{ height }} className="w-full animate-pulse rounded-xl bg-surface/50" />;
+  }
+
   return (
     <div style={{ height }} className="w-full">
       <ResponsiveContainer width="100%" height="100%">

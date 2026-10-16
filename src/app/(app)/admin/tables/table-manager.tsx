@@ -363,7 +363,7 @@ export function TableManager({
                         {t.type.name}
                       </Badge>
                     ) : (
-                      <Badge variant="secondary" className="text-xs text-muted">
+                      <Badge variant="default" className="text-xs text-muted">
                         {tr("General / No type")}
                       </Badge>
                     )}
