@@ -21,6 +21,7 @@ import {
   BarChart3,
   QrCode,
   LayoutDashboard,
+  Table2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Role } from "@prisma/client";
@@ -49,6 +50,7 @@ const STAFF_NAV: NavItem[] = [
 
 const CHEF_NAV: NavItem[] = [
   { href: "/admin", label: "Admin", icon: LayoutDashboard },
+  { href: "/admin/tables", label: "Tables", icon: Table2 },
 ];
 
 // Mobile bottom bar: the 5 core destinations

@@ -149,14 +149,29 @@ model Employee {
 
 // ─────────────────────────── Club assets ───────────────────────────
 
+model TableType {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tables      Table[]
+}
+
 model Table {
   id           String        @id @default(cuid())
   number       Int           @unique
   name         String
   isActive     Boolean       @default(true)
   hourlyRate   Int           @default(1500) // in cents
+  typeId       String?
+  type         TableType?    @relation(fields: [typeId], references: [id], onDelete: SetNull)
   matches      Match[]
   reservations Reservation[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @default(now()) @updatedAt
+
+  @@index([typeId])
 }
 
 // ─────────────────────────── Matches & scoring ───────────────────────────

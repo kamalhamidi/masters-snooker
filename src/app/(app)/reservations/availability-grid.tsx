@@ -25,6 +25,7 @@ type TableInfo = {
   name: string;
   number: number;
   hourlyRate: number;
+  typeName?: string | null;
 };
 type Slot = { tableId: string; start: string; end: string; mine: boolean };
 type PlayerOption = { id: string; name: string; isSelf: boolean };
@@ -197,7 +198,14 @@ export function AvailabilityGrid({
                   scope="row"
                   className="sticky start-0 z-10 bg-surface p-3 text-start font-normal"
                 >
-                  <p className="font-semibold">{tr(t.name)}</p>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <p className="font-semibold">{tr(t.name)}</p>
+                    {t.typeName && (
+                      <span className="rounded bg-emerald-accent/15 px-1.5 py-0.5 text-[10px] font-medium text-emerald-bright">
+                        {t.typeName}
+                      </span>
+                    )}
+                  </div>
                   <p className="text-xs text-faint">
                     {formatCents(t.hourlyRate, locale)}
                     {tr("/hr")}

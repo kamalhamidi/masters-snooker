@@ -55,6 +55,7 @@ export default async function ReservationsPage({
   const [tables, dayReservations, mine, allPlayers] = await Promise.all([
     prisma.table.findMany({
       where: { isActive: true },
+      include: { type: true },
       orderBy: { number: "asc" },
     }),
     prisma.reservation.findMany({
@@ -144,6 +145,7 @@ export default async function ReservationsPage({
           name: t.name,
           number: t.number,
           hourlyRate: t.hourlyRate,
+          typeName: t.type?.name ?? null,
         }))}
         reservations={dayReservations.map((r) => ({
           tableId: r.tableId,

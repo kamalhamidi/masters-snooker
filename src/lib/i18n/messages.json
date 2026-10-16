@@ -1,4 +1,176 @@
 {
+  "Tables": {
+    "fr": "Tables",
+    "ar": "الطاولات"
+  },
+  "Billiard tables": {
+    "fr": "Tables de billard",
+    "ar": "طاولات البلياردو"
+  },
+  "Billiard tables & types": {
+    "fr": "Tables de billard et disciplines",
+    "ar": "طاولات البلياردو والأنواع"
+  },
+  "Manage the billiard tables and table disciplines of your club.": {
+    "fr": "Gérez les tables de billard et les disciplines de votre club.",
+    "ar": "إدارة طاولات البلياردو والتخصصات في ناديك."
+  },
+  "Table types": {
+    "fr": "Types de tables",
+    "ar": "أنواع الطاولات"
+  },
+  "Define the disciplines of your billiard club (Snooker, American Pool, Carom, etc.)": {
+    "fr": "Définissez les disciplines de votre club de billard (Snooker, Pool américain, Carambole, etc.)",
+    "ar": "حدد تخصصات نادي البلياردو الخاص بك (سنوكر، بلياردو أمريكي، كاروم، إلخ)"
+  },
+  "Club billiard tables": {
+    "fr": "Tables de billard du club",
+    "ar": "طاولات بلياردو النادي"
+  },
+  "Add, configure, and monitor your club's snooker & pool tables.": {
+    "fr": "Ajoutez, configurez et suivez les tables de snooker et de billard de votre club.",
+    "ar": "أضف وقم بتهيئة ومتابعة طاولات السنوكر والبلياردو في ناديك."
+  },
+  "Add table": {
+    "fr": "Ajouter une table",
+    "ar": "إضافة طاولة"
+  },
+  "Add type": {
+    "fr": "Ajouter un type",
+    "ar": "إضافة نوع"
+  },
+  "Add table type": {
+    "fr": "Ajouter un type de table",
+    "ar": "إضافة نوع طاولة"
+  },
+  "Edit table type": {
+    "fr": "Modifier le type de table",
+    "ar": "تعديل نوع الطاولة"
+  },
+  "Add billiard table": {
+    "fr": "Ajouter une table de billard",
+    "ar": "إضافة طاولة بلياردو"
+  },
+  "Edit billiard table": {
+    "fr": "Modifier la table de billard",
+    "ar": "تعديل طاولة البلياردو"
+  },
+  "Manage tables": {
+    "fr": "Gérer les tables",
+    "ar": "إدارة الطاولات"
+  },
+  "Table number": {
+    "fr": "Numéro de table",
+    "ar": "رقم الطاولة"
+  },
+  "Table name / Label": {
+    "fr": "Nom / Libellé de la table",
+    "ar": "اسم / تسمية الطاولة"
+  },
+  "Table type / discipline": {
+    "fr": "Type de table / discipline",
+    "ar": "نوع الطاولة / التخصص"
+  },
+  "Table disciplines / types": {
+    "fr": "Disciplines / types de tables",
+    "ar": "تخصصات / أنواع الطاولات"
+  },
+  "Total tables": {
+    "fr": "Total des tables",
+    "ar": "إجمالي الطاولات"
+  },
+  "Active & playable": {
+    "fr": "Actives et jouables",
+    "ar": "نشطة ومتاحة للعب"
+  },
+  "in maintenance": {
+    "fr": "en maintenance",
+    "ar": "قيد الصيانة"
+  },
+  "Avg. hourly rate": {
+    "fr": "Tarif horaire moyen",
+    "ar": "متوسط السعر بالساعة"
+  },
+  "Available for play & reservations": {
+    "fr": "Disponible pour le jeu et les réservations",
+    "ar": "متاح للعب والحجوزات"
+  },
+  "All disciplines / types": {
+    "fr": "Toutes les disciplines / types",
+    "ar": "جميع التخصصات / الأنواع"
+  },
+  "Active only": {
+    "fr": "Actives seulement",
+    "ar": "النشطة فقط"
+  },
+  "Inactive / Maintenance": {
+    "fr": "Inactives / Maintenance",
+    "ar": "غير نشطة / صيانة"
+  },
+  "Search by table name, number, or type...": {
+    "fr": "Rechercher par nom, numéro ou type de table...",
+    "ar": "بحث حسب اسم الطاولة أو الرقم أو النوع..."
+  },
+  "Back to admin dashboard": {
+    "fr": "Retour au tableau de bord administrateur",
+    "ar": "العودة إلى لوحة تحكم الإدارة"
+  },
+  "Type name": {
+    "fr": "Nom du type",
+    "ar": "اسم النوع"
+  },
+  "Create type": {
+    "fr": "Créer le type",
+    "ar": "إنشاء النوع"
+  },
+  "No table types yet": {
+    "fr": "Aucun type de table pour le moment",
+    "ar": "لا توجد أنواع طاولات بعد"
+  },
+  "Add first table type": {
+    "fr": "Ajouter le premier type de table",
+    "ar": "إضافة أول نوع طاولة"
+  },
+  "Add first table": {
+    "fr": "Ajouter la première table",
+    "ar": "إضافة أول طاولة"
+  },
+  "Table type created successfully": {
+    "fr": "Type de table créé avec succès",
+    "ar": "تم إنشاء نوع الطاولة بنجاح"
+  },
+  "Table type updated": {
+    "fr": "Type de table mis à jour",
+    "ar": "تم تحديث نوع الطاولة"
+  },
+  "Table type deleted": {
+    "fr": "Type de table supprimé",
+    "ar": "تم حذف نوع الطاولة"
+  },
+  "Table {number} added successfully": {
+    "fr": "Table {number} ajoutée avec succès",
+    "ar": "تمت إضافة الطاولة {number} بنجاح"
+  },
+  "Table updated": {
+    "fr": "Table mise à jour",
+    "ar": "تم تحديث الطاولة"
+  },
+  "Table deleted": {
+    "fr": "Table supprimée",
+    "ar": "تم حذف الطاولة"
+  },
+  "Table is now active and available for booking": {
+    "fr": "La table est désormais active et disponible à la réservation",
+    "ar": "الطاولة الآن نشطة ومتاحة للحجز"
+  },
+  "Table marked as inactive (maintenance)": {
+    "fr": "Table marquée comme inactive (maintenance)",
+    "ar": "تم تعيين الطاولة كغير نشطة (صيانة)"
+  },
+  "Maintenance": {
+    "fr": "Maintenance",
+    "ar": "صيانة"
+  },
   "(optional)": {
     "fr": "(facultatif)",
     "ar": "(اختياري)"

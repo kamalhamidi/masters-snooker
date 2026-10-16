@@ -54,12 +54,13 @@ async function main() {
     prisma.employee.deleteMany(),
     prisma.user.deleteMany(),
     prisma.table.deleteMany(),
+    prisma.tableType.deleteMany(),
     prisma.clubSettings.deleteMany(),
   ]);
 
   const passwordHash = await bcrypt.hash(PASSWORD, 10);
 
-  console.log("Creating badges, rewards, tables, settings…");
+  console.log("Creating badges, rewards, table types, tables, settings…");
   await prisma.badge.createMany({ data: BADGE_DEFS.map((b) => ({ ...b })) });
   const badges = await prisma.badge.findMany();
   const badgeByCode = Object.fromEntries(badges.map((b) => [b.code, b]));
@@ -76,6 +77,33 @@ async function main() {
   });
   const rewards = await prisma.reward.findMany();
 
+  const [snookerType, poolType, englishType, caromType] = await Promise.all([
+    prisma.tableType.create({
+      data: {
+        name: "Snooker 12ft",
+        description: "Championship full-size 12ft snooker table with precision wool cloth and steel cushions.",
+      },
+    }),
+    prisma.tableType.create({
+      data: {
+        name: "American Pool 9ft",
+        description: "Professional 9ft tournament pool table with fast Simonis cloth and drop pockets.",
+      },
+    }),
+    prisma.tableType.create({
+      data: {
+        name: "English Pool 7ft",
+        description: "Standard 7ft English 8-ball table with napped cloth and 2-inch balls.",
+      },
+    }),
+    prisma.tableType.create({
+      data: {
+        name: "Carom / 3-Cushion",
+        description: "Pocketless heated carom billiard table for three-cushion championships.",
+      },
+    }),
+  ]);
+
   const tables = await Promise.all(
     [1, 2, 3, 4, 5, 6].map((n) =>
       prisma.table.create({
@@ -83,6 +111,7 @@ async function main() {
           number: n,
           name: n === 6 ? "VIP Championship Table" : `Table ${n}`,
           hourlyRate: n === 6 ? 3000 : 1500,
+          typeId: n === 3 || n === 4 ? poolType.id : snookerType.id,
         },
       })
     )

@@ -111,6 +111,11 @@ export default async function AdminPage() {
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
+          <Link href="/admin/tables">
+            <Button variant="secondary">
+              <Table2 size={16} /> {tr("Billiard tables")}
+            </Button>
+          </Link>
           <Link href="/admin/applications">
             <Button variant="secondary">
               <Inbox size={16} /> {tr("Applications")}
@@ -185,8 +190,15 @@ export default async function AdminPage() {
         {/* Table utilization */}
         <Card>
           <CardHeader>
-            <CardTitle>{tr("Table utilization")}</CardTitle>
-            <Badge variant="emerald">{tr("matches + bookings")}</Badge>
+            <div className="flex items-center gap-2">
+              <CardTitle>{tr("Table utilization")}</CardTitle>
+              <Badge variant="emerald">{tr("matches + bookings")}</Badge>
+            </div>
+            <Link href="/admin/tables">
+              <Button variant="ghost" size="sm" className="h-7 text-xs text-muted hover:text-foreground">
+                <Table2 size={13} className="me-1" /> {tr("Manage tables")}
+              </Button>
+            </Link>
           </CardHeader>
           <div className="space-y-3.5">
             {tables.map((t) => {
