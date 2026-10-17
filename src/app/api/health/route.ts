@@ -9,8 +9,10 @@ export async function GET() {
   let dbLatencyMs = -1;
   let dbError: string | null = null;
 
+  let userCount = -1;
   try {
     await prisma.$queryRaw`SELECT 1`;
+    userCount = await prisma.user.count();
     dbStatus = "connected";
     dbLatencyMs = Date.now() - t0;
   } catch (err: unknown) {
@@ -20,6 +22,9 @@ export async function GET() {
 
   const envCheck = {
     DATABASE_URL_SET: Boolean(process.env.DATABASE_URL),
+    DATABASE_URL_PREFIX: process.env.DATABASE_URL
+      ? process.env.DATABASE_URL.slice(0, 16) + "..."
+      : "not set",
     DATABASE_URL_POOLER_PORT: process.env.DATABASE_URL
       ? process.env.DATABASE_URL.includes(":6543")
         ? "6543 (transaction)"
@@ -38,6 +43,7 @@ export async function GET() {
     database: {
       status: dbStatus,
       latencyMs: dbLatencyMs,
+      userCount,
       error: dbError,
     },
     environment: envCheck,
