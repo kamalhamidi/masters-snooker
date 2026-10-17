@@ -28,31 +28,54 @@ export const revalidate = 60;
 export default async function LandingPage() {
   const { tr, locale } = await getI18n();
 
-  const [settings, tournaments, topPlayers, stats] = await Promise.all([
-    getClubSettings(),
-    prisma.tournament.findMany({
-      where: { status: { in: ["REGISTRATION", "IN_PROGRESS"] } },
-      orderBy: { startDate: "asc" },
-      take: 3,
-      include: { _count: { select: { entries: true } } },
-    }),
-    prisma.player.findMany({
-      orderBy: { points: "desc" },
-      take: 10,
-      include: {
-        user: { select: { name: true, avatarUrl: true } },
-        _count: { select: { matchesWon: true } },
-      },
-    }),
-    Promise.all([
-      prisma.player.count(),
-      prisma.match.count({ where: { status: "COMPLETED" } }),
-      prisma.tournament.count(),
-      prisma.table.count(),
-    ]),
-  ]);
-  const [playerCount, matchCount, tournamentCount, tableCount] = stats;
+  const settings = await getClubSettings();
+  let tournaments: Awaited<ReturnType<typeof prisma.tournament.findMany<{
+    where: { status: { in: ["REGISTRATION", "IN_PROGRESS"] } };
+    orderBy: { startDate: "asc" };
+    take: 3;
+    include: { _count: { select: { entries: true } } };
+  }>>> = [];
+  let topPlayers: Awaited<ReturnType<typeof prisma.player.findMany<{
+    orderBy: { points: "desc" };
+    take: 10;
+    include: {
+      user: { select: { name: true; avatarUrl: true } };
+      _count: { select: { matchesWon: true } };
+    };
+  }>>> = [];
+  let stats: [number, number, number, number] = [0, 0, 0, 0];
 
+  try {
+    const [t, p, s] = await Promise.all([
+      prisma.tournament.findMany({
+        where: { status: { in: ["REGISTRATION", "IN_PROGRESS"] } },
+        orderBy: { startDate: "asc" },
+        take: 3,
+        include: { _count: { select: { entries: true } } },
+      }),
+      prisma.player.findMany({
+        orderBy: { points: "desc" },
+        take: 10,
+        include: {
+          user: { select: { name: true, avatarUrl: true } },
+          _count: { select: { matchesWon: true } },
+        },
+      }),
+      Promise.all([
+        prisma.player.count(),
+        prisma.match.count({ where: { status: "COMPLETED" } }),
+        prisma.tournament.count(),
+        prisma.table.count(),
+      ]),
+    ]);
+    tournaments = t;
+    topPlayers = p;
+    stats = s;
+  } catch (error) {
+    console.error("[LandingPage] Database query error:", error);
+  }
+
+  const [playerCount, matchCount, tournamentCount, tableCount] = stats;
   const featured = tournaments[0];
   return (
     <>
