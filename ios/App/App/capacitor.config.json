@@ -1,0 +1,11 @@
+{
+	"appId": "com.masterssnooker.app",
+	"appName": "Master's Snooker",
+	"webDir": "public",
+	"server": {
+		"androidScheme": "https",
+		"url": "http://192.168.3.122:3000",
+		"cleartext": true
+	},
+	"packageClassList": []
+}

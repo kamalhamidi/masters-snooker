@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Master's Snooker Club</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: radial-gradient(circle at 50% 20%, #0b4d37 0%, #06281e 65%, #03140f 100%);
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+    .logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      box-shadow: 0 0 35px rgba(212, 175, 55, 0.3);
+      margin-bottom: 20px;
+      animation: pulse 2.5s infinite ease-in-out;
+    }
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #f7d372;
+      margin-bottom: 6px;
+    }
+    p {
+      font-size: 0.9rem;
+      color: #a3c4b8;
+      max-width: 280px;
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid rgba(247, 211, 114, 0.2);
+      border-top-color: #f7d372;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+  </style>
+</head>
+<body>
+  <img src="logo masters.png" alt="Master's Snooker" class="logo" onerror="this.style.display='none'" />
+  <h1>MASTER'S SNOOKER</h1>
+  <p id="status-text">Connecting to club arena...</p>
+  <div id="spinner" class="spinner"></div>
+
+  <div id="error-box" style="display:none; margin-top: 20px; background: rgba(0,0,0,0.4); border: 1px solid rgba(247,211,114,0.3); border-radius: 12px; padding: 16px; max-width: 320px; width: 100%;">
+    <p style="font-size: 0.85rem; color: #ffb4b4; margin-bottom: 12px;" id="error-desc">
+      Could not connect to development server.
+    </p>
+    <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+      <input id="server-input" type="text" placeholder="http://192.168.3.122:3000" style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #0b4d37; background: #041a14; color: #fff; font-size: 0.85rem; outline: none;" />
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <button onclick="connectCustomUrl()" style="flex: 1; padding: 10px; background: linear-gradient(135deg, #f7d372, #d4af37); color: #06281e; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem;">
+        Connect
+      </button>
+      <button onclick="retryConnection()" style="padding: 10px 16px; background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; cursor: pointer; font-size: 0.85rem;">
+        Retry
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const DEFAULT_SERVER = 'http://192.168.3.122:3000';
+    const statusText = document.getElementById('status-text');
+    const spinner = document.getElementById('spinner');
+    const errorBox = document.getElementById('error-box');
+    const serverInput = document.getElementById('server-input');
+
+    function getTargetUrl() {
+      // 1. Capacitor native configured server
+      if (window.Capacitor && typeof window.Capacitor.getServerUrl === 'function') {
+        const capUrl = window.Capacitor.getServerUrl();
+        if (capUrl && !capUrl.startsWith('capacitor://') && !capUrl.startsWith('http://localhost') && !capUrl.includes('index.html')) {
+          return capUrl;
+        }
+      }
+      // 2. Saved preference in localStorage
+      const saved = localStorage.getItem('masters_server_url');
+      if (saved) return saved;
+
+      // 3. Default Mac local IP
+      return DEFAULT_SERVER;
+    }
+
+    async function tryConnect(targetUrl) {
+      if (serverInput) serverInput.value = targetUrl;
+      statusText.textContent = 'Connecting to ' + targetUrl.replace(/^https?:\/\//, '') + '...';
+      spinner.style.display = 'block';
+      errorBox.style.display = 'none';
+
+      // Perform a ping check
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 4000);
+        await fetch(targetUrl, { method: 'HEAD', mode: 'no-cors', signal: controller.signal });
+        clearTimeout(timeout);
+        // Success: redirect webview to the server
+        localStorage.setItem('masters_server_url', targetUrl);
+        window.location.replace(targetUrl);
+      } catch (e) {
+        showError(targetUrl);
+      }
+    }
+
+    function showError(targetUrl) {
+      spinner.style.display = 'none';
+      errorBox.style.display = 'block';
+      statusText.textContent = 'Unable to reach club server';
+      document.getElementById('error-desc').textContent = 
+        'Make sure "npm run dev" is running on your Mac and this device is connected to the same Wi-Fi network.';
+    }
+
+    function retryConnection() {
+      tryConnect(getTargetUrl());
+    }
+
+    function connectCustomUrl() {
+      let val = serverInput.value.trim();
+      if (!val) return;
+      if (!val.startsWith('http://') && !val.startsWith('https://')) {
+        val = 'http://' + val;
+      }
+      localStorage.setItem('masters_server_url', val);
+      tryConnect(val);
+    }
+
+    // Auto-attempt connection
+    const target = getTargetUrl();
+    if (window.location.href.startsWith(target)) {
+      // Already on the server
+    } else {
+      tryConnect(target);
+    }
+  </script>
+</body>
+</html>

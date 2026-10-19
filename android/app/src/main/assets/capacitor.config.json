@@ -1,0 +1,9 @@
+{
+	"appId": "com.masterssnooker.app",
+	"appName": "Master's Snooker",
+	"webDir": "public",
+	"server": {
+		"androidScheme": "https",
+		"cleartext": true
+	}
+}
