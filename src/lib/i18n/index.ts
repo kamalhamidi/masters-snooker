@@ -20,6 +20,10 @@ export function resolveLocale(value: unknown): Locale {
   return isLocale(value) ? value : "en";
 }
 const dictionary: Record<string, { fr: string; ar: string }> = messages;
+
+// Pre-compute dictionary Map for O(1) lookups
+const dictMap = new Map(Object.entries(dictionary));
+
 const escapeRegex = (value: string) =>
   value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 // Existing notification records contain rendered English messages. Match only
@@ -40,16 +44,34 @@ const legacyTemplates = Object.keys(dictionary)
       .join("");
     return { key, names, pattern: new RegExp(`^${pattern}$`, "u") };
   });
+
+const interpolate = (
+  text: string,
+  params?: Record<string, string | number>,
+): string => {
+  if (!params) return text;
+  return text.replace(
+    /\{(\w+)\}/g,
+    (placeholder, name: string) => String(params[name] ?? placeholder),
+  );
+};
+
 export function createTranslator(locale: Locale) {
+  // English: just interpolate, no dictionary lookup needed
+  if (locale === "en") {
+    return (text: string, values?: Record<string, string | number>): string =>
+      interpolate(text, values);
+  }
+
   return (text: string, values?: Record<string, string | number>): string => {
     const key = text.replace(/\s+/g, " ").trim();
-    let translated = locale === "en" ? text : dictionary[key]?.[locale];
+    let translated = dictMap.get(key)?.[locale];
     let parameters = values;
-    if (locale !== "en" && translated === undefined) {
+    if (translated === undefined) {
       for (const template of legacyTemplates) {
         const match = template.pattern.exec(key);
         if (match) {
-          translated = dictionary[template.key][locale];
+          translated = dictMap.get(template.key)?.[locale];
           parameters = Object.fromEntries(
             template.names.map((name, i) => [name, match[i + 1]]),
           );
@@ -57,18 +79,12 @@ export function createTranslator(locale: Locale) {
         }
       }
     }
-    if (translated === undefined) return text;
-    if (locale !== "en")
-      translated =
-        (text.match(/^\s*/)?.[0] ?? "") +
-        translated +
-        (text.match(/\s*$/)?.[0] ?? "");
-    if (parameters)
-      translated = translated.replace(
-        /\{(\w+)\}/g,
-        (placeholder, name: string) =>
-          String(parameters?.[name] ?? placeholder),
-      );
-    return translated;
+    if (translated === undefined) return interpolate(text, values);
+    translated =
+      (text.match(/^\s*/)?.[0] ?? "") +
+      translated +
+      (text.match(/\s*$/)?.[0] ?? "");
+    return interpolate(translated, parameters);
   };
 }
+

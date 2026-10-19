@@ -2,6 +2,7 @@ import { getI18n } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import dynamic from "next/dynamic";
 import {
   Trophy,
   Swords,
@@ -28,9 +29,22 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { StatCounter } from "@/components/ui/stat-counter";
-import { PointsChart } from "@/components/charts/points-chart";
 import { MatchRow } from "@/components/features/match-row";
 import { buttonVariants } from "@/components/ui/button";
+
+// Lazy-load the chart — it's a heavy client component (recharts ~140KB)
+const PointsChart = dynamic(
+  () =>
+    import("@/components/charts/points-chart").then((m) => ({
+      default: m.PointsChart,
+    })),
+  {
+    loading: () => (
+      <div className="h-56 w-full animate-pulse rounded-xl bg-surface/50" />
+    ),
+    ssr: false,
+  },
+);
 
 export async function generateMetadata(): Promise<Metadata> {
   const { tr } = await getI18n();
@@ -50,16 +64,16 @@ export default async function DashboardPage() {
       : null);
 
   if (!playerId) redirect("/login");
-  const player = await prisma.player.findUniqueOrThrow({
-    where: { id: playerId },
-    include: { user: true, _count: { select: { badges: true } } },
-  });
 
-  const [stats, series, rank, recentMatches, upcomingMatches] =
+  // Fire ALL independent queries at once instead of sequential fetches
+  const [player, stats, series, recentMatches, upcomingMatches] =
     await Promise.all([
+      prisma.player.findUniqueOrThrow({
+        where: { id: playerId },
+        include: { user: true, _count: { select: { badges: true } } },
+      }),
       getPlayerCoreStats(playerId),
       getPointsSeries(playerId),
-      getRankPosition(player.points),
       prisma.match.findMany({
         where: {
           status: "COMPLETED",
@@ -79,6 +93,9 @@ export default async function DashboardPage() {
         include: matchInclude,
       }),
     ]);
+
+  // Rank depends on player.points — runs after the parallel batch
+  const rank = await getRankPosition(player.points);
 
   const lvl = levelProgress(player.xp);
 
@@ -118,11 +135,11 @@ export default async function DashboardPage() {
               {tr("Make your next move")}
             </p>
             <h2 className="font-display text-3xl tracking-wide sm:text-4xl">
-              {tr("There’s a great frame ahead of you.")}
+              {tr("There's a great frame ahead of you.")}
             </h2>
             <p className="mt-2 max-w-lg text-sm text-white/65">
               {tr(
-                "Book your next session or check in when you arrive. We’ll keep track of the progress.",
+                "Book your next session or check in when you arrive. We'll keep track of the progress.",
               )}
             </p>
           </div>

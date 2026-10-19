@@ -14,11 +14,14 @@ import { LiveBadge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 
 export async function AppShell({ children }: { children: React.ReactNode }) {
-  const { tr } = await getI18n();
+  // Parallelize all independent data-fetching
+  const [{ tr }, session, settings] = await Promise.all([
+    getI18n(),
+    auth(),
+    getClubSettings(),
+  ]);
 
-  const session = await auth();
-  const settings = await getClubSettings();
-
+  // Only count unread notifications if we have a session
   const unread = session
     ? await prisma.notification.count({
         where: { userId: session.user.id, read: false },
@@ -76,7 +79,7 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
           <div className="mx-auto flex min-h-16 flex-wrap py-2 max-w-7xl items-center gap-3 px-4 sm:px-6">
             <Logo href={session ? "/dashboard" : "/"} className="lg:hidden" />
             <span className="eyebrow hidden text-muted lg:block">
-              {tr("Master’s Snooker / Member club")}
+              {tr("Master's Snooker / Member club")}
             </span>
             {settings.isLive && (
               <Link href="/live" className="hidden sm:block">

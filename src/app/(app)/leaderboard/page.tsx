@@ -30,38 +30,39 @@ export default async function LeaderboardPage({
   const { period } = await searchParams;
   const active = PERIODS.some((p) => p.key === period) ? period! : "all";
 
-  const players = await prisma.player.findMany({
-    orderBy: { points: "desc" },
-    take: 50,
-    include: {
-      user: { select: { name: true, avatarUrl: true } },
-      badges: {
-        include: { badge: true },
-        take: 3,
-        orderBy: { unlockedAt: "desc" },
-      },
-    },
-  });
-
-  // Rank movement: compare current points vs points at start of period
+  // Compute period filter date upfront
   const since = new Date();
   if (active === "week") since.setDate(since.getDate() - 7);
   else if (active === "month") since.setMonth(since.getMonth() - 1);
   else since.setFullYear(2000);
 
-  const deltas = await prisma.pointsHistory.groupBy({
-    by: ["playerId"],
-    where: { createdAt: { gte: since } },
-    _sum: { delta: true },
-  });
-  const deltaMap = new Map(deltas.map((d) => [d.playerId, d._sum.delta ?? 0]));
+  // Fire all 3 independent queries in parallel
+  const [players, deltas, winCounts] = await Promise.all([
+    prisma.player.findMany({
+      orderBy: { points: "desc" },
+      take: 50,
+      include: {
+        user: { select: { name: true, avatarUrl: true } },
+        badges: {
+          include: { badge: true },
+          take: 3,
+          orderBy: { unlockedAt: "desc" },
+        },
+      },
+    }),
+    prisma.pointsHistory.groupBy({
+      by: ["playerId"],
+      where: { createdAt: { gte: since } },
+      _sum: { delta: true },
+    }),
+    prisma.match.groupBy({
+      by: ["winnerId"],
+      where: { status: "COMPLETED", winnerId: { not: null } },
+      _count: true,
+    }),
+  ]);
 
-  // Win counts for mini profile
-  const winCounts = await prisma.match.groupBy({
-    by: ["winnerId"],
-    where: { status: "COMPLETED", winnerId: { not: null } },
-    _count: true,
-  });
+  const deltaMap = new Map(deltas.map((d) => [d.playerId, d._sum.delta ?? 0]));
   const winsMap = new Map(winCounts.map((w) => [w.winnerId, w._count]));
 
   const podium = players.slice(0, 3);

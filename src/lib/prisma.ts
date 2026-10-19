@@ -30,10 +30,14 @@ if (cleanedUrl && cleanedUrl !== process.env.DATABASE_URL) {
 
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
+const isProduction = process.env.NODE_ENV === "production";
+
 export const prisma =
   globalForPrisma.prisma ??
-  new PrismaClient(
-    cleanedUrl ? { datasources: { db: { url: cleanedUrl } } } : undefined
-  );
+  new PrismaClient({
+    ...(cleanedUrl ? { datasources: { db: { url: cleanedUrl } } } : {}),
+    // Silence query logs in production for perf; enable warnings in dev
+    log: isProduction ? ["error"] : ["warn"],
+  });
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+if (!isProduction) globalForPrisma.prisma = prisma;
