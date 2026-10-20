@@ -109,6 +109,7 @@
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 html.light {
   color-scheme: light;
@@ -119,6 +120,7 @@ body {
   color: var(--text);
   font-family: var(--font-manrope), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 
 /* Felt texture backdrop for hero sections */

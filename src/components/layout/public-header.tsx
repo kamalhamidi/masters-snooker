@@ -15,7 +15,7 @@ export async function PublicHeader() {
   const [session, settings] = await Promise.all([auth(), getClubSettings()]);
   return (
     <header className="glass sticky top-0 z-40 border-b border-border">
-      <div className="mx-auto flex h-20 max-w-7xl items-center gap-3 px-4 sm:px-6 lg:gap-4">
+      <div className="mx-auto flex h-16 sm:h-20 max-w-7xl items-center gap-2 sm:gap-3 px-4 sm:px-6 lg:gap-4">
         <Logo />
         <nav
           aria-label={tr("Public")}
@@ -49,7 +49,7 @@ export async function PublicHeader() {
             {tr("Watch live")}
           </Link>
         </nav>
-        <div className="ms-auto flex items-center gap-1 sm:gap-2">
+        <div className="ms-auto flex items-center gap-1.5 sm:gap-2">
           <LanguageSwitcher />
           <ThemeToggle />
           <Link
@@ -63,7 +63,7 @@ export async function PublicHeader() {
             className={buttonVariants({
               variant: "gold",
               size: "sm",
-              className: "hidden sm:inline-flex",
+              className: "hidden md:inline-flex",
             })}
           >
             {session ? tr("Book a table") : tr("Join the club")}

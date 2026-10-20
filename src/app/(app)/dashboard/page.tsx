@@ -42,7 +42,6 @@ const PointsChart = dynamic(
     loading: () => (
       <div className="h-56 w-full animate-pulse rounded-xl bg-surface/50" />
     ),
-    ssr: false,
   },
 );
 
